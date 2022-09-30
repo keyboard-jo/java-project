@@ -9,4 +9,16 @@ public class Admin extends Person {
         super(firstName, lastName);
         super.type = "admin";
     }
+
+    public void addCar() {
+
+    }
+
+    public void editCar() {
+
+    }
+
+    public void confirmCarBooking() {
+
+    }
 }
