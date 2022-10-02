@@ -1,9 +1,5 @@
 package Objects;
-
-import java.util.Random;;
-
-public class Person {
-    public String id;
+public class Person extends EntityId{
     public String firstName;
     public String lastName;
     public String type;
@@ -12,36 +8,34 @@ public class Person {
     public Person(String firtName, String lastName) {
         this.firstName = firtName;
         this.lastName = lastName;
-        this.id = generateId();
     }
 
+    // Test function
     public void sayHello() {
         System.out.println("My name is " + this.firstName + " " + this.lastName + ". I am a " + this.type);
     }
     
-    private String generateId() {
-        Random random = new Random();
-        Integer range = 100000000;
-        Integer id = random.nextInt(range);
-        return id.toString();
-    }
-
+    // Encapsulation setter
     private void setPassword(String password) {
         this.password = password;
     }
 
+    // Encapsulation getter
     private String getPassword() {
         return this.password;
     }
 
+    // Register to the DatabaseSystem
     public void register() {
 
     }
 
+    // Login to the Menu
     public void login() {
         
     }
 
+    // Logout of the Menu
     public void logout() {
 
     }

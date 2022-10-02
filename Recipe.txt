@@ -1,0 +1,10 @@
+// Create admin, client, car, booking for the first time
+
+Admin admin = new Admin("Jonathan", "Joestar");
+admin.setId("AD:" + EntityId.generateId());
+
+
+// Open data file using DatabaseSystem
+
+DatabaseSystem dbs = new DatabaseSystem("./Data/Car.txt");
+Scanner dataFile = dbs.openFile();

@@ -1,17 +1,15 @@
 package Objects;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public class Car {
-    String id;
+public class Car extends EntityId{
     String manufacture;
     String model;
-    Date year;
+    LocalDate year;
     Double rentalCost;
     Boolean isRented;
 
-    public Car(String id, String manufacture, String model, Date year, Double rentalCost, Boolean isRented) {
-        this.id = id;
+    public Car(String manufacture, String model, LocalDate year, Double rentalCost, Boolean isRented) {
         this.manufacture = manufacture;
         this.model = model;
         this.year = year;
