@@ -39,4 +39,7 @@ public class Person extends EntityId{
     public void logout() {
 
     }
+
+    // TODO: Create function that can construct database entry and deconstruct database entry
+    // TODO: Create function that can query database system
 }

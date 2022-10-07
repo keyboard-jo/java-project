@@ -1,6 +1,5 @@
 package Objects;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +11,7 @@ public class CarDatabaseSystem extends DatabaseSystem{
         super(path);
     }
 
+    // Query database based on hashmap
     public ArrayList<Car> queryDatabase(HashMap<String, String> query) {
         ArrayList<Car> carList = new ArrayList<Car>();
         Scanner dataFile = super.openFileRead();
@@ -22,16 +22,13 @@ public class CarDatabaseSystem extends DatabaseSystem{
         return carList;
     }
 
-    public void addEntry(Car car) {
-        BufferedWriter dataFile = super.openFileAppend();
-        try {
-            String entry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.rentalCost + ";" + car.year + ";" + car.isRented;
-            dataFile.write(entry + System.lineSeparator());
-            dataFile.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static String constructEntry(Car car) {
+        String entry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.rentalCost + ";" + car.year + ";" + car.isRented;
+        return entry;
     }
-    
+
+    // public static Car deconstructEntry(String entry) {
+    //     String[] attributes = entry.split(";");
+
+    // }
 }

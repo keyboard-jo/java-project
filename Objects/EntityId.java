@@ -1,5 +1,5 @@
 package Objects;
-import java.util.Random;;
+import java.util.UUID;
 
 public class EntityId {
     private String id;
@@ -8,11 +8,8 @@ public class EntityId {
 
     // Generate id number
     public static String generateId() {
-        Random random = new Random();
-        Integer range = 100000000;
-        Integer id = random.nextInt(range);
-        String formatId = String.format("%09d", id);
-        return formatId;
+        UUID formatId = UUID.randomUUID();
+        return formatId.toString();
     }
 
     public void setId(String id) {

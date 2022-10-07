@@ -1,3 +1,4 @@
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -12,6 +13,16 @@ public class Main {
         admin.setId("AD:" + EntityId.generateId());
         System.out.println(admin.getId());
         admin.sayHello();
+
+        Class<?> current = admin.getClass();
+        while (current.getSuperclass() != null) {
+            Field[] fields = current.getDeclaredFields();
+            for(int i = 0; i < fields.length; i++) {
+                System.out.println("Field = " + fields[i].toString());
+         }
+            current = current.getSuperclass();
+        }
+
         admin.addCar("Honda", "Jazz", LocalDate.of(2022, 1, 1), 84615.45, false);
 
         DatabaseSystem dbs = new DatabaseSystem("./Data/Car.txt");

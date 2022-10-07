@@ -12,11 +12,14 @@ public class Admin extends Person {
         super.type = "admin";
     }
 
+    // Takes in attributes of a car and create a car object. Sets its ID and add it to the database
     public void addCar(String manufacture, String model, LocalDate year, Double rentalCost, Boolean isRented) {
         Car car = new Car(manufacture, model, year, rentalCost, isRented);
-        car.setId("CA" + EntityId.generateId());
+        car.setId("CA:" + EntityId.generateId());
+        String carEntry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.rentalCost + ";" + car.year + ";" + car.isRented;
+        
         CarDatabaseSystem cdbs = new CarDatabaseSystem("./Data/Car.txt");
-        cdbs.addEntry(car);
+        cdbs.addEntry(carEntry);
     }
 
     public void editCar() {
