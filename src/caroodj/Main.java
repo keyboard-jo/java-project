@@ -1,6 +1,5 @@
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.Date;
 
 import Objects.Admin;
 import Objects.DatabaseSystem;
@@ -27,6 +26,10 @@ public class Main {
 
         DatabaseSystem dbs = new DatabaseSystem("./Data/Car.txt");
         dbs.openFileRead();
+
+        new Swing();
     }
 }
 
+    // TODO: Create function that can query database system
+    
