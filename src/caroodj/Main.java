@@ -24,7 +24,7 @@ public class Main {
 
         admin.addCar("Honda", "Jazz", LocalDate.of(2022, 1, 1), 84615.45, false);
 
-        DatabaseSystem dbs = new DatabaseSystem("./Data/Car.txt");
+        DatabaseSystem dbs = new DatabaseSystem("src\\caroodj\\Data\\Car.txt");
         dbs.openFileRead();
 
         new Swing();
