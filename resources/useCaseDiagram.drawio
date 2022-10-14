@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-12T03:55:27.141Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" version="20.4.0" etag="aSBE8TGWuB51DFHeyKbK" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-14T03:53:01.632Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="mUcFQQyrjmOlh_gTHa88" version="20.4.0" type="github">
   <diagram id="8ZVSrb0IBzY9VmoiaXhC" name="Page-1">
     <mxGraphModel dx="1278" dy="539" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -16,10 +16,10 @@
         <mxCell id="7" value="Confirm Booking" style="ellipse;whiteSpace=wrap;html=1;" parent="2" vertex="1">
           <mxGeometry x="50" y="400" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="eEi77S1ZfedkLptUBWkQ-7" value="payment notice" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+        <mxCell id="eEi77S1ZfedkLptUBWkQ-7" value="payment notice" style="ellipse;whiteSpace=wrap;html=1;" parent="2" vertex="1">
           <mxGeometry x="190" y="60" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="eEi77S1ZfedkLptUBWkQ-8" value="receive payment" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+        <mxCell id="eEi77S1ZfedkLptUBWkQ-8" value="receive payment" style="ellipse;whiteSpace=wrap;html=1;" parent="2" vertex="1">
           <mxGeometry x="190" y="400" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="4" value="Client" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
