@@ -22,8 +22,20 @@ public class CarDatabaseSystem extends DatabaseSystem{
         return carList;
     }
 
+    // Print database content
+    public ArrayList<Car> displayDatabase() {
+        ArrayList<Car> carList = new ArrayList<Car>();
+        Scanner dataFile = super.openFileRead();
+        while (dataFile.hasNextLine()) {
+            String data = dataFile.nextLine();
+            carList.add(deconstructEntry(data));
+            System.out.println(data);
+        }
+        return carList;
+    }
+
     public static String constructEntry(Car car) {
-        String entry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.rentalCost + ";" + car.year + ";" + car.isRented;
+        String entry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.year + ";" + car.rentalCost + ";" + car.isRented;
         return entry;
     }
 
@@ -32,10 +44,10 @@ public class CarDatabaseSystem extends DatabaseSystem{
         String manufacture = attributes[1];
         String model = attributes[2];
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
 
-        LocalDate year = LocalDate.parse(attributes[4], formatter);
-        Double rentalCost = Double.parseDouble(attributes[3]);
+        LocalDate year = LocalDate.parse(attributes[3], formatter);
+        Double rentalCost = Double.parseDouble(attributes[4]);
         Boolean isRented = Boolean.parseBoolean(attributes[5]);
         Car car = new Car(manufacture, model, year, rentalCost, isRented);
         car.setId(attributes[0]);

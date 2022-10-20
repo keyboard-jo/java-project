@@ -1,8 +1,10 @@
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import Objects.Admin;
-import Objects.DatabaseSystem;
+import Objects.Car;
+import Objects.CarDatabaseSystem;
 import Objects.EntityId;
 
 public class Main {
@@ -22,10 +24,14 @@ public class Main {
             current = current.getSuperclass();
         }
 
+        // Add car
         admin.addCar("Honda", "Jazz", LocalDate.of(2022, 1, 1), 84615.45, false);
 
-        DatabaseSystem dbs = new DatabaseSystem("src\\caroodj\\Data\\Car.txt");
-        dbs.openFileRead();
+        CarDatabaseSystem cdbs = new CarDatabaseSystem("src\\caroodj\\Data\\Car.txt");
+
+        // Display all database
+        ArrayList<Car> carList = cdbs.displayDatabase();
+        System.out.println(carList);
 
         new Swing();
     }
