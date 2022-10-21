@@ -1,8 +1,8 @@
 package Objects;
 
 public class Client extends Person{
-    public Client(String firstName, String lastName) {
-        super(firstName, lastName);
+    public Client(String username) {
+        super(username);
         super.type = "client";
     }
 

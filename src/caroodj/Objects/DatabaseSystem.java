@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class DatabaseSystem {
@@ -62,5 +63,14 @@ public class DatabaseSystem {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Operators
+    public Boolean isBetween(Double start, Double val, Double end) {
+        return !(val < start || val > end);
+    }
+
+    public Boolean isBetween(LocalDate start, LocalDate val, LocalDate end) {
+        return !(val.isBefore(start) || val.isAfter(end));
     }
 }

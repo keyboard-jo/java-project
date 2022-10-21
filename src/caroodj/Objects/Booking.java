@@ -1,16 +1,16 @@
 package Objects;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Booking extends EntityId{
-    Date startDate;
-    Date endDate;
+    LocalDate startDate;
+    LocalDate endDate;
     Boolean isConfirmed;
     String clientId;
     Car car;
     Client client;
 
-    public Booking(Date startDate, Date endDate, Boolean isConfirmed, Car car, Client client) {
+    public Booking(LocalDate startDate, LocalDate endDate, Boolean isConfirmed, Car car, Client client) {
         this.car = car;
         this.client = client;
         this.startDate = startDate;

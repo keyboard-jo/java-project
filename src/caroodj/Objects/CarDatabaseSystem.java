@@ -12,7 +12,7 @@ public class CarDatabaseSystem extends DatabaseSystem{
     }
 
     // Query database based on hashmap
-    public ArrayList<Car> queryDatabase(HashMap<String, String> query) {
+    public ArrayList<Car> queryDatabase(HashMap<String, ArrayList<String>> query) {
         ArrayList<Car> carList = new ArrayList<Car>();
         Scanner dataFile = super.openFileRead();
         while (dataFile.hasNextLine()) {

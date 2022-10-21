@@ -4,10 +4,10 @@ public class Person extends EntityId{
     public String lastName;
     public String type;
     private String password;
+    public String username;
 
-    public Person(String firtName, String lastName) {
-        this.firstName = firtName;
-        this.lastName = lastName;
+    public Person(String username) {
+        this.username = username;
     }
 
     // Test function

@@ -10,7 +10,7 @@ import Objects.EntityId;
 public class Main {
     public static void main(String[] aStrings){
         
-        Admin admin = new Admin("Jonathan", "Joestar");
+        Admin admin = new Admin("Jonathan");
         admin.setId("AD:" + EntityId.generateId());
         System.out.println(admin.getId());
         admin.sayHello();
