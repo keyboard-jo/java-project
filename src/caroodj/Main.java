@@ -2,6 +2,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import Menus.Login;
 import Objects.Admin;
 import Objects.Car;
 import Objects.CarDatabaseSystem;
@@ -10,7 +11,7 @@ import Objects.EntityId;
 public class Main {
     public static void main(String[] aStrings){
         
-        Admin admin = new Admin("Jonathan");
+        Admin admin = new Admin("Jonathan", "aiduaiudgabdkanwk");
         admin.setId("AD:" + EntityId.generateId());
         System.out.println(admin.getId());
         admin.sayHello();
@@ -33,7 +34,7 @@ public class Main {
         ArrayList<Car> carList = cdbs.displayDatabase();
         System.out.println(carList);
 
-        new Swing();
+        new Login().setVisible(true);;
     }
 }
 

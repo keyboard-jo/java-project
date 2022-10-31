@@ -1,33 +1,47 @@
 package Objects;
 public class Person extends EntityId{
-    public String firstName;
-    public String lastName;
     public String type;
     private String password;
     public String username;
 
-    public Person(String username) {
+    // Optional
+    private String email;
+    private String name;
+
+    public Person(String username, String password) {
         this.username = username;
+        this.password = password;
     }
 
     // Test function
     public void sayHello() {
-        System.out.println("My name is " + this.firstName + " " + this.lastName + ". I am a " + this.type);
+        System.out.println("My name is " + this.username + ". I am a " + this.type);
     }
     
     // Encapsulation setter
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // Encapsulation getter
-    private String getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    // Register to the DatabaseSystem
-    public void register() {
+    public String getEmail() {
+        return email;
+    }
 
+    public String getName() {
+        return name;
     }
 
     // Login to the Menu
