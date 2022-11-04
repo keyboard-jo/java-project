@@ -39,4 +39,28 @@ public class PersonDatabaseSystem extends DatabaseSystem {
         }
         return true;
     }
+
+    public boolean checkPassword(String username, String password) {
+        Scanner dataFile = super.openFileRead();
+        while (dataFile.hasNextLine()) {
+            String data = dataFile.nextLine();
+            Person person = deconstructEntry(data);
+            if (username.equals(person.username)) {
+                return password.equals(person.getPassword());
+            }
+        }
+        return false;
+    }
+
+    public Person queryByUsername(String username) {
+        Scanner dataFile = super.openFileRead();
+        while (dataFile.hasNextLine()) {
+            String data = dataFile.nextLine();
+            Person person = deconstructEntry(data);
+            if (username.equals(person.username)) {
+                return person;
+            }
+        }
+        return null;
+    }
 }

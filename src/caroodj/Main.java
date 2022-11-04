@@ -2,7 +2,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Menus.Login;
+import Menus.Base;
 import Objects.Admin;
 import Objects.Car;
 import Objects.CarDatabaseSystem;
@@ -34,7 +34,7 @@ public class Main {
         ArrayList<Car> carList = cdbs.displayDatabase();
         System.out.println(carList);
 
-        new Login().setVisible(true);;
+        new Base().setVisible(true);
     }
 }
 

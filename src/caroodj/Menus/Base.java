@@ -5,6 +5,8 @@
 package Menus;
 
 import java.awt.Container;
+import java.awt.event.MouseEvent;
+import java.util.function.Function;
 
 import Menus.Panel.LoginPanel;
 import Menus.Panel.RegisterPanel;
@@ -13,12 +15,12 @@ import Menus.Panel.RegisterPanel;
  *
  * @author JUSTIN
  */
-public class Login extends javax.swing.JFrame {
+public class Base extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Base() {
         initComponents();
     }
 
@@ -34,14 +36,28 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Car Rental Service");
 
-        Container cPane = getContentPane();
-        cPane.setLayout(new java.awt.CardLayout());
+        cPane = getContentPane();
+        card = new java.awt.CardLayout();
+        cPane.setLayout(card);
 
-        cPane.add("Register", new RegisterPanel());
-        cPane.add("Login", new LoginPanel());
+        cPane.add("Login", new LoginPanel(this.goToRegisterMenu));
+        cPane.add("Register", new RegisterPanel(this.goToLoginMenu));
 
         pack();
 
 
     }// </editor-fold>
+
+    java.awt.CardLayout card;
+    Container cPane;
+
+    private Function<MouseEvent, Void> goToLoginMenu = e -> {
+        this.card.show(this.cPane, "Login");
+        return null;
+    };
+
+    private Function<MouseEvent, Void> goToRegisterMenu = e -> {
+        this.card.show(this.cPane, "Register");
+        return null;
+    };
 }

@@ -10,7 +10,6 @@ public class Client extends Person{
     public boolean register() {
         PersonDatabaseSystem pds = new PersonDatabaseSystem("src\\caroodj\\Data\\Person.txt");
         String entry = PersonDatabaseSystem.constructEntry(this);
-        System.out.println(entry);
         if (pds.checkDuplicate(username)) {
             pds.addEntry(entry);
             return true;

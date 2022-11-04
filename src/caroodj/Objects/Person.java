@@ -45,8 +45,12 @@ public class Person extends EntityId{
     }
 
     // Login to the Menu
-    public void login() {
-        
+    public Person login() {
+        PersonDatabaseSystem pds = new PersonDatabaseSystem("src\\caroodj\\Data\\Person.txt");
+        if (pds.checkPassword(this.username, this.getPassword())) {
+            return pds.queryByUsername(this.username);
+        }
+        return null;
     }
 
     // Logout of the Menu
