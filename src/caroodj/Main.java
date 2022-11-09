@@ -39,4 +39,6 @@ public class Main {
 }
 
     // TODO: Create function that can query database system
+    // TODO: Create validation when registering, text field should not be empty
+    // TODO: Create mandatory date picker or try catch for fail date parseing
     

@@ -1,4 +1,7 @@
 package Objects;
+
+import java.time.LocalDate;
+
 public class Person extends EntityId{
     public String type;
     private String password;
@@ -7,6 +10,7 @@ public class Person extends EntityId{
     // Optional
     private String email;
     private String name;
+    private LocalDate dateOfBirth;
 
     public Person(String username, String password) {
         this.username = username;
@@ -31,6 +35,10 @@ public class Person extends EntityId{
         this.name = name;
     }
 
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     // Encapsulation getter
     public String getPassword() {
         return this.password;
@@ -42,6 +50,10 @@ public class Person extends EntityId{
 
     public String getName() {
         return name;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     // Login to the Menu

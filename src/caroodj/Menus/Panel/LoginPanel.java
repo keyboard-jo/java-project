@@ -4,12 +4,9 @@
  */
 package Menus.Panel;
 
+import java.util.Objects;
 import java.util.function.Function;
 
-import javax.swing.JOptionPane;
-
-import Objects.Client;
-import Objects.EntityId;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -25,8 +22,9 @@ public class LoginPanel extends javax.swing.JPanel {
     /**
      * Creates new form Register
      */
-    public LoginPanel(Function <java.awt.event.MouseEvent, Void> mouseEventFunction) {
+    public LoginPanel(Function <java.awt.event.MouseEvent, Void> mouseEventFunction, Function<Person, Void> goToHomeMenu) {
         this.mouseEventFunction = mouseEventFunction;
+        this.goToHomeMenu = goToHomeMenu;
         initComponents();
     }
 
@@ -122,7 +120,7 @@ public class LoginPanel extends javax.swing.JPanel {
         add(jPasswordField1, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel4.setText("Already have an account login here");
+        jLabel4.setText("Don't have and account? Register here!");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mouseEventFunction.apply(evt);
@@ -140,7 +138,10 @@ public class LoginPanel extends javax.swing.JPanel {
         String password = String.valueOf(jPasswordField1.getPassword());
         Person candidate = new Person(username, password);
         Person person = candidate.login();
-        person.sayHello();
+        if (!Objects.isNull(person)) {
+            person.sayHello();
+            goToHomeMenu.apply(person);
+        }
         
     }
 
@@ -153,5 +154,6 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private Function <java.awt.event.MouseEvent, Void> mouseEventFunction;
+    private Function <Person, Void> goToHomeMenu;
     // End of variables declaration                   
 }

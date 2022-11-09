@@ -8,8 +8,10 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.util.function.Function;
 
+import Menus.Panel.Home;
 import Menus.Panel.LoginPanel;
 import Menus.Panel.RegisterPanel;
+import Objects.Person;
 
 /**
  *
@@ -40,7 +42,7 @@ public class Base extends javax.swing.JFrame {
         card = new java.awt.CardLayout();
         cPane.setLayout(card);
 
-        cPane.add("Login", new LoginPanel(this.goToRegisterMenu));
+        cPane.add("Login", new LoginPanel(this.goToRegisterMenu, this.goToHomeMenu));
         cPane.add("Register", new RegisterPanel(this.goToLoginMenu));
 
         pack();
@@ -50,6 +52,7 @@ public class Base extends javax.swing.JFrame {
 
     java.awt.CardLayout card;
     Container cPane;
+    Person person;
 
     private Function<MouseEvent, Void> goToLoginMenu = e -> {
         this.card.show(this.cPane, "Login");
@@ -58,6 +61,17 @@ public class Base extends javax.swing.JFrame {
 
     private Function<MouseEvent, Void> goToRegisterMenu = e -> {
         this.card.show(this.cPane, "Register");
+        return null;
+    };
+
+    public Function<Person, Void> addPersonHomeMenu = p -> {
+        this.cPane.add("Home", new Home(p));
+        return null;
+    };
+
+    private Function<Person, Void> goToHomeMenu = p -> {
+        this.addPersonHomeMenu.apply(p);
+        this.card.show(this.cPane, "Home");
         return null;
     };
 }

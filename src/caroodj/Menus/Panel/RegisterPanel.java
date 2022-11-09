@@ -4,6 +4,7 @@
  */
 package Menus.Panel;
 
+import java.time.LocalDate;
 import java.util.function.Function;
 
 import javax.swing.JOptionPane;
@@ -139,6 +140,7 @@ public class RegisterPanel extends javax.swing.JPanel {
         String password = String.valueOf(jPasswordField1.getPassword());
         Client client = new Client(username, password);
         client.setId("CL:" + EntityId.generateId());
+        client.setDateOfBirth(LocalDate.parse("2003-01-01"));
         if (client.register()) {
             JOptionPane.showMessageDialog(null, "Succesful Registration");
         } else {

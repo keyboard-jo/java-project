@@ -1,5 +1,6 @@
 package Objects;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PersonDatabaseSystem extends DatabaseSystem {
@@ -8,7 +9,7 @@ public class PersonDatabaseSystem extends DatabaseSystem {
     }
 
     public static String constructEntry(Person person) {
-        String entry = person.getId() + ";" + person.username + ";" + person.type + ";" + person.getEmail() + ";" + person.getName() + ";" + person.getPassword();
+        String entry = person.getId() + ";" + person.username + ";" + person.type + ";" + person.getEmail() + ";" + person.getName() + ";" + person.getDateOfBirth() + ";" + person.getPassword();
         return entry;
     }
 
@@ -18,13 +19,15 @@ public class PersonDatabaseSystem extends DatabaseSystem {
         String type = attributes[2];
         String email = attributes[3];
         String name = attributes[4];
-        String password = attributes[5];
+        LocalDate dateOfBirth = LocalDate.parse(attributes[5]);
+        String password = attributes[6];
 
         Person person = new Person(username, password);
         person.setEmail(email);
         person.setId(attributes[0]);
         person.type = type;
         person.setName(name);
+        person.setDateOfBirth(dateOfBirth);
         return person;
     }
 
