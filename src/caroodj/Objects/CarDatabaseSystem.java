@@ -12,11 +12,39 @@ public class CarDatabaseSystem extends DatabaseSystem{
     }
 
     // Query database based on hashmap
-    public ArrayList<Car> queryDatabase(HashMap<String, ArrayList<String>> query) {
+    public ArrayList<Car> queryDatabaseOne(HashMap<String, String> query) {
         ArrayList<Car> carList = new ArrayList<Car>();
         Scanner dataFile = super.openFileRead();
+
+        String manufacture = query.get("Manufacture");
+        String model = query.get("Model");
+
+        Boolean isRented = Boolean.parseBoolean(query.get("Rented"));
+
+        // Add try catch date
+        Boolean isRangeDate = query.get("Year").split(" ", 2).length > 1;
+        Boolean isRangeDouble = query.get("Rent").split(" ", 2).length > 1;
+
+        if (isRangeDate) {
+            String yearsRange[] = query.get("Year").split(" ", 2);
+            LocalDate yearLow = LocalDate.parse(yearsRange[0]);
+            LocalDate yearHigh = LocalDate.parse(yearsRange[1]);
+        } else {
+            LocalDate year = LocalDate.parse(query.get("Year"));
+        }
+
+        if (isRangeDouble) {
+            String rentRange[] = query.get("Rent").split(" ", 2);
+            Double rentLow = Double.parseDouble(rentRange[0]);
+            Double rentHigh = Double.parseDouble(rentRange[1]);
+        } else {
+            Double rent = Double.parseDouble(query.get("Rent"));
+        }
+        
+
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
+            Car car = deconstructEntry(data);
             System.out.println(data);
         }
         return carList;

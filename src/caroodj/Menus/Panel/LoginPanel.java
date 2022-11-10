@@ -136,7 +136,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String username = jTextField1.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-        Person candidate = new Person(username, password);
+        Person candidate = new Person(username, password, null);
         Person person = candidate.login();
         if (!Objects.isNull(person)) {
             person.sayHello();

@@ -1,32 +1,23 @@
-import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Menus.Base;
-import Objects.Admin;
 import Objects.Car;
 import Objects.CarDatabaseSystem;
-import Objects.EntityId;
 
 public class Main {
     public static void main(String[] aStrings){
-        
-        Admin admin = new Admin("Jonathan", "aiduaiudgabdkanwk");
-        admin.setId("AD:" + EntityId.generateId());
-        System.out.println(admin.getId());
-        admin.sayHello();
 
-        Class<?> current = admin.getClass();
-        while (current.getSuperclass() != null) {
-            Field[] fields = current.getDeclaredFields();
-            for(int i = 0; i < fields.length; i++) {
-                System.out.println("Field = " + fields[i].toString());
-         }
-            current = current.getSuperclass();
-        }
+        // Class<?> current = admin.getClass();
+        // while (current.getSuperclass() != null) {
+        //     Field[] fields = current.getDeclaredFields();
+        //     for(int i = 0; i < fields.length; i++) {
+        //         System.out.println("Field = " + fields[i].toString());
+        //  }
+        //     current = current.getSuperclass();
+        // }
 
         // Add car
-        admin.addCar("Honda", "Jazz", LocalDate.of(2022, 1, 1), 84615.45, false);
+        // admin.addCar("Honda", "Jazz", LocalDate.of(2022, 1, 1), 84615.45, false);
 
         CarDatabaseSystem cdbs = new CarDatabaseSystem("src\\caroodj\\Data\\Car.txt");
 
@@ -41,4 +32,5 @@ public class Main {
     // TODO: Create function that can query database system
     // TODO: Create validation when registering, text field should not be empty
     // TODO: Create mandatory date picker or try catch for fail date parseing
+    // TODO: create try catch date
     

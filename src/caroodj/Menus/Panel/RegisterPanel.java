@@ -5,6 +5,7 @@
 package Menus.Panel;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.function.Function;
 
 import javax.swing.JOptionPane;
@@ -49,6 +50,12 @@ public class RegisterPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -57,6 +64,7 @@ public class RegisterPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 2;
         gridBagConstraints.ipady = 2;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
@@ -90,11 +98,13 @@ public class RegisterPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 2;
         gridBagConstraints.ipady = 2;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(jLabel3, gridBagConstraints);
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Register");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +113,7 @@ public class RegisterPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 2;
         gridBagConstraints.ipady = 2;
@@ -130,17 +140,89 @@ public class RegisterPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         add(jLabel4, gridBagConstraints);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Email");
+        jLabel5.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(jLabel5, gridBagConstraints);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Name");
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(jLabel6, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Date of Birth");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(jLabel7, gridBagConstraints);
+
+        jTextField2.setPreferredSize(new java.awt.Dimension(128, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(jTextField2, gridBagConstraints);
+
+        jTextField3.setPreferredSize(new java.awt.Dimension(128, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(jTextField3, gridBagConstraints);
+
+        jDateChooser1.setPreferredSize(new java.awt.Dimension(128, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(jDateChooser1, gridBagConstraints);
     }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String username = jTextField1.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-        Client client = new Client(username, password);
+        String email = jTextField2.getText();
+        String name = jTextField3.getText();
+        LocalDate dateOfBirth = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Client client = new Client(username, password, dateOfBirth);
+        client.setEmail(email);
+        client.setName(name);
         client.setId("CL:" + EntityId.generateId());
-        client.setDateOfBirth(LocalDate.parse("2003-01-01"));
         if (client.register()) {
             JOptionPane.showMessageDialog(null, "Succesful Registration");
         } else {
@@ -157,6 +239,12 @@ public class RegisterPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private Function <java.awt.event.MouseEvent, Void> mouseEventFunction;
     // End of variables declaration                   
 }

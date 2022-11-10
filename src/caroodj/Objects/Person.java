@@ -6,15 +6,16 @@ public class Person extends EntityId{
     public String type;
     private String password;
     public String username;
+    private LocalDate dateOfBirth;
 
     // Optional
     private String email;
     private String name;
-    private LocalDate dateOfBirth;
 
-    public Person(String username, String password) {
+    public Person(String username, String password, LocalDate dateOfBirth) {
         this.username = username;
         this.password = password;
+        this.dateOfBirth = dateOfBirth;
     }
 
     // Test function

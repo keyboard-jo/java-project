@@ -19,10 +19,12 @@ public class PersonDatabaseSystem extends DatabaseSystem {
         String type = attributes[2];
         String email = attributes[3];
         String name = attributes[4];
+
+        // Add try catch date
         LocalDate dateOfBirth = LocalDate.parse(attributes[5]);
         String password = attributes[6];
 
-        Person person = new Person(username, password);
+        Person person = new Person(username, password, dateOfBirth);
         person.setEmail(email);
         person.setId(attributes[0]);
         person.type = type;

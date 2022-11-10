@@ -7,8 +7,8 @@ import java.time.LocalDate;
  */
 public class Admin extends Person {
 
-    public Admin(String username, String password) {
-        super(username, password);
+    public Admin(String username, String password, LocalDate dateOfBirth) {
+        super(username, password, dateOfBirth);
         super.type = "admin";
     }
 
