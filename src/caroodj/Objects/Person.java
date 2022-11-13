@@ -1,9 +1,10 @@
 package Objects;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 // Abbstarct class
-public class Person extends EntityId{
+public abstract class Person extends EntityId{
     public String type;
     private String password;
     public String username;
@@ -60,10 +61,11 @@ public class Person extends EntityId{
 
     // Login to the Menu
     // Fix return of person
-    public static Person login(String username, String password) {
+    public static String login(String username, String password) {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         if (pdf.checkPassword(username, password)) {
-            return pdf.queryByUsername(username);
+            HashMap<String, String> query = PersonDataFile.createQuery("*", username, "*", "*", "*", "*", "*");
+            return pdf.queryDatabase(query).get(0)[0];
         }
         return null;
     }
