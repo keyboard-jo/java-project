@@ -6,10 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DataFile {
+public class DataFile<T> {
     String path;
+    ArrayList<T> lastQuery;
     public DataFile(String path) {
         this.path = path;
     }
@@ -76,5 +78,9 @@ public class DataFile {
 
     public static Boolean isStar(String val) {
         return (val == "*") ? true : false;
+    }
+
+    public T first() {
+        return (T) this.lastQuery.get(0);
     }
 }

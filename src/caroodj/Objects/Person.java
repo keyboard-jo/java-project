@@ -65,7 +65,7 @@ public abstract class Person extends EntityId{
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         if (pdf.checkPassword(username, password)) {
             HashMap<String, String> query = PersonDataFile.createQuery("*", username, "*", "*", "*", "*", "*");
-            return pdf.queryDatabase(query).get(0)[0];
+            return pdf.queryDatabase(query).first()[0];
         }
         return null;
     }

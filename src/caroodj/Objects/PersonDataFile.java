@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class PersonDataFile extends DataFile {
+public class PersonDataFile extends DataFile<String[]> {
     PersonDataFile(String path) {
         super(path);
     }
 
-    public ArrayList<String[]> queryDatabase(HashMap<String, String> query) {
+    public PersonDataFile queryDatabase(HashMap<String, String> query) {
         Scanner dataFile = super.openFileRead();
 
         ArrayList<String[]> personIdList = new ArrayList<String[]>();
@@ -59,7 +59,8 @@ public class PersonDataFile extends DataFile {
             }
         }
 
-        return personIdList;
+        this.lastQuery = personIdList;
+        return this;
     }
 
     public static HashMap<String, String> createQuery(String id, String username, String type, String email, String name, String dateOfBirth, String password) {
