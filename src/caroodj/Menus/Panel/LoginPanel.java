@@ -22,7 +22,7 @@ public class LoginPanel extends javax.swing.JPanel {
     /**
      * Creates new form Register
      */
-    public LoginPanel(Function <java.awt.event.MouseEvent, Void> mouseEventFunction, Function<Person, Void> goToHomeMenu) {
+    public LoginPanel(Function <java.awt.event.MouseEvent, Void> mouseEventFunction, Function<String, Void> goToHomeMenu) {
         this.mouseEventFunction = mouseEventFunction;
         this.goToHomeMenu = goToHomeMenu;
         initComponents();
@@ -136,11 +136,9 @@ public class LoginPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String username = jTextField1.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-        Person candidate = new Person(username, password, null);
-        Person person = candidate.login();
+        Person person = Person.login(username, password);
         if (!Objects.isNull(person)) {
-            person.sayHello();
-            goToHomeMenu.apply(person);
+            goToHomeMenu.apply(person.getId());
         }
         
     }
@@ -154,6 +152,6 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private Function <java.awt.event.MouseEvent, Void> mouseEventFunction;
-    private Function <Person, Void> goToHomeMenu;
+    private Function <String, Void> goToHomeMenu;
     // End of variables declaration                   
 }

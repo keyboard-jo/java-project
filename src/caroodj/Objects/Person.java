@@ -2,6 +2,7 @@ package Objects;
 
 import java.time.LocalDate;
 
+// Abbstarct class
 public class Person extends EntityId{
     public String type;
     private String password;
@@ -58,10 +59,11 @@ public class Person extends EntityId{
     }
 
     // Login to the Menu
-    public Person login() {
-        PersonDatabaseSystem pds = new PersonDatabaseSystem("src\\caroodj\\Data\\Person.txt");
-        if (pds.checkPassword(this.username, this.getPassword())) {
-            return pds.queryByUsername(this.username);
+    // Fix return of person
+    public static Person login(String username, String password) {
+        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+        if (pdf.checkPassword(username, password)) {
+            return pdf.queryByUsername(username);
         }
         return null;
     }
@@ -69,5 +71,5 @@ public class Person extends EntityId{
     // Logout of the Menu
     public void logout() {
 
-    }
+    };
 }

@@ -17,9 +17,9 @@ public class Admin extends Person {
         Car car = new Car(manufacture, model, year, rentalCost, isRented);
         car.setId("CA:" + EntityId.generateId());
         
-        CarDatabaseSystem cdbs = new CarDatabaseSystem("src\\caroodj\\Data\\Car.txt");
+        CarDataFile cdbs = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
-        String carEntry = CarDatabaseSystem.constructEntry(car);
+        String carEntry = CarDataFile.constructEntry(car);
 
         cdbs.addEntry(carEntry);
     }

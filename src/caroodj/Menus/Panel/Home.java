@@ -4,8 +4,6 @@
  */
 package Menus.Panel;
 
-import Objects.Person;
-
 /**
  *
  * @author JUSTIN
@@ -15,8 +13,8 @@ public class Home extends javax.swing.JPanel {
     /**
      * Creates new form Home
      */
-    public Home(Person person) {
-        this.person = person;
+    public Home(String personId) {
+        this.personId = personId;
         initComponents();
     }
 
@@ -31,7 +29,7 @@ public class Home extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setText(this.person.username);
+        jLabel1.setText(this.personId);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,6 +52,6 @@ public class Home extends javax.swing.JPanel {
 
     // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel1;
-    private Person person;
+    private String personId;
     // End of variables declaration                   
 }

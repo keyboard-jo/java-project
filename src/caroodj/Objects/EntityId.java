@@ -1,7 +1,7 @@
 package Objects;
 import java.util.UUID;
 
-public class EntityId {
+public abstract class EntityId {
     private String id;
     public EntityId() {
     }

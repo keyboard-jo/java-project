@@ -11,7 +11,6 @@ import java.util.function.Function;
 import Menus.Panel.Home;
 import Menus.Panel.LoginPanel;
 import Menus.Panel.RegisterPanel;
-import Objects.Person;
 
 /**
  *
@@ -52,7 +51,6 @@ public class Base extends javax.swing.JFrame {
 
     java.awt.CardLayout card;
     Container cPane;
-    Person person;
 
     private Function<MouseEvent, Void> goToLoginMenu = e -> {
         this.card.show(this.cPane, "Login");
@@ -64,12 +62,12 @@ public class Base extends javax.swing.JFrame {
         return null;
     };
 
-    public Function<Person, Void> addPersonHomeMenu = p -> {
+    public Function<String, Void> addPersonHomeMenu = p -> {
         this.cPane.add("Home", new Home(p));
         return null;
     };
 
-    private Function<Person, Void> goToHomeMenu = p -> {
+    private Function<String, Void> goToHomeMenu = p -> {
         this.addPersonHomeMenu.apply(p);
         this.card.show(this.cPane, "Home");
         return null;

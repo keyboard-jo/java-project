@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class DatabaseSystem {
+public class DataFile {
     String path;
-    public DatabaseSystem(String path) {
+    public DataFile(String path) {
         this.path = path;
     }
 
@@ -66,11 +66,15 @@ public class DatabaseSystem {
     }
 
     // Operators
-    public Boolean isBetween(Double start, Double val, Double end) {
+    public static Boolean isBetween(Double start, Double val, Double end) {
         return !(val < start || val > end);
     }
 
-    public Boolean isBetween(LocalDate start, LocalDate val, LocalDate end) {
+    public static Boolean isBetween(LocalDate start, LocalDate val, LocalDate end) {
         return !(val.isBefore(start) || val.isAfter(end));
+    }
+
+    public static Boolean isStar(String val) {
+        return (val == "*") ? true : false;
     }
 }
