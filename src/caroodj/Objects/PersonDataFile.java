@@ -70,7 +70,7 @@ public class PersonDataFile extends DataFile {
                 }
                 personIdList.clear();
                 personIdList = (ArrayList<Person>)arrayPersonId.clone();
-                personIdList.clear();
+                arrayPersonId.clear();
             }
         }
 
