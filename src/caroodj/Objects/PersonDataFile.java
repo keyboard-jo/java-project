@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class PersonDataFile extends DataFile {
+public class PersonDataFile extends DataFile<String[]> {
     PersonDataFile(String path) {
         super(path);
     }
 
-    public ArrayList<Person> queryDatabase(HashMap<String, String> query) {
+    public PersonDataFile queryDatabase(HashMap<String, String> query) {
         Scanner dataFile = super.openFileRead();
 
-        ArrayList<Person> personIdList = new ArrayList<Person>();
-        ArrayList<Person> arrayPersonId = new ArrayList<Person>();
+        ArrayList<String[]> personIdList = new ArrayList<String[]>();
+        ArrayList<String[]> arrayPersonId = new ArrayList<String[]>();
 
         String id = query.get("Id");
         String type = query.get("Type");
@@ -25,13 +25,13 @@ public class PersonDataFile extends DataFile {
         
         String dateOfBirth = query.get("DOB");
 
-        String[] featureVal = {id, type, password, dateOfBirth ,username, email, name};
+        String[] featureVal = {id, type, password, dateOfBirth, username, email, name};
 
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
-            Person person = deconstructEntry(data);
+            String[] person = deconstructEntry(data);
             if (!super.isStar(id)) {
-                if (person.getId().equals(id)) {
+                if (person[0].equals(id)) {
                     personIdList.add(person);
                 }
             } else {
@@ -41,79 +41,63 @@ public class PersonDataFile extends DataFile {
 
         for (Integer i = 1; i < featureVal.length; i++) {
             if (!super.isStar(featureVal[i])) {
-                for (Person person : personIdList) {
-                    if (i == 1) {
-                        if (person.type.equals(featureVal[i])) {
+                for (String[] person : personIdList) {
+                    if (i == 3) {
+                        if (LocalDate.parse(person[3]).equals(LocalDate.parse(featureVal[i]))) {
                             arrayPersonId.add(person);
                         }
-                    } else if (i == 2) {
-                        if (person.getPassword().equals(featureVal[i])) {
-                            arrayPersonId.add(person);
-                        }
-                    } else if (i == 3) {
-                        if (person.getDateOfBirth().equals(LocalDate.parse(featureVal[i]))) {
-                            arrayPersonId.add(person);
-                        }
-                    } else if (i == 4) {
-                        if (person.username.equals(featureVal[i])) {
-                            arrayPersonId.add(person);
-                        }
-                    } else if (i == 5) {
-                        if (person.getEmail().equals(featureVal[i])) {
-                            arrayPersonId.add(person);
-                        }
-                    } else if (i == 6) {
-                        if (person.getName().equals(featureVal[i])) {
+                    } else {
+                        System.out.println(person[i] + " " + featureVal[i]);
+                        if (person[i].equals(featureVal[i])) {
                             arrayPersonId.add(person);
                         }
                     }
                 }
                 personIdList.clear();
-                personIdList = (ArrayList<Person>)arrayPersonId.clone();
+                
+                personIdList = (ArrayList<String[]>)arrayPersonId.clone();
+
                 arrayPersonId.clear();
             }
         }
 
-        return personIdList;
+        this.lastQuery = personIdList;
+        return this;
     }
 
-    public static HashMap<String, String> createQuery(String id, String username, String type, String email, String name, String dateOfBirth, String password) {
+    public HashMap<String, String> createQuery(String[] person) {
         HashMap<String, String> query = new HashMap<String, String>();
 
-        query.put("Id", id);
-        query.put("Type", type);
-        query.put("Password", password);
-        query.put("Username", username);
-        query.put("Email", email);
-        query.put("Name", name);
-        query.put("DOB", dateOfBirth);
+        query.put("Id", person[0]);
+        query.put("Type", person[2]);
+        query.put("Password", person[6]);
+        query.put("Username", person[1]);
+        query.put("Email", person[3]);
+        query.put("Name", person[4]);
+        query.put("DOB", person[5]);
 
         return query;
     }
 
-    public static String constructEntry(Person person) {
-        String entry = person.getId() + ";" + person.username + ";" + person.type + ";" + person.getEmail() + ";" + person.getName() + ";" + person.getDateOfBirth() + ";" + person.getPassword();
+    public String constructEntry(String[] person) {
+        String entry = person[0] + ";" + person[1] + ";" + person[2] + ";" + person[3] + ";" + person[4] + ";" + person[5] + ";" + person[6];
         return entry;
     }
 
     // Fix person abstarcxt class
-    public static Person deconstructEntry(String entry) {
+    public String[] deconstructEntry(String entry) {
         String[] attributes = entry.split(";");
+        String id = attributes[0];
         String username = attributes[1];
         String type = attributes[2];
         String email = attributes[3];
         String name = attributes[4];
 
         // Add try catch date
-        LocalDate dateOfBirth = LocalDate.parse(attributes[5]);
+        String dateOfBirth = attributes[5];
         String password = attributes[6];
 
-        Person person = new Person(username, password, dateOfBirth);
-        person.setEmail(email);
-        person.setId(attributes[0]);
-        person.type = type;
-        person.setName(name);
-        person.setDateOfBirth(dateOfBirth);
+        String[] person = {id, type, password, dateOfBirth, username, email, name};
         return person;
     }
 
@@ -121,8 +105,8 @@ public class PersonDataFile extends DataFile {
         Scanner dataFile = super.openFileRead();
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
-            Person person = deconstructEntry(data);
-            if (username.equals(person.username)) {
+            String[] person = deconstructEntry(data);
+            if (username.equals(person[4])) {
                 return false;
             }
         }
@@ -133,23 +117,11 @@ public class PersonDataFile extends DataFile {
         Scanner dataFile = super.openFileRead();
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
-            Person person = deconstructEntry(data);
-            if (username.equals(person.username)) {
-                return password.equals(person.getPassword());
+            String[] person = deconstructEntry(data);
+            if (username.equals(person[4])) {
+                return password.equals(person[2]);
             }
         }
         return false;
-    }
-    // Fix person abstract class
-    public Person queryByUsername(String username) {
-        Scanner dataFile = super.openFileRead();
-        while (dataFile.hasNextLine()) {
-            String data = dataFile.nextLine();
-            Person person = deconstructEntry(data);
-            if (username.equals(person.username)) {
-                return person;
-            }
-        }
-        return null;
     }
 }

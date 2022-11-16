@@ -6,10 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class DataFile {
+public abstract class DataFile<T> {
     String path;
+    ArrayList<T> lastQuery;
     public DataFile(String path) {
         this.path = path;
     }
@@ -65,6 +68,11 @@ public class DataFile {
         }
     }
 
+    public abstract String constructEntry(T objectT);
+    public abstract T deconstructEntry(String val);
+    public abstract HashMap<String, String> createQuery(String[] argument);
+
+    // TODO: Seperate this methods into different object
     // Operators
     public static Boolean isBetween(Double start, Double val, Double end) {
         return !(val < start || val > end);
@@ -76,5 +84,9 @@ public class DataFile {
 
     public static Boolean isStar(String val) {
         return (val == "*") ? true : false;
+    }
+
+    public T first() {
+        return (T) this.lastQuery.get(0);
     }
 }

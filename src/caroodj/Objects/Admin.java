@@ -19,7 +19,7 @@ public class Admin extends Person {
         
         CarDataFile cdbs = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
-        String carEntry = CarDataFile.constructEntry(car);
+        String carEntry = cdbs.constructEntry(car);
 
         cdbs.addEntry(carEntry);
     }

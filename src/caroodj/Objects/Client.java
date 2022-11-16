@@ -11,7 +11,8 @@ public class Client extends Person{
     // Register to the DatabaseSystem
     public boolean register() {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
-        String entry = PersonDataFile.constructEntry(this);
+        String[] personData = {super.getId(), this.username, this.type, super.getEmail(), super.getName(), super.getDateOfBirth()+"", super.getPassword()};
+        String entry = pdf.constructEntry(personData);
         if (pdf.checkDuplicate(username)) {
             pdf.addEntry(entry);
             return true;

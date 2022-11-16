@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CarDataFile extends DataFile{
+public class CarDataFile extends DataFile<Car>{
 
     public CarDataFile(String path) {
         super(path);
@@ -94,40 +94,27 @@ public class CarDataFile extends DataFile{
             }
         }
 
-
         return carList;
     }
 
-    public static HashMap<String, String> createQuery(String id, String manufacture, String model, String year, String rentalCost, String isRented) {
+    public HashMap<String, String> createQuery(String[] car) {
         HashMap<String, String> query = new HashMap<String, String>();
 
-        query.put("Id", id);
-        query.put("Manufacture", manufacture);
-        query.put("Model", model);
-        query.put("Year", year);
-        query.put("Rent", rentalCost);
-        query.put("Rented", isRented);
+        query.put("Id", car[0]);
+        query.put("Manufacture", car[1]);
+        query.put("Model", car[2]);
+        query.put("Year", car[3]);
+        query.put("Rent", car[4]);
+        query.put("Rented", car[5]);
         return query;
     }
 
-    // Print database content
-    public ArrayList<Car> displayDatabase() {
-        ArrayList<Car> carList = new ArrayList<Car>();
-        Scanner dataFile = super.openFileRead();
-        while (dataFile.hasNextLine()) {
-            String data = dataFile.nextLine();
-            carList.add(deconstructEntry(data));
-            System.out.println(data);
-        }
-        return carList;
-    }
-
-    public static String constructEntry(Car car) {
+    public String constructEntry(Car car) {
         String entry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.year + ";" + car.rentalCost + ";" + car.isRented;
         return entry;
     }
 
-    public static Car deconstructEntry(String entry) {
+    public Car deconstructEntry(String entry) {
         String[] attributes = entry.split(";");
         String manufacture = attributes[1];
         String model = attributes[2];
