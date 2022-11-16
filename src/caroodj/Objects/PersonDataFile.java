@@ -63,27 +63,27 @@ public class PersonDataFile extends DataFile<String[]> {
         return this;
     }
 
-    public static HashMap<String, String> createQuery(String id, String username, String type, String email, String name, String dateOfBirth, String password) {
+    public HashMap<String, String> createQuery(String[] person) {
         HashMap<String, String> query = new HashMap<String, String>();
 
-        query.put("Id", id);
-        query.put("Type", type);
-        query.put("Password", password);
-        query.put("Username", username);
-        query.put("Email", email);
-        query.put("Name", name);
-        query.put("DOB", dateOfBirth);
+        query.put("Id", person[0]);
+        query.put("Type", person[2]);
+        query.put("Password", person[6]);
+        query.put("Username", person[1]);
+        query.put("Email", person[3]);
+        query.put("Name", person[4]);
+        query.put("DOB", person[5]);
 
         return query;
     }
 
-    public static String constructEntry(Person person) {
-        String entry = person.getId() + ";" + person.username + ";" + person.type + ";" + person.getEmail() + ";" + person.getName() + ";" + person.getDateOfBirth() + ";" + person.getPassword();
+    public String constructEntry(String[] person) {
+        String entry = person[0] + ";" + person[1] + ";" + person[2] + ";" + person[3] + ";" + person[4] + ";" + person[5] + ";" + person[6];
         return entry;
     }
 
     // Fix person abstarcxt class
-    public static String[] deconstructEntry(String entry) {
+    public String[] deconstructEntry(String entry) {
         String[] attributes = entry.split(";");
         String id = attributes[0];
         String username = attributes[1];

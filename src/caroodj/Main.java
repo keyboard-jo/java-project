@@ -21,7 +21,9 @@ public class Main {
 
         CarDataFile cdbs = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
-        ArrayList<Car> carList = cdbs.queryDatabase(CarDataFile.createQuery("*", "BMW", "*", "*", "*", "*"));
+        String [] query = {"*", "BMW", "*", "*", "*", "*"};
+        
+        ArrayList<Car> carList = cdbs.queryDatabase(cdbs.createQuery(query));
 
         for (Car car : carList) {
             System.out.println(car.getId());

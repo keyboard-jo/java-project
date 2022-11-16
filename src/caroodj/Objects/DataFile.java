@@ -7,9 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class DataFile<T> {
+public abstract class DataFile<T> {
     String path;
     ArrayList<T> lastQuery;
     public DataFile(String path) {
@@ -67,6 +68,11 @@ public class DataFile<T> {
         }
     }
 
+    public abstract String constructEntry(T objectT);
+    public abstract T deconstructEntry(String val);
+    public abstract HashMap<String, String> createQuery(String[] argument);
+
+    // TODO: Seperate this methods into different object
     // Operators
     public static Boolean isBetween(Double start, Double val, Double end) {
         return !(val < start || val > end);
