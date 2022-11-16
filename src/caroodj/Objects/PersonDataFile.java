@@ -54,7 +54,9 @@ public class PersonDataFile extends DataFile<String[]> {
                     }
                 }
                 personIdList.clear();
+                
                 personIdList = (ArrayList<String[]>)arrayPersonId.clone();
+
                 arrayPersonId.clear();
             }
         }
