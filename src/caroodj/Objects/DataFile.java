@@ -89,4 +89,8 @@ public abstract class DataFile<T> {
     public T first() {
         return (T) this.lastQuery.get(0);
     }
+
+    public ArrayList<T> all() {
+        return this.lastQuery;
+    }
 }

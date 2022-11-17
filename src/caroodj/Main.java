@@ -23,7 +23,7 @@ public class Main {
 
         String [] query = {"*", "BMW", "*", "*", "*", "*"};
         
-        ArrayList<Car> carList = cdbs.queryDatabase(cdbs.createQuery(query));
+        ArrayList<Car> carList = cdbs.queryDatabase(cdbs.createQuery(query)).all();
 
         for (Car car : carList) {
             System.out.println(car.getId());
