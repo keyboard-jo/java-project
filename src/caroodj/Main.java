@@ -7,11 +7,11 @@ import Objects.CarDataFile;
 public class Main {
     public static void main(String[] aStrings){
 
-        CarDataFile cdbs = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
         String [] query = {"*", "BMW", "*", "*", "*", "*"};
         
-        ArrayList<Car> carList = cdbs.queryDatabase(cdbs.createQuery(query)).all();
+        ArrayList<Car> carList = cdf.queryDatabase(cdf.createQuery(query)).all();
 
         for (Car car : carList) {
             System.out.println(car.getId());

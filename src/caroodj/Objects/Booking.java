@@ -7,7 +7,6 @@ public class Booking extends EntityId{
     LocalDate endDate;
     Boolean isConfirmed;
     Boolean isCanceled;
-    String clientId;
     Car car;
     Client client;
 
