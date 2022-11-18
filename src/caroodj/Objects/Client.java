@@ -28,4 +28,24 @@ public class Client extends Person{
     public void viewCarBookingHistory() {
 
     }
+
+    public static Client convertToClient(String[] params) {
+        String id = params[0];
+        String username = params[1];
+        String type = params[2];
+        String email = params[3];
+        String name = params[4];
+
+        // Add try catch date
+        LocalDate dateOfBirth = LocalDate.parse(params[5]);
+        String password = params[6];
+
+        Client client = new Client(username, password, dateOfBirth);
+        client.setId(id);
+        client.setEmail(email);
+        client.setName(name);
+        client.type = type;
+
+        return client;
+    }
 }

@@ -7,23 +7,11 @@ import Objects.CarDataFile;
 public class Main {
     public static void main(String[] aStrings){
 
-        // Class<?> current = admin.getClass();
-        // while (current.getSuperclass() != null) {
-        //     Field[] fields = current.getDeclaredFields();
-        //     for(int i = 0; i < fields.length; i++) {
-        //         System.out.println("Field = " + fields[i].toString());
-        //  }
-        //     current = current.getSuperclass();
-        // }
-
-        // Add car
-        // admin.addCar("Honda", "Jazz", LocalDate.of(2022, 1, 1), 84615.45, false);
-
-        CarDataFile cdbs = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
         String [] query = {"*", "BMW", "*", "*", "*", "*"};
         
-        ArrayList<Car> carList = cdbs.queryDatabase(cdbs.createQuery(query));
+        ArrayList<Car> carList = cdf.queryDatabase(cdf.createQuery(query)).all();
 
         for (Car car : carList) {
             System.out.println(car.getId());

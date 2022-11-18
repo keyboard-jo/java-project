@@ -12,7 +12,7 @@ public class CarDataFile extends DataFile<Car>{
     }
 
     // Query database based on hashmap
-    public ArrayList<Car> queryDatabase(HashMap<String, String> query) {
+    public DataFileQueryOperator<Car> queryDatabase(HashMap<String, String> query) {
         Scanner dataFile = super.openFileRead();
         
         ArrayList<Car> carList = new ArrayList<Car>();
@@ -94,7 +94,8 @@ public class CarDataFile extends DataFile<Car>{
             }
         }
 
-        return carList;
+        this.dfqo.setLastQuery(carList);
+        return this.dfqo;
     }
 
     public HashMap<String, String> createQuery(String[] car) {
