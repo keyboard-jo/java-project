@@ -25,5 +25,11 @@ public class BookingDataFile extends DataFile<Booking> {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public DataFileQueryOperator<Booking> queryDatabase(HashMap<String, String> query) {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

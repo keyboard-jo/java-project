@@ -10,7 +10,7 @@ public class PersonDataFile extends DataFile<String[]> {
         super(path);
     }
 
-    public PersonDataFile queryDatabase(HashMap<String, String> query) {
+    public DataFileQueryOperator<String[]> queryDatabase(HashMap<String, String> query) {
         Scanner dataFile = super.openFileRead();
 
         ArrayList<String[]> personIdList = new ArrayList<String[]>();
@@ -61,8 +61,8 @@ public class PersonDataFile extends DataFile<String[]> {
             }
         }
 
-        this.lastQuery = personIdList;
-        return this;
+        this.dfqo.setLastQuery(personIdList);
+        return this.dfqo;
     }
 
     public HashMap<String, String> createQuery(String[] person) {

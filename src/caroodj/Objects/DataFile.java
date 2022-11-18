@@ -6,13 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public abstract class DataFile<T> {
     String path;
-    ArrayList<T> lastQuery;
+    public DataFileQueryOperator<T> dfqo = new DataFileQueryOperator<T>(null);
     public DataFile(String path) {
         this.path = path;
     }
@@ -71,6 +70,7 @@ public abstract class DataFile<T> {
     public abstract String constructEntry(T objectT);
     public abstract T deconstructEntry(String val);
     public abstract HashMap<String, String> createQuery(String[] argument);
+    public abstract DataFileQueryOperator<T> queryDatabase(HashMap<String, String> query);
 
     // TODO: Seperate this methods into different object
     // Operators
@@ -84,13 +84,5 @@ public abstract class DataFile<T> {
 
     public static Boolean isStar(String val) {
         return (val == "*") ? true : false;
-    }
-
-    public T first() {
-        return (T) this.lastQuery.get(0);
-    }
-
-    public ArrayList<T> all() {
-        return this.lastQuery;
     }
 }
