@@ -22,7 +22,7 @@ public class Home extends javax.swing.JPanel {
     public Home(String p) {
         this.personId = p;
         initComponents();
-        cardLayout = (CardLayout)(panelCard.getLayout());
+        cardLayout = (CardLayout)(jPanel1.getLayout());
     }
 
     /**
@@ -290,27 +290,27 @@ public class Home extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        cardLayout.show(panelCard, "card4");
+        cardLayout.show(jPanel1, "card4");
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        cardLayout.show(panelCard, "card2");
+        cardLayout.show(jPanel1, "card2");
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        cardLayout.show(panelCard, "card1");
+        cardLayout.show(jPanel1, "card1");
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        cardLayout.show(panelCard, "card3");
+        cardLayout.show(jPanel1, "card3");
     }                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        cardLayout.show(panelCard, "card5");
+        cardLayout.show(jPanel1, "card5");
     }                                        
 
 
@@ -334,7 +334,6 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JPanel panelCard;
     // End of variables declaration                   
 }
 

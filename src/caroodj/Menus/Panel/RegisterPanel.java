@@ -9,6 +9,8 @@ import java.time.ZoneId;
 import java.util.function.Function;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import Objects.Client;
 import Objects.EntityId;
@@ -213,20 +215,24 @@ public class RegisterPanel extends javax.swing.JPanel {
         add(jDateChooser1, gridBagConstraints);
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        String username = jTextField1.getText();
-        String password = String.valueOf(jPasswordField1.getPassword());
-        String email = jTextField2.getText();
-        String name = jTextField3.getText();
-        LocalDate dateOfBirth = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Client client = new Client(username, password, dateOfBirth);
-        client.setEmail(email);
-        client.setName(name);
-        client.setId("CL:" + EntityId.generateId());
-        if (client.register()) {
-            JOptionPane.showMessageDialog(null, "Succesful Registration");
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        if ((jTextField1.getText().equals("")) || (String.valueOf(jPasswordField1.getPassword()).equals("")) || (jDateChooser1.getDate() == null)) {
+            JOptionPane.showMessageDialog(null, "Please fill all compulsary fields");
         } else {
-            JOptionPane.showMessageDialog(null, "Registration Error! Duplicate Username");
+            String username = jTextField1.getText();
+            String password = String.valueOf(jPasswordField1.getPassword());
+            String email = jTextField2.getText();
+            String name = jTextField3.getText();
+            LocalDate dateOfBirth = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Client client = new Client(username, password, dateOfBirth);
+            client.setEmail(email);
+            client.setName(name);
+            client.setId("CL:" + EntityId.generateId());
+            if (client.register()) {
+                JOptionPane.showMessageDialog(null, "Succesful Registration");
+            } else {
+                JOptionPane.showMessageDialog(null, "Registration Error! Duplicate Username");
+            }
         }
         
     }
