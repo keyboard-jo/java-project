@@ -5,6 +5,9 @@
 package Menus.Panel;
 
 import java.awt.CardLayout;
+import java.util.HashMap;
+
+import Objects.PersonDataFile;
 
 /**
  *
@@ -16,13 +19,24 @@ public class Home extends javax.swing.JPanel {
      * Creates new form GUI
      */
     
-    
+    private ConfirmBookingMenu bookingQuery = new ConfirmBookingMenu();
     private CardLayout cardLayout;
     private String personId;
+    private String[] person;
+    private Boolean isAdmin;
     public Home(String p) {
         this.personId = p;
+        initPerson();
         initComponents();
         cardLayout = (CardLayout)(jPanel1.getLayout());
+    }
+
+    private void initPerson() {
+        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+        String[] queryCandidate = {this.personId, "*", "*", "*", "*", "*", "*"};
+        HashMap<String, String> query = pdf.createQuery(queryCandidate);
+        this.person = pdf.queryDatabase(query).first();
+        this.isAdmin = this.person[1] == "admin";
     }
 
     /**
@@ -175,7 +189,7 @@ public class Home extends javax.swing.JPanel {
                 .addContainerGap(317, Short.MAX_VALUE))
         );
 
-        jPanel1.add(c14, "card4");
+        jPanel1.add(bookingQuery, "card4");
 
         c3.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -289,27 +303,24 @@ public class Home extends javax.swing.JPanel {
     }// </editor-fold>                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
         cardLayout.show(jPanel1, "card4");
+        System.out.println(jPanel1.getSize().height);
+        System.out.println(jPanel1.getSize().width);
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
         cardLayout.show(jPanel1, "card2");
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
         cardLayout.show(jPanel1, "card1");
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
         cardLayout.show(jPanel1, "card3");
     }                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
         cardLayout.show(jPanel1, "card5");
     }                                        
 

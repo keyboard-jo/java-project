@@ -1,12 +1,13 @@
 package Objects;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class PersonDataFile extends DataFile<String[]> {
-    PersonDataFile(String path) {
+    public PersonDataFile(String path) {
         super(path);
     }
 
@@ -39,6 +40,8 @@ public class PersonDataFile extends DataFile<String[]> {
             }
         }
 
+        dataFile.close();
+
         for (Integer i = 1; i < featureVal.length; i++) {
             if (!super.isStar(featureVal[i])) {
                 for (String[] person : personIdList) {
@@ -69,12 +72,12 @@ public class PersonDataFile extends DataFile<String[]> {
         HashMap<String, String> query = new HashMap<String, String>();
 
         query.put("Id", person[0]);
-        query.put("Type", person[2]);
-        query.put("Password", person[6]);
-        query.put("Username", person[1]);
-        query.put("Email", person[3]);
-        query.put("Name", person[4]);
-        query.put("DOB", person[5]);
+        query.put("Type", person[1]);
+        query.put("Password", person[2]);
+        query.put("DOB", person[3]);
+        query.put("Username", person[4]);
+        query.put("Email", person[5]);
+        query.put("Name", person[6]);
 
         return query;
     }
@@ -88,14 +91,16 @@ public class PersonDataFile extends DataFile<String[]> {
     public String[] deconstructEntry(String entry) {
         String[] attributes = entry.split(";");
         String id = attributes[0];
-        String username = attributes[1];
-        String type = attributes[2];
-        String email = attributes[3];
-        String name = attributes[4];
+        String type = attributes[1];
+        String password = attributes[2];
 
         // Add try catch date
-        String dateOfBirth = attributes[5];
-        String password = attributes[6];
+        String dateOfBirth = attributes[3];
+
+        String username = attributes[4];
+        String email = attributes[5];
+        String name = attributes[6];
+
 
         String[] person = {id, type, password, dateOfBirth, username, email, name};
         return person;
@@ -123,5 +128,11 @@ public class PersonDataFile extends DataFile<String[]> {
             }
         }
         return false;
+    }
+
+    @Override
+    public Boolean updateEntry(String[] objectT) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
