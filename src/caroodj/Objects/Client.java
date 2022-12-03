@@ -11,7 +11,8 @@ public class Client extends Person{
     // Register to the DatabaseSystem
     public boolean register() {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
-        String[] personData = {super.getId(), this.username, this.type, super.getEmail(), super.getName(), super.getDateOfBirth()+"", super.getPassword()};
+        // Fixx this to match query
+        String[] personData = {super.getId(), this.type, super.getPassword(), super.getDateOfBirth()+"", super.username, super.getEmail(), super.getName()};
         String entry = pdf.constructEntry(personData);
         if (pdf.checkDuplicate(username)) {
             pdf.addEntry(entry);
@@ -31,14 +32,14 @@ public class Client extends Person{
 
     public static Client convertToClient(String[] params) {
         String id = params[0];
-        String username = params[1];
-        String type = params[2];
-        String email = params[3];
-        String name = params[4];
-
+        String type = params[1];
+        String password = params[2];
         // Add try catch date
-        LocalDate dateOfBirth = LocalDate.parse(params[5]);
-        String password = params[6];
+        LocalDate dateOfBirth = LocalDate.parse(params[3]);
+        String username = params[4];
+        String email = params[5];
+        String name = params[6];
+
 
         Client client = new Client(username, password, dateOfBirth);
         client.setId(id);

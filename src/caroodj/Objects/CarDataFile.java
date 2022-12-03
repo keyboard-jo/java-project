@@ -1,9 +1,12 @@
 package Objects;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+// TODO: Fix range query for car and booking, fix the range to account for "x *" and "* x"
 
 public class CarDataFile extends DataFile<Car>{
 
@@ -41,6 +44,8 @@ public class CarDataFile extends DataFile<Car>{
             }
         }
 
+        dataFile.close();
+
         for (Integer i = 1; i < featureVal.length; i++) {
             if (!super.isStar(featureVal[i])) {
                 for (Car car : carList) {
@@ -60,10 +65,22 @@ public class CarDataFile extends DataFile<Car>{
                         Boolean isRangeDate = featureVal[i].split(" ", 2).length > 1;
                         if (isRangeDate) {
                             String[] yearsRange = featureVal[i].split(" ", 2);
-                            LocalDate yearLow = LocalDate.parse(yearsRange[0]);
-                            LocalDate yearHigh = LocalDate.parse(yearsRange[1]);
-                            if (super.isBetween(yearLow, car.year, yearHigh)) {
-                                arrayCar.add(car);
+                            if (yearsRange[0].equals("*")) {
+                                LocalDate yearHigh = LocalDate.parse(yearsRange[1]);
+                                if (super.isLower(car.year, yearHigh)) {
+                                    arrayCar.add(car);
+                                }
+                            } else if (yearsRange[1].equals("*")) {
+                                LocalDate yearLow = LocalDate.parse(yearsRange[0]);
+                                if (super.isHigher(car.year, yearLow)) {
+                                    arrayCar.add(car);
+                                }
+                            } else {
+                                LocalDate yearLow = LocalDate.parse(yearsRange[0]);
+                                LocalDate yearHigh = LocalDate.parse(yearsRange[1]);
+                                if (super.isBetween(yearLow, car.year, yearHigh)) {
+                                    arrayCar.add(car);
+                                }
                             }
                         } else {
                             LocalDate year = LocalDate.parse(featureVal[i]);
@@ -75,10 +92,22 @@ public class CarDataFile extends DataFile<Car>{
                         Boolean isRangeDouble = featureVal[i].split(" ", 2).length > 1;
                         if (isRangeDouble) {
                             String[] rentRange = featureVal[i].split(" ", 2);
-                            Double rentLow = Double.parseDouble(rentRange[0]);
-                            Double rentHigh = Double.parseDouble(rentRange[1]);
-                            if (super.isBetween(rentLow, car.rentalCost, rentHigh)) {
-                                arrayCar.add(car);
+                            if (rentRange[0].equals("*")) {
+                                Double rentHigh = Double.parseDouble(rentRange[1]);
+                                if (super.isLower(car.rentalCost, rentHigh)) {
+                                    arrayCar.add(car);
+                                }
+                            } else if (rentRange[1].equals("*")) {
+                                Double rentLow = Double.parseDouble(rentRange[0]);
+                                if (super.isHigher(car.rentalCost, rentLow)) {
+                                    arrayCar.add(car);
+                                }
+                            } else {
+                                Double rentLow = Double.parseDouble(rentRange[0]);
+                                Double rentHigh = Double.parseDouble(rentRange[1]);
+                                if (super.isBetween(rentLow, car.rentalCost, rentHigh)) {
+                                    arrayCar.add(car);
+                                }
                             }
                         } else {
                             Double rentDouble = Double.parseDouble(featureVal[i]);
@@ -94,8 +123,8 @@ public class CarDataFile extends DataFile<Car>{
             }
         }
 
-        this.dfqo.setLastQuery(carList);
-        return this.dfqo;
+        super.dfqo.setLastQuery(carList);
+        return super.dfqo;
     }
 
     public HashMap<String, String> createQuery(String[] car) {
@@ -128,5 +157,11 @@ public class CarDataFile extends DataFile<Car>{
         Car car = new Car(manufacture, model, year, rentalCost, isRented);
         car.setId(attributes[0]);
         return car;
+    }
+
+    @Override
+    public Boolean updateEntry(Car objectT) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

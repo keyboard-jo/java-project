@@ -64,7 +64,7 @@ public abstract class Person extends EntityId{
     public static String login(String username, String password) {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         if (pdf.checkPassword(username, password)) {
-            String[] queryCandidate = {"*", username, "*", "*", "*", "*", "*"};
+            String[] queryCandidate = {"*", "*" , "*", "*", username , "*", "*"};
             HashMap<String, String> query = pdf.createQuery(queryCandidate);
             return pdf.queryDatabase(query).first()[0];
         }

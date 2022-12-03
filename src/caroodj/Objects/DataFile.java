@@ -21,7 +21,7 @@ public abstract class DataFile<T> {
         try {
             File dataFile = new File(this.path);
             Scanner dataFileReader = new Scanner(dataFile);
-            System.out.println("File exist!");
+            // System.out.println("File exist!");
             return dataFileReader;
         } catch (FileNotFoundException e) {
             System.out.println("File does not exist!");
@@ -34,7 +34,7 @@ public abstract class DataFile<T> {
     public BufferedWriter openFileWrite() {
         try {
             BufferedWriter dataFile = new BufferedWriter(new FileWriter(this.path));
-            System.out.println("File exist!");
+            // System.out.println("File exist!");
             return dataFile;
         } catch (IOException e) {
             System.out.println("File does not exists!");
@@ -71,6 +71,7 @@ public abstract class DataFile<T> {
     public abstract T deconstructEntry(String val);
     public abstract HashMap<String, String> createQuery(String[] argument);
     public abstract DataFileQueryOperator<T> queryDatabase(HashMap<String, String> query);
+    public abstract Boolean updateEntry(T objectT);
 
     // TODO: Seperate this methods into different object
     // Operators
@@ -80,9 +81,33 @@ public abstract class DataFile<T> {
 
     public static Boolean isBetween(LocalDate start, LocalDate val, LocalDate end) {
         return !(val.isBefore(start) || val.isAfter(end));
+    
+    }
+
+    public static Boolean isHigher(Double val, Double cmpr) {
+        return (val >= cmpr);
+    }
+
+    public static Boolean isHigher(LocalDate val, LocalDate cmpr) {
+        Integer i = val.compareTo(cmpr);
+        return (i >= 0);
+    }
+
+    public static Boolean isLower(Double val, Double cmpr) {
+        return (val <= cmpr);
+    }
+
+    public static Boolean isLower(LocalDate val, LocalDate cmpr) {
+        Integer i = val.compareTo(cmpr);
+        return (i <= 0);
     }
 
     public static Boolean isStar(String val) {
-        return (val == "*") ? true : false;
+        if ((val.split(" ", 2).length > 1)) {
+            if ((val.split(" ", 2)[0].equals("*")) && (val.split(" ", 2)[1].equals("*"))) {
+                return true;
+            }
+        }
+        return (val.equals("*")) ? true : false;
     }
 }
