@@ -71,7 +71,7 @@ public abstract class DataFile<T> {
     public abstract T deconstructEntry(String val);
     public abstract HashMap<String, String> createQuery(String[] argument);
     public abstract DataFileQueryOperator<T> queryDatabase(HashMap<String, String> query);
-    public abstract Boolean updateEntry(T objectT);
+    public abstract Boolean updateEntry(T objectT) throws IOException;
 
     // TODO: Seperate this methods into different object
     // Operators
