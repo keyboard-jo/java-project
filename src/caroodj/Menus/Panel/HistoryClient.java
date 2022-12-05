@@ -10,10 +10,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import Objects.Booking;
+import Objects.BookingDataFile;
 
 /**
  *
@@ -24,8 +28,20 @@ public class HistoryClient extends javax.swing.JPanel {
     /**
      * Creates new form HistoryClient
      */
-    public HistoryClient() {
+    public HistoryClient(String clientID) {
         initComponents();
+        DefaultTableModel model = (DefaultTableModel) HistoryTable.getModel();
+        model.setRowCount(0);
+
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        String[] bookingQuery = {"*", "*", "*", "*", "*", "*",clientID};
+
+        ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
+
+        for (Booking booking : bookingList) {
+            model.addRow(new Object[] {booking.getId(), booking.car.manufacture, booking.car.model, 
+                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate, booking.isConfirmed});
+        }
     }
 
     /**
