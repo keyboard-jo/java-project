@@ -31,7 +31,6 @@ public class PersonDataFile extends DataFile<String[]> {
 
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
-            System.out.println(data);
             String[] person = deconstructEntry(data);
             if (!super.isStar(id)) {
                 if (person[0].equals(id)) {
@@ -52,7 +51,6 @@ public class PersonDataFile extends DataFile<String[]> {
                             arrayPersonId.add(person);
                         }
                     } else {
-                        System.out.println(person[i] + " " + featureVal[i]);
                         if (person[i].equals(featureVal[i])) {
                             arrayPersonId.add(person);
                         }
@@ -94,8 +92,6 @@ public class PersonDataFile extends DataFile<String[]> {
 
         String[] attributes = entry.split(";", 7);
 
-        System.out.println(attributes[0]);
-        System.out.println(attributes.length);
         String id = attributes[0];
         String type = attributes[1];
         String password = attributes[2];

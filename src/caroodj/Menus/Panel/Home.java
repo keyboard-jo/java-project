@@ -22,6 +22,7 @@ public class Home extends javax.swing.JPanel {
     private ConfirmBookingMenu bookingQuery = new ConfirmBookingMenu();
     private ManageCarInformationMenu manageCarInformationMenu = new ManageCarInformationMenu();
     private ManageClientInformation manageClientInformation = new ManageClientInformation();
+    private CreateReport createReport = new CreateReport();
     private CardLayout cardLayout;
     private String personId;
     private String[] person;
@@ -283,7 +284,7 @@ public class Home extends javax.swing.JPanel {
                 .addContainerGap(329, Short.MAX_VALUE))
         );
 
-        jPanel1.add(c15, "card5");
+        jPanel1.add(createReport, "card5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

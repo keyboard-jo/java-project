@@ -12,11 +12,11 @@ import Objects.Client;
 import Objects.EntityId;
 import Objects.Person;
 import Objects.PersonDataFile;
+import Objects.Report;
 
 // TODO: Implement try catch in every user form
 // TODO: add input validation for forms
-// TODO: Fix radioButton in ClientQuery and ManageClientInformation
-// TODO: Add dateCreated attribute for Booking
+// TODO: add null for first() and all()
 
 // ASssumption: admin can double book
 public class Main {
@@ -46,6 +46,32 @@ public class Main {
         //     startDate.plusDays(5);
         //     endDate.plusDays(5);
         // }
+
+        // Report report = new Report(LocalDate.of(2022, 12, 1), LocalDate.of(2023, 1, 1));
+
+        // System.out.println(report.getBookingRange().size());
+
+        // for (Booking booking : report.getBookingRange()) {
+        //     System.out.println(booking.getId());
+        // }
+
+        // report.calculateTopClients();
+
+        // for (String key : report.getClientToRent().keySet()) {
+        //     System.out.println("key : " + key);
+        //     System.out.println("value : " + report.getClientToRent().get(key));
+        // }
+
+        // System.out.println(report.getTopClient().size());
+
+        // report.calculateTopCar();
+
+        // for (String key : report.getCarToCount().keySet()) {
+        //     System.out.println("key : " + key);
+        //     System.out.println("value : " + report.getCarToCount().get(key));
+        // }
+
+        // System.out.println(report.getTopCar().size());
 
         new Base().setVisible(true);
     }
