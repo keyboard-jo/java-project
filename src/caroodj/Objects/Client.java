@@ -29,7 +29,7 @@ public class Client extends Person{
         }
     }
 
-    public void createCarBooking(Car car, LocalDate startDate, LocalDate endDate) {
+    public void createCarBooking(Car car, LocalDate startDate, LocalDate endDate) throws IOException {
         Booking booking = new Booking(startDate, endDate, false, false, car, this);
         booking.setId("BO:" + EntityId.generateId());
         
