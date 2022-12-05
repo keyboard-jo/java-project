@@ -29,8 +29,15 @@ public class Client extends Person{
         }
     }
 
-    public void createCarBooking() {
+    public void createCarBooking(Car car, LocalDate startDate, LocalDate endDate) {
+        Booking booking = new Booking(startDate, endDate, false, false, car, this);
+        booking.setId("BO:" + EntityId.generateId());
+        
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
 
+        String bookingEntry = bdf.constructEntry(booking);
+
+        bdf.addEntry(bookingEntry);
     }
 
     public void viewCarBookingHistory() {
