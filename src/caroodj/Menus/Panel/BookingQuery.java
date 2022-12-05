@@ -271,7 +271,7 @@ public class BookingQuery extends javax.swing.JPanel {
 
         String clientIDQuery =  (clientIDField.getText().equals("") ? "*" : clientIDField.getText());
         
-        String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "false", "*", carIDQuery, clientIDQuery};
+        String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "*", "*", carIDQuery, clientIDQuery};
 
         return bdf.createQuery(bookingQuery);
     }

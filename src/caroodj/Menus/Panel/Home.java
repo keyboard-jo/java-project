@@ -20,6 +20,8 @@ public class Home extends javax.swing.JPanel {
      */
     
     private ConfirmBookingMenu bookingQuery = new ConfirmBookingMenu();
+    private ManageCarInformationMenu manageCarInformationMenu = new ManageCarInformationMenu();
+    private ManageClientInformation manageClientInformation = new ManageClientInformation();
     private CardLayout cardLayout;
     private String personId;
     private String[] person;
@@ -212,7 +214,7 @@ public class Home extends javax.swing.JPanel {
                 .addContainerGap(353, Short.MAX_VALUE))
         );
 
-        jPanel1.add(c3, "card3");
+        jPanel1.add(manageCarInformationMenu, "card3");
 
         c2.setBackground(new java.awt.Color(255, 204, 0));
 
@@ -235,7 +237,7 @@ public class Home extends javax.swing.JPanel {
                 .addContainerGap(325, Short.MAX_VALUE))
         );
 
-        jPanel1.add(c2, "card2");
+        jPanel1.add(manageClientInformation, "card2");
 
         c1.setBackground(new java.awt.Color(204, 0, 255));
 

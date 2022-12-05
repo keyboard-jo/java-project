@@ -14,6 +14,9 @@ import Objects.Person;
 import Objects.PersonDataFile;
 
 // TODO: Implement try catch in every user form
+// TODO: add input validation for forms
+// TODO: Fix radioButton in ClientQuery and ManageClientInformation
+// TODO: Add dateCreated attribute for Booking
 
 // ASssumption: admin can double book
 public class Main {

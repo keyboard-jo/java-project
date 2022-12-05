@@ -1,5 +1,6 @@
 package Objects;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -21,7 +22,11 @@ public class Admin extends Person {
 
         String carEntry = cdbs.constructEntry(car);
 
-        cdbs.addEntry(carEntry);
+        try {
+            cdbs.addEntry(carEntry);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void editCar() {

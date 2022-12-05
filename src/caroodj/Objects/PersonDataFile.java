@@ -1,5 +1,6 @@
 package Objects;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class PersonDataFile extends DataFile<String[]> {
 
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
+            System.out.println(data);
             String[] person = deconstructEntry(data);
             if (!super.isStar(id)) {
                 if (person[0].equals(id)) {
@@ -89,7 +91,11 @@ public class PersonDataFile extends DataFile<String[]> {
 
     // Fix person abstarcxt class
     public String[] deconstructEntry(String entry) {
-        String[] attributes = entry.split(";");
+
+        String[] attributes = entry.split(";", 7);
+
+        System.out.println(attributes[0]);
+        System.out.println(attributes.length);
         String id = attributes[0];
         String type = attributes[1];
         String password = attributes[2];
@@ -130,9 +136,76 @@ public class PersonDataFile extends DataFile<String[]> {
         return false;
     }
 
+    public void removeEntry(String id) throws IOException {
+        Scanner dataFileRead = this.openFileRead();
+
+        ArrayList<String> entries = new ArrayList<String>();
+
+        while (dataFileRead.hasNextLine()) {
+            String data = dataFileRead.nextLine();
+            if (!data.split(";")[0].equals(id)) {
+                entries.add(data);
+            }
+        }
+
+        dataFileRead.close();
+
+        BufferedWriter dataFileWrite = this.openFileWrite();
+
+        for (String entry: entries) {
+            dataFileWrite.write(entry + System.lineSeparator());
+        }
+        dataFileWrite.close();
+
+        entries.clear();
+
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        Scanner dataFileReadBooking = bdf.openFileRead();
+
+        while (dataFileReadBooking.hasNextLine()) {
+            String data = dataFileReadBooking.nextLine();
+            if (!data.split(";")[6].equals(id)) {
+                entries.add(data);
+            }
+        }
+
+        dataFileReadBooking.close();
+
+        BufferedWriter dataFileWriteBooking = bdf.openFileWrite();
+
+        for (String entry: entries) {
+            dataFileWriteBooking.write(entry + System.lineSeparator());
+        }
+
+        dataFileWriteBooking.close();
+    }
+
     @Override
-    public Boolean updateEntry(String[] objectT) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+    public Boolean updateEntry(String[] person) throws IOException {
+        Scanner dataFileRead = super.openFileRead();
+
+        ArrayList<String[]> personList = new ArrayList<String[]>();
+
+        Boolean isChanged = false;
+
+        while (dataFileRead.hasNextLine()) {
+            String[] personData = deconstructEntry(dataFileRead.nextLine());
+            if (person[0].equals(personData[0])) {
+                personList.add(person);
+                isChanged = true;
+            } else {
+                personList.add(personData);
+            }
+        }
+
+        dataFileRead.close();
+
+        BufferedWriter dataFileWrite = super.openFileWrite();
+        for (String[] personData: personList) {
+            String entry = constructEntry(personData);
+            dataFileWrite.write(entry + System.lineSeparator());
+        }
+        dataFileWrite.close();
+        return isChanged;
     }
 }

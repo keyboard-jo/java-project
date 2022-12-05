@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -56,15 +57,11 @@ public abstract class DataFile<T> {
     }
 
     // Add entry to the database
-    public void addEntry(String entry) {
+    public void addEntry(String entry) throws IOException {
         BufferedWriter dataFile = this.openFileAppend();
-        try {
-            dataFile.write(entry + System.lineSeparator());
-            dataFile.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        dataFile.write(entry + System.lineSeparator());
+        dataFile.close();
+        System.out.println("Successfully wrote to the file.");
     }
 
     public abstract String constructEntry(T objectT);
