@@ -130,6 +130,8 @@ public class ManageClientInformation extends javax.swing.JPanel {
         typeLabel.setText("Type:");
 
         passwordLabel.setText("Password:");
+        passwordField.setMinimumSize(new java.awt.Dimension(178, 22));
+        passwordField.setPreferredSize(new java.awt.Dimension(178, 22));
 
         emailLabel.setText("Email:");
 
@@ -467,7 +469,7 @@ public class ManageClientInformation extends javax.swing.JPanel {
         queryScroll.setMinimumSize(new java.awt.Dimension(1276, 200));
         queryScroll.setPreferredSize(new java.awt.Dimension(1276, 200));
 
-        clearQueryButton.setText("CLEAR");
+        clearQueryButton.setText("CLEAR QUERY");
         clearQueryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearQueryButtonActionPerformed(evt);
