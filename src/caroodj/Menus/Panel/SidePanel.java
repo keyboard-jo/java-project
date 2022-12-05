@@ -17,6 +17,7 @@ public class SidePanel extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private HistoryClient historyClient;
     private ClientAccountDetail clientAccountDetail;
+    private ClientHome clientHome;
     private String personID;
     public SidePanel(String personID) {
         this.personID = personID;
@@ -169,8 +170,12 @@ public class SidePanel extends javax.swing.JPanel {
         );
         clientAccountDetail = new ClientAccountDetail(personID);
         MainPanel.add(clientAccountDetail,"clientAccountDetail");
+
         historyClient = new HistoryClient(personID);
         MainPanel.add(historyClient,"historyClient");
+
+        clientHome = new ClientHome(personID);
+        MainPanel.add(clientHome,"clientHome");
     }// </editor-fold>                        
 
     private void AccountButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -184,6 +189,7 @@ public class SidePanel extends javax.swing.JPanel {
 
     private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+        cardLayout.show(MainPanel,"clientHome");
     }                                          
 
     private void HistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
