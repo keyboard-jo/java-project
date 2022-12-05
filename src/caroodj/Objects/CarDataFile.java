@@ -1,4 +1,5 @@
 package Objects;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -159,9 +160,77 @@ public class CarDataFile extends DataFile<Car>{
         return car;
     }
 
+    public void removeEntry(String id) throws IOException {
+        Scanner dataFileRead = this.openFileRead();
+
+        ArrayList<String> entries = new ArrayList<String>();
+
+        while (dataFileRead.hasNextLine()) {
+            String data = dataFileRead.nextLine();
+            if (!data.split(";")[0].equals(id)) {
+                entries.add(data);
+            }
+        }
+
+        dataFileRead.close();
+
+        BufferedWriter dataFileWrite = this.openFileWrite();
+
+        for (String entry: entries) {
+            dataFileWrite.write(entry + System.lineSeparator());
+        }
+        dataFileWrite.close();
+
+        entries.clear();
+
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        Scanner dataFileReadBooking = bdf.openFileRead();
+
+        while (dataFileReadBooking.hasNextLine()) {
+            String data = dataFileReadBooking.nextLine();
+            if (!data.split(";")[5].equals(id)) {
+                entries.add(data);
+            }
+        }
+
+        dataFileReadBooking.close();
+
+        BufferedWriter dataFileWriteBooking = bdf.openFileWrite();
+
+        for (String entry: entries) {
+            dataFileWriteBooking.write(entry + System.lineSeparator());
+        }
+
+        dataFileWriteBooking.close();
+    }
+
     @Override
-    public Boolean updateEntry(Car objectT) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+    public Boolean updateEntry(Car car) throws IOException {
+        Scanner dataFileRead = super.openFileRead();
+
+        ArrayList<Car> carList = new ArrayList<Car>();
+
+        Boolean isChanged = false;
+
+        while (dataFileRead.hasNextLine()) {
+            Car carData = deconstructEntry(dataFileRead.nextLine());
+            if (carData.getId().equals(car.getId())) {
+                carList.add(car);
+                isChanged = true;
+            } else {
+                carList.add(carData);
+            }
+        }
+
+        dataFileRead.close();
+
+        BufferedWriter dataFileWrite = super.openFileWrite();
+        for (Car carData: carList) {
+            String entry = constructEntry(carData);
+            dataFileWrite.write(entry + System.lineSeparator());
+        }
+        dataFileWrite.close();
+
+        return isChanged;
     }
 }

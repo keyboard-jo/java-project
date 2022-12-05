@@ -266,9 +266,10 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
 
 
             for (Booking booking : bookingList) {
-                model.addRow(new Object[] {booking.getId(), booking.startDate, booking.endDate, booking.isConfirmed, booking.isCanceled, booking.car.getId(), booking.car.model, booking.car.rentalCost, booking.car.isRented, booking.client.getId(), booking.client.username});
+                if (booking.isConfirmed.equals(false)) {
+                    model.addRow(new Object[] {booking.getId(), booking.startDate, booking.endDate, booking.isConfirmed, booking.isCanceled, booking.car.getId(), booking.car.model, booking.car.rentalCost, booking.car.isRented, booking.client.getId(), booking.client.username});
+                }
             }
-
         }
     }
     
