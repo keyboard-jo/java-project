@@ -23,8 +23,12 @@ public class Admin extends Person {
         String carEntry = cdf.constructEntry(car);
 
 
+        try {
+            cdf.addEntry(carEntry);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        cdf.addEntry(carEntry);
     }
 
     public void editCar() {
