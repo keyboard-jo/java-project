@@ -18,12 +18,12 @@ public class Admin extends Person {
         Car car = new Car(manufacture, model, year, rentalCost, isRented);
         car.setId("CA:" + EntityId.generateId());
         
-        CarDataFile cdbs = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
-        String carEntry = cdbs.constructEntry(car);
+        String carEntry = cdf.constructEntry(car);
 
         try {
-            cdbs.addEntry(carEntry);
+            cdf.addEntry(carEntry);
         } catch (IOException e) {
             e.printStackTrace();
         }
