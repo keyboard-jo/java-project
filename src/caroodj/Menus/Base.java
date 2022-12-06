@@ -8,9 +8,9 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.util.function.Function;
 
-import Menus.Panel.Home;
 import Menus.Panel.LoginPanel;
 import Menus.Panel.RegisterPanel;
+import Menus.Panel.SidePanel;
 
 /**
  *
@@ -63,7 +63,7 @@ public class Base extends javax.swing.JFrame {
     };
 
     public Function<String, Void> addPersonHomeMenu = p -> {
-        this.cPane.add("Home", new Home(p));
+        this.cPane.add("Home", new SidePanel(p));
         return null;
     };
 

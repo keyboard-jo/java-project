@@ -1,5 +1,5 @@
 package Menus.Panel;
-
+import java.awt.CardLayout;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -14,8 +14,15 @@ public class SidePanel extends javax.swing.JPanel {
     /**
      * Creates new form SidePanel
      */
-    public SidePanel() {
+    private CardLayout cardLayout;
+    private HistoryClient historyClient;
+    private ClientAccountDetail clientAccountDetail;
+    private ClientHome clientHome;
+    private String personID;
+    public SidePanel(String personID) {
+        this.personID = personID;
         initComponents();
+        cardLayout = (CardLayout)(MainPanel.getLayout());
     }
 
     /**
@@ -35,7 +42,7 @@ public class SidePanel extends javax.swing.JPanel {
         HomeButton = new javax.swing.JButton();
         HistoryButton = new javax.swing.JButton();
         GreetingText = new javax.swing.JLabel();
-        CardLayout = new javax.swing.JPanel();
+        MainPanel = new javax.swing.JPanel();
 
         setMaximumSize(new java.awt.Dimension(1298, 1012));
         setMinimumSize(new java.awt.Dimension(1298, 1012));
@@ -46,7 +53,7 @@ public class SidePanel extends javax.swing.JPanel {
 
         LogoText.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 60)); // NOI18N
         LogoText.setForeground(new java.awt.Color(255, 255, 255));
-        LogoText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assigmnt/imgs/zclogo.png"))); // NOI18N
+        LogoText.setIcon(new javax.swing.ImageIcon(getClass().getResource("zs.png"))); // NOI18N
 
         jSeparatorSide.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -56,6 +63,7 @@ public class SidePanel extends javax.swing.JPanel {
         AccountButton.setText("Account");
         AccountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AccountButtonActionPerformed(evt);
             }
         });
 
@@ -65,6 +73,7 @@ public class SidePanel extends javax.swing.JPanel {
         BookCarButton.setText("Book Car");
         BookCarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookCarButtonActionPerformed(evt);
             }
         });
 
@@ -74,6 +83,7 @@ public class SidePanel extends javax.swing.JPanel {
         HomeButton.setText("Home");
         HomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomeButtonActionPerformed(evt);
             }
         });
 
@@ -83,6 +93,7 @@ public class SidePanel extends javax.swing.JPanel {
         HistoryButton.setText("History");
         HistoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HistoryButtonActionPerformed(evt);
             }
         });
 
@@ -135,10 +146,10 @@ public class SidePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        CardLayout.setMaximumSize(new java.awt.Dimension(1298, 1012));
-        CardLayout.setMinimumSize(new java.awt.Dimension(1298, 1012));
-        CardLayout.setPreferredSize(new java.awt.Dimension(1298, 1012));
-        CardLayout.setLayout(new java.awt.CardLayout());
+        MainPanel.setMaximumSize(new java.awt.Dimension(1298, 1012));
+        MainPanel.setMinimumSize(new java.awt.Dimension(1298, 1012));
+        MainPanel.setPreferredSize(new java.awt.Dimension(1298, 1012));
+        MainPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -147,28 +158,56 @@ public class SidePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(CardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+        clientAccountDetail = new ClientAccountDetail(personID);
+        MainPanel.add(clientAccountDetail,"clientAccountDetail");
+
+        historyClient = new HistoryClient(personID);
+        MainPanel.add(historyClient,"historyClient");
+
+        clientHome = new ClientHome(personID);
+        MainPanel.add(clientHome,"clientHome");
     }// </editor-fold>                        
+
+    private void AccountButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        cardLayout.show(MainPanel,"clientAccountDetail");
+    }                                             
+
+    private void BookCarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        cardLayout.show(MainPanel,"clientHome");
+    }                                          
+
+    private void HistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        cardLayout.show(MainPanel,"historyClient");
+    }                                             
 
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton AccountButton;
     private javax.swing.JButton BookCarButton;
-    private javax.swing.JPanel CardLayout;
     private javax.swing.JLabel GreetingText;
     private javax.swing.JButton HistoryButton;
     private javax.swing.JButton HomeButton;
     private javax.swing.JLabel LogoText;
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel SidePanel;
     private javax.swing.JSeparator jSeparatorSide;
     // End of variables declaration                   
 }
+

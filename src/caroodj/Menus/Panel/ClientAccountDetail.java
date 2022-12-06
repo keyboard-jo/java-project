@@ -14,7 +14,11 @@ public class ClientAccountDetail extends javax.swing.JPanel {
     /**
      * Creates new form AccountClient
      */
-    public ClientAccountDetail() {
+    private String nameDefault;
+    //make ini klo di reset
+    private String clientID;
+    public ClientAccountDetail(String clientID) {
+        this.clientID = clientID;
         initComponents();
     }
 

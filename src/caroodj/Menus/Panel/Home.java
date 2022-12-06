@@ -19,6 +19,7 @@ public class Home extends javax.swing.JPanel {
      * Creates new form GUI
      */
     
+    private HistoryClient historyClient =  new HistoryClient("CL:8e1528f4-452b-4c15-b48f-a42da19b504a");
     private ConfirmBookingMenu bookingQuery = new ConfirmBookingMenu();
     private ManageCarInformationMenu manageCarInformationMenu = new ManageCarInformationMenu();
     private ManageClientInformation manageClientInformation = new ManageClientInformation();
@@ -261,7 +262,7 @@ public class Home extends javax.swing.JPanel {
                 .addContainerGap(395, Short.MAX_VALUE))
         );
 
-        jPanel1.add(c1, "card1");
+        jPanel1.add(historyClient, "card1");
 
         c15.setBackground(new java.awt.Color(102, 255, 204));
 
