@@ -54,7 +54,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
         queryScroll = new javax.swing.JScrollPane(queryFull);
 
         typeGroup = new javax.swing.ButtonGroup();
-        typeGroup1 = new javax.swing.ButtonGroup();
         titlePanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         crudPanel = new javax.swing.JPanel();
@@ -78,7 +77,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
         updateMenu = new javax.swing.JPanel();
         usernameLabel1 = new javax.swing.JLabel();
         usernameField1 = new javax.swing.JTextField();
-        typeLabel1 = new javax.swing.JLabel();
         passwordLabel1 = new javax.swing.JLabel();
         emailLabel1 = new javax.swing.JLabel();
         emailField1 = new javax.swing.JTextField();
@@ -91,8 +89,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
         passwordField1 = new javax.swing.JPasswordField();
         DOBLabel1 = new javax.swing.JLabel();
         DOBField1 = new com.toedter.calendar.JDateChooser();
-        clientButton1 = new javax.swing.JRadioButton();
-        adminButton1 = new javax.swing.JRadioButton();
         removeMenu = new javax.swing.JPanel();
         removeMenuLabel = new javax.swing.JLabel();
         clientIDLabel = new javax.swing.JLabel();
@@ -241,7 +237,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
         usernameField1.setMinimumSize(new java.awt.Dimension(178, 22));
         usernameField1.setPreferredSize(new java.awt.Dimension(178, 22));
 
-        typeLabel1.setText("Type:");
 
         passwordLabel1.setText("Password:");
 
@@ -271,14 +266,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
 
         DOBLabel1.setText("DOB:");
 
-        typeGroup1.add(clientButton1);
-        clientButton1.setText("client");
-        clientButton1.setActionCommand(clientButton1.getText()+"1");
-
-        typeGroup1.add(adminButton1);
-        adminButton1.setText("admin");
-        adminButton1.setActionCommand(adminButton1.getText()+"1");
-
         javax.swing.GroupLayout updateMenuLayout = new javax.swing.GroupLayout(updateMenu);
         updateMenu.setLayout(updateMenuLayout);
         updateMenuLayout.setHorizontalGroup(
@@ -290,7 +277,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
                         .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cleintIDLabel)
                             .addComponent(usernameLabel1)
-                            .addComponent(typeLabel1)
                             .addComponent(DOBLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -304,11 +290,7 @@ public class ManageClientInformation extends javax.swing.JPanel {
                                 .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(DOBField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(usernameField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(updateMenuLayout.createSequentialGroup()
-                                        .addComponent(clientButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(adminButton1)))
+                                        .addComponent(usernameField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(36, 36, 36)
                                 .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updateMenuLayout.createSequentialGroup()
@@ -333,11 +315,7 @@ public class ManageClientInformation extends javax.swing.JPanel {
                         .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(usernameLabel1)
                             .addComponent(usernameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(typeLabel1)
-                            .addComponent(clientButton1)
-                            .addComponent(adminButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(updateMenuLayout.createSequentialGroup()
                         .addGroup(updateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passwordLabel1)
@@ -696,8 +674,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
 
         String username = usernameField1.getText();
 
-        String type = adminButton1.isSelected() ? "admin" : "client";
-
         String name = nameField1.getText();
 
         String password = String.valueOf(passwordField1.getPassword());
@@ -708,14 +684,15 @@ public class ManageClientInformation extends javax.swing.JPanel {
 
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         
-        String[] query = {clientId, "*", "*", "*", "*", "*", "*"};
+        String[] query = {clientId, "client", "*", "*", "*", "*", "*"};
 
         Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(query)).first());
+
+
 
         HashMap<String, String> updateMap = new HashMap<String, String>();
 
         updateMap.put("Username", username);
-        updateMap.put("Type", type);
         updateMap.put("Name", name);
         updateMap.put("Password", password);
         updateMap.put("Email", email);
@@ -734,12 +711,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
         if (this.menuCode == 2) {
             clientID.setText((String)clientTable.getValueAt(row, 0));
             usernameField1.setText((String)clientTable.getValueAt(row, 1));
-
-            if (((String)clientTable.getValueAt(row, 2)).equals("client")) {
-                clientButton1.setSelected(true);
-            } else {
-                adminButton1.setSelected(true);
-            }
 
             System.out.println(clientTable.getValueAt(row, 5));
             
@@ -771,12 +742,10 @@ public class ManageClientInformation extends javax.swing.JPanel {
     private javax.swing.JLabel addMenuLabel;
     private javax.swing.JButton addQueryButton;
     private javax.swing.JRadioButton adminButton;
-    private javax.swing.JRadioButton adminButton1;
     private javax.swing.JPanel clientQueryPanel;
     private javax.swing.JButton clearQueryButton;
     private javax.swing.JLabel cleintIDLabel;
     private javax.swing.JRadioButton clientButton;
-    private javax.swing.JRadioButton clientButton1;
     private javax.swing.JLabel clientID;
     private javax.swing.JTextField clientIDField;
     private javax.swing.JLabel clientIDLabel;
@@ -808,9 +777,7 @@ public class ManageClientInformation extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     private javax.swing.ButtonGroup typeGroup;
-    private javax.swing.ButtonGroup typeGroup1;
     private javax.swing.JLabel typeLabel;
-    private javax.swing.JLabel typeLabel1;
     private javax.swing.JButton updateButton;
     private javax.swing.JPanel updateMenu;
     private javax.swing.JLabel updateMenuLabel;
