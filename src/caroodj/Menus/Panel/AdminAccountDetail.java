@@ -196,7 +196,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.emailDefault, 3, 1);
         model.setValueAt(this.DOBDefault, 4, 1);
 
-
         System.out.println("HIT");
         System.out.println(this.nameDefault);
     }                                           
