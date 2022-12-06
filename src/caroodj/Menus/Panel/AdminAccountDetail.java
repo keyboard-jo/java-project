@@ -69,10 +69,9 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         AccountTable = new javax.swing.JTable();
         SaveButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(1928, 1012));
-        setMinimumSize(new java.awt.Dimension(1298, 1012));
-        setPreferredSize(new java.awt.Dimension(1928, 1012));
+        setPreferredSize(new java.awt.Dimension(1670, 1012));
         setVerifyInputWhenFocusTarget(false);
 
         TitlePanel.setToolTipText("");
@@ -120,6 +119,13 @@ public class AdminAccountDetail extends javax.swing.JPanel {
             }
         });
 
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,6 +141,8 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 .addComponent(SaveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ResetButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logoutButton)
                 .addGap(425, 425, 425))
         );
         layout.setVerticalGroup(
@@ -146,7 +154,8 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
-                    .addComponent(ResetButton))
+                    .addComponent(ResetButton)
+                    .addComponent(logoutButton))
                 .addGap(0, 881, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
@@ -161,13 +170,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         String dateOfBirth = (String)model.getValueAt(4, 1);
 
         HashMap<String, String> updateMap = new HashMap<String, String>();
-
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(name);
-        System.out.println(email);
-        System.out.println(dateOfBirth);
-        System.out.println(admin.getId());
 
         updateMap.put("Username", username);
         updateMap.put("Name", name);
@@ -196,10 +198,11 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.emailDefault, 3, 1);
         model.setValueAt(this.DOBDefault, 4, 1);
 
-
-        System.out.println("HIT");
-        System.out.println(this.nameDefault);
-    }                                           
+    }
+    
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
 
 
     // Variables declaration - do not modify                     
@@ -210,5 +213,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
     private javax.swing.JLabel TitleAccount;
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JTable AccountTable;
+    private javax.swing.JButton logoutButton;
     // End of variables declaration                   
 }

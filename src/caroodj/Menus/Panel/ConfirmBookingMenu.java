@@ -69,7 +69,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
         centerBookingQueryPanel = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(1298, 1012));
-        setPreferredSize(new java.awt.Dimension(1298, 1012));
+        setPreferredSize(new java.awt.Dimension(1670, 1012));
 
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
 

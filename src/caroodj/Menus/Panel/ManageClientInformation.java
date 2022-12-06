@@ -106,7 +106,7 @@ public class ManageClientInformation extends javax.swing.JPanel {
         clientTable = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(1298, 1012));
-        setPreferredSize(new java.awt.Dimension(1298, 1012));
+        setPreferredSize(new java.awt.Dimension(1670, 1012));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         titleLabel.setText("MANAGE CLIENT INFORMATION");
