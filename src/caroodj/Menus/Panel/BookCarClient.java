@@ -30,12 +30,21 @@ public class BookCarClient extends javax.swing.JPanel {
         TitlePanel = new javax.swing.JPanel();
         BookCarTitle = new javax.swing.JLabel();
         QueryPanel = new javax.swing.JPanel();
+        AddQueryButton = new javax.swing.JButton();
+        RemoveQueryButton = new javax.swing.JButton();
+        ClearQueryButton = new javax.swing.JButton();
+        SearchButton = new javax.swing.JButton();
         TablePanel = new javax.swing.JPanel();
         BookCarTableScroll = new javax.swing.JScrollPane();
         BookCarTable = new javax.swing.JTable();
         BookFieldPanel = new javax.swing.JPanel();
         CarIDField = new javax.swing.JTextField();
         BookCarButton = new javax.swing.JButton();
+        CarIDText = new javax.swing.JLabel();
+        StartDateText = new javax.swing.JLabel();
+        StartDateField = new javax.swing.JTextField();
+        EndDateText = new javax.swing.JLabel();
+        EndDateField = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setMaximumSize(new java.awt.Dimension(1298, 1012));
@@ -49,15 +58,59 @@ public class BookCarClient extends javax.swing.JPanel {
 
         QueryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Car"));
 
+        AddQueryButton.setText("Add Query");
+        AddQueryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        RemoveQueryButton.setText("Remove Query");
+        RemoveQueryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        ClearQueryButton.setText("Clear Query");
+        ClearQueryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        SearchButton.setText("Search");
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout QueryPanelLayout = new javax.swing.GroupLayout(QueryPanel);
         QueryPanel.setLayout(QueryPanelLayout);
         QueryPanelLayout.setHorizontalGroup(
             QueryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(QueryPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(AddQueryButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RemoveQueryButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ClearQueryButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SearchButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         QueryPanelLayout.setVerticalGroup(
             QueryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 179, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QueryPanelLayout.createSequentialGroup()
+                .addContainerGap(150, Short.MAX_VALUE)
+                .addGroup(QueryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddQueryButton)
+                    .addComponent(RemoveQueryButton)
+                    .addComponent(ClearQueryButton)
+                    .addComponent(SearchButton))
+                .addContainerGap())
         );
 
         TablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Car Table"));
@@ -102,18 +155,18 @@ public class BookCarClient extends javax.swing.JPanel {
         TablePanelLayout.setHorizontalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
-                .addComponent(BookCarTableScroll)
+                .addComponent(BookCarTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 1262, Short.MAX_VALUE)
                 .addContainerGap())
         );
         TablePanelLayout.setVerticalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(BookCarTableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BookCarTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        BookFieldPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Car ID to Book"));
+        BookFieldPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Information to Book Car"));
 
         CarIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,22 +181,47 @@ public class BookCarClient extends javax.swing.JPanel {
             }
         });
 
+        CarIDText.setText("Enter Car ID");
+
+        StartDateText.setText("Enter Start Date");
+
+        EndDateText.setText("Enter End Date");
+
         javax.swing.GroupLayout BookFieldPanelLayout = new javax.swing.GroupLayout(BookFieldPanel);
         BookFieldPanel.setLayout(BookFieldPanelLayout);
         BookFieldPanelLayout.setHorizontalGroup(
             BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BookFieldPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addGroup(BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CarIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BookCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BookCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(BookFieldPanelLayout.createSequentialGroup()
+                        .addGroup(BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(StartDateText)
+                            .addComponent(CarIDText)
+                            .addComponent(EndDateText))
+                        .addGap(18, 18, 18)
+                        .addGroup(BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(StartDateField)
+                            .addComponent(CarIDField)
+                            .addComponent(EndDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         BookFieldPanelLayout.setVerticalGroup(
             BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BookFieldPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CarIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CarIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CarIDText))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StartDateText)
+                    .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(BookFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EndDateText)
+                    .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BookCarButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -156,15 +234,16 @@ public class BookCarClient extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1284, Short.MAX_VALUE)
+                    .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(QueryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addComponent(BookFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 1047, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -175,10 +254,10 @@ public class BookCarClient extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(QueryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BookFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(387, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
     }// </editor-fold>                        
 
@@ -194,6 +273,22 @@ public class BookCarClient extends javax.swing.JPanel {
         // TODO add your handling code here:
     }                                             
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton BookCarButton;
@@ -202,8 +297,17 @@ public class BookCarClient extends javax.swing.JPanel {
     private javax.swing.JLabel BookCarTitle;
     private javax.swing.JPanel BookFieldPanel;
     private javax.swing.JTextField CarIDField;
+    private javax.swing.JLabel CarIDText;
+    private javax.swing.JTextField EndDateField;
+    private javax.swing.JLabel EndDateText;
     private javax.swing.JPanel QueryPanel;
+    private javax.swing.JTextField StartDateField;
+    private javax.swing.JLabel StartDateText;
     private javax.swing.JPanel TablePanel;
     private javax.swing.JPanel TitlePanel;
+    private javax.swing.JButton AddQueryButton;
+    private javax.swing.JButton RemoveQueryButton;
+    private javax.swing.JButton ClearQueryButton;
+    private javax.swing.JButton SearchButton;
     // End of variables declaration                   
 }
