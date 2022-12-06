@@ -47,6 +47,7 @@ public class Client extends Person{
     public static Client convertToClient(String[] params) {
         String id = params[0];
         String type = params[1];
+
         String password = params[2];
         // Add try catch date
         LocalDate dateOfBirth = LocalDate.parse(params[3]);

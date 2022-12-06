@@ -45,7 +45,6 @@ public class ClientQuery extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        typeGroup = new javax.swing.ButtonGroup();
         clientIdLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
@@ -60,9 +59,6 @@ public class ClientQuery extends javax.swing.JPanel {
         DOBButton = new javax.swing.JButton();
         queryLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        clientButton = new javax.swing.JRadioButton();
-        adminButton = new javax.swing.JRadioButton();
         DOBField1 = new com.toedter.calendar.JDateChooser();
 
         setMinimumSize(new java.awt.Dimension(1264, 100));
@@ -105,14 +101,6 @@ public class ClientQuery extends javax.swing.JPanel {
         queryLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         queryLabel.setText("Query 1");
 
-        jLabel1.setText("Type:");
-
-        typeGroup.add(clientButton);
-        clientButton.setText("client");
-
-        typeGroup.add(adminButton);
-        adminButton.setText("admin");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,12 +132,7 @@ public class ClientQuery extends javax.swing.JPanel {
                         .addComponent(emailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clientButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(adminButton)))
+                        .addGap(18, 18, 18)))
                 .addContainerGap(386, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -172,10 +155,7 @@ public class ClientQuery extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLabel)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(clientButton)
-                    .addComponent(adminButton))
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -241,17 +221,7 @@ public class ClientQuery extends javax.swing.JPanel {
 
         String name = nameField.getText().equals("") ? "*" : nameField.getText();
 
-        String type = null;
-
-        if (clientButton.isSelected()) {
-            type = "client";
-        } else if (adminButton.isSelected()) {
-            type = "admin";
-        } else {
-            type = "*";
-        }
-
-        String[] clientQuery = {clientID, type, "*", DOBQuery, username, email, name};
+        String[] clientQuery = {clientID, "client", "*", DOBQuery, username, email, name};
 
         return pdf.createQuery(clientQuery);
     }
@@ -275,14 +245,10 @@ public class ClientQuery extends javax.swing.JPanel {
     private javax.swing.JLabel clientIdLabel;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton clientButton;
-    private javax.swing.JRadioButton adminButton;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel queryLabel;
-    private javax.swing.ButtonGroup typeGroup;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration                   
