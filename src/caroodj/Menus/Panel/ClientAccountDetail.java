@@ -20,6 +20,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
     public ClientAccountDetail(String clientID) {
         this.clientID = clientID;
         initComponents();
+        AccountTable.setValueAt("aa", 0, 1);
     }
 
     /**
@@ -34,26 +35,19 @@ public class ClientAccountDetail extends javax.swing.JPanel {
         TitlePanel = new javax.swing.JPanel();
         TitleAccount = new javax.swing.JLabel();
         TablePanel = new javax.swing.JPanel();
-        AccountTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AccountTable = new javax.swing.JTable();
         SaveButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(1928, 1012));
         setMinimumSize(new java.awt.Dimension(1298, 1012));
-        setPreferredSize(new java.awt.Dimension(1928, 1012));
-        setVerifyInputWhenFocusTarget(false);
-
-        TitlePanel.setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(1298, 1012));
 
         TitleAccount.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        TitleAccount.setForeground(new java.awt.Color(51, 51, 51));
-        TitleAccount.setText("ACCOUNT");
+        TitleAccount.setText("Account Detail");
         TitlePanel.add(TitleAccount);
 
-        TablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edit Profile"));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        AccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Username", null},
                 {"Password", null},
@@ -64,16 +58,37 @@ public class ClientAccountDetail extends javax.swing.JPanel {
             new String [] {
                 "Key", "Value"
             }
-        ));
-        jTable1.setName(""); // NOI18N
-        jTable1.setPreferredSize(new java.awt.Dimension(50, 100));
-        AccountTable.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(AccountTable);
+        if (AccountTable.getColumnModel().getColumnCount() > 0) {
+            AccountTable.getColumnModel().getColumn(0).setResizable(false);
+            AccountTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        TablePanel.add(AccountTable);
+        javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
+        TablePanel.setLayout(TablePanelLayout);
+        TablePanelLayout.setHorizontalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        TablePanelLayout.setVerticalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TablePanelLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         SaveButton.setText("Save");
         SaveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,30 +108,32 @@ public class ClientAccountDetail extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TablePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(681, Short.MAX_VALUE)
-                .addComponent(SaveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ResetButton)
-                .addGap(425, 425, 425))
+                .addGap(0, 405, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SaveButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResetButton)))
+                .addGap(429, 429, 429))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(TitlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveButton)
-                    .addComponent(ResetButton))
-                .addGap(0, 881, Short.MAX_VALUE))
+                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ResetButton)
+                    .addComponent(SaveButton))
+                .addContainerGap(756, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
@@ -130,12 +147,12 @@ public class ClientAccountDetail extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JScrollPane AccountTable;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton ResetButton;
     private javax.swing.JButton SaveButton;
     private javax.swing.JPanel TablePanel;
     private javax.swing.JLabel TitleAccount;
     private javax.swing.JPanel TitlePanel;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable AccountTable;
     // End of variables declaration                   
 }

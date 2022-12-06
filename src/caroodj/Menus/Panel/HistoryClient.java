@@ -25,6 +25,7 @@ public class HistoryClient extends javax.swing.JPanel {
      */
     public HistoryClient(String clientID) {
         initComponents();
+        HistoryTable.getColumnModel().getColumn(0).setPreferredWidth(200);
         DefaultTableModel model = (DefaultTableModel) HistoryTable.getModel();
         model.setRowCount(0);
 

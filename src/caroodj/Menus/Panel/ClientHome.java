@@ -23,13 +23,14 @@ public class ClientHome extends javax.swing.JPanel {
      */
     public ClientHome(String ClientID) {
         initComponents();
+        TableOngoingBooking.getColumnModel().getColumn(0).setPreferredWidth(200);
         DefaultTableModel model = (DefaultTableModel) TableOngoingBooking.getModel();
         model.setRowCount(0);
 
-        BookingDataFile obdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        String[] bookingQuery = {"*", "*", "*", "*", "*", "false",ClientID};
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        String[] bookingQuery = {"*", "*", "*", "false", "*", "*",ClientID};
         
-        ArrayList<Booking> bookingList = obdf.queryDatabase(obdf.createQuery(bookingQuery)).all();
+        ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
         for (Booking booking : bookingList) {
             model.addRow(new Object[] {booking.getId(), booking.car.manufacture, booking.car.model, 
@@ -91,16 +92,16 @@ public class ClientHome extends javax.swing.JPanel {
         TitlePanelLayout.setHorizontalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitlePanelLayout.createSequentialGroup()
-                .addGap(203, 203, 203)
+                .addGap(343, 343, 343)
                 .addComponent(TitleHome)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
         TitlePanelLayout.setVerticalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitlePanelLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(37, 37, 37)
                 .addComponent(TitleHome)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         TableOngoingBooking.setModel(new javax.swing.table.DefaultTableModel(
@@ -113,8 +114,26 @@ public class ClientHome extends javax.swing.JPanel {
             new String [] {
                 "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableOngoingBooking.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(TableOngoingBooking);
+        if (TableOngoingBooking.getColumnModel().getColumnCount() > 0) {
+            TableOngoingBooking.getColumnModel().getColumn(0).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(1).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(2).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(3).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(4).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(5).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
@@ -139,10 +158,10 @@ public class ClientHome extends javax.swing.JPanel {
             .addComponent(MottoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(269, 269, 269))
+                .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +174,6 @@ public class ClientHome extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>                        
-
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel MottoPanel;
