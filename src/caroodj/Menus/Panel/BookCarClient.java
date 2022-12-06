@@ -42,9 +42,9 @@ public class BookCarClient extends javax.swing.JPanel {
         BookCarButton = new javax.swing.JButton();
         CarIDText = new javax.swing.JLabel();
         StartDateText = new javax.swing.JLabel();
-        StartDateField = new javax.swing.JTextField();
+        StartDateField = new com.toedter.calendar.JDateChooser();
         EndDateText = new javax.swing.JLabel();
-        EndDateField = new javax.swing.JTextField();
+        EndDateField = new com.toedter.calendar.JDateChooser();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setMaximumSize(new java.awt.Dimension(1298, 1012));
@@ -298,10 +298,10 @@ public class BookCarClient extends javax.swing.JPanel {
     private javax.swing.JPanel BookFieldPanel;
     private javax.swing.JTextField CarIDField;
     private javax.swing.JLabel CarIDText;
-    private javax.swing.JTextField EndDateField;
+    private com.toedter.calendar.JDateChooser EndDateField;
     private javax.swing.JLabel EndDateText;
     private javax.swing.JPanel QueryPanel;
-    private javax.swing.JTextField StartDateField;
+    private com.toedter.calendar.JDateChooser StartDateField;
     private javax.swing.JLabel StartDateText;
     private javax.swing.JPanel TablePanel;
     private javax.swing.JPanel TitlePanel;

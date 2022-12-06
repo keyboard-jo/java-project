@@ -69,7 +69,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         AccountTable = new javax.swing.JTable();
         SaveButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1670, 1012));
         setVerifyInputWhenFocusTarget(false);
@@ -119,12 +118,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
             }
         });
 
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,7 +135,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ResetButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutButton)
                 .addGap(425, 425, 425))
         );
         layout.setVerticalGroup(
@@ -154,8 +146,7 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
-                    .addComponent(ResetButton)
-                    .addComponent(logoutButton))
+                    .addComponent(ResetButton))
                 .addGap(0, 881, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
@@ -199,11 +190,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.DOBDefault, 4, 1);
 
     }
-    
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        
-    }
-
 
     // Variables declaration - do not modify                     
     private javax.swing.JScrollPane AccountScroll;
@@ -213,6 +199,5 @@ public class AdminAccountDetail extends javax.swing.JPanel {
     private javax.swing.JLabel TitleAccount;
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JTable AccountTable;
-    private javax.swing.JButton logoutButton;
     // End of variables declaration                   
 }
