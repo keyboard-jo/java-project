@@ -206,10 +206,10 @@ public class SidePanel extends javax.swing.JPanel {
             historyClient = new HistoryClient(this.personId);
             clientHome = new ClientHome(this.personId);
             
+            MainPanel.add(clientHome,"clientHome");
             MainPanel.add(clientAccountDetail,"clientAccountDetail");
             MainPanel.add(historyClient,"historyClient");
-            MainPanel.add(clientHome,"clientHome");
-
+            
             SidePanelLayout.setHorizontalGroup(
                 SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(SidePanelLayout.createSequentialGroup()
@@ -351,7 +351,6 @@ public class SidePanel extends javax.swing.JPanel {
         this.goToLoginMenu.apply(evt);
     }
 
-
     // Variables declaration - do not modify                     
     private javax.swing.JButton AccountButton;
     private javax.swing.JButton BookCarButton;
@@ -368,4 +367,3 @@ public class SidePanel extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparatorSide;
     // End of variables declaration                   
 }
-
