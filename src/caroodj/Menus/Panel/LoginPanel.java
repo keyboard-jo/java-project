@@ -138,6 +138,8 @@ public class LoginPanel extends javax.swing.JPanel {
         String password = String.valueOf(jPasswordField1.getPassword());
         String personId = Person.login(username, password);
         if (!(personId == null)) {
+            jTextField1.setText("");
+            jPasswordField1.setText("");
             goToHomeMenu.apply(personId);
         }
         
