@@ -47,6 +47,10 @@ public class ClientHome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+        CancelBookPanel = new javax.swing.JPanel();
+        BookingIDField = new javax.swing.JTextField();
+        CancelBook = new javax.swing.JButton();
+        BookingIDText = new javax.swing.JLabel();
         MottoPanel = new javax.swing.JPanel();
         MottoText = new javax.swing.JLabel();
         TitlePanel = new javax.swing.JPanel();
@@ -55,8 +59,54 @@ public class ClientHome extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableOngoingBooking = new javax.swing.JTable();
 
+        setMaximumSize(new java.awt.Dimension(1298, 1012));
         setMinimumSize(new java.awt.Dimension(1298, 1012));
         setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1298, 1012));
+
+        CancelBookPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Car ID to Cancel"));
+
+        BookingIDField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingIDFieldActionPerformed(evt);
+            }
+        });
+
+        CancelBook.setText("Cancel Book");
+        CancelBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelBookActionPerformed(evt);
+            }
+        });
+
+        BookingIDText.setText("Enter Booking ID");
+
+        javax.swing.GroupLayout CancelBookPanelLayout = new javax.swing.GroupLayout(CancelBookPanel);
+        CancelBookPanel.setLayout(CancelBookPanelLayout);
+        CancelBookPanelLayout.setHorizontalGroup(
+            CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CancelBookPanelLayout.createSequentialGroup()
+                .addGroup(CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CancelBookPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CancelBook))
+                    .addGroup(CancelBookPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(BookingIDText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(BookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28))
+        );
+        CancelBookPanelLayout.setVerticalGroup(
+            CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CancelBookPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookingIDText))
+                .addGap(18, 18, 18)
+                .addComponent(CancelBook))
+        );
 
         MottoPanel.setBackground(new java.awt.Color(15, 129, 185));
 
@@ -69,16 +119,16 @@ public class ClientHome extends javax.swing.JPanel {
         MottoPanelLayout.setHorizontalGroup(
             MottoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MottoPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(29, 29, 29)
                 .addComponent(MottoText)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(325, Short.MAX_VALUE))
         );
         MottoPanelLayout.setVerticalGroup(
             MottoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MottoPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(33, 33, 33)
                 .addComponent(MottoText)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         TitlePanel.setBackground(new java.awt.Color(0, 51, 102));
@@ -148,7 +198,8 @@ public class ClientHome extends javax.swing.JPanel {
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -158,9 +209,13 @@ public class ClientHome extends javax.swing.JPanel {
             .addComponent(MottoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(CancelBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
@@ -170,12 +225,27 @@ public class ClientHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TitlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CancelBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
+    private void BookingIDFieldActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void CancelBookActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+
     // Variables declaration - do not modify                     
+    private javax.swing.JTextField BookingIDField;
+    private javax.swing.JLabel BookingIDText;
+    private javax.swing.JButton CancelBook;
+    private javax.swing.JPanel CancelBookPanel;
     private javax.swing.JPanel MottoPanel;
     private javax.swing.JLabel MottoText;
     private javax.swing.JTable TableOngoingBooking;

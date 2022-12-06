@@ -1,5 +1,11 @@
 package Menus.Panel;
 
+import java.util.ArrayList;
+
+import Objects.Booking;
+import Objects.Person;
+import Objects.PersonDataFile;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -15,12 +21,17 @@ public class ClientAccountDetail extends javax.swing.JPanel {
      * Creates new form AccountClient
      */
     private String nameDefault;
+    private String usernameDefault;
     //make ini klo di reset
     private String clientID;
     public ClientAccountDetail(String clientID) {
         this.clientID = clientID;
         initComponents();
-        AccountTable.setValueAt("aa", 0, 1);
+        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+        String[] personQuery = {clientID,"*", "*", "*", "*", "*", "*"};
+        ArrayList<String[]> personList = pdf.queryDatabase(pdf.createQuery(personQuery)).all();
+        
+
     }
 
     /**
@@ -144,7 +155,6 @@ public class ClientAccountDetail extends javax.swing.JPanel {
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           
-
 
     // Variables declaration - do not modify                     
     private javax.swing.JScrollPane jScrollPane1;
