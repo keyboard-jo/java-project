@@ -7,30 +7,27 @@ package Menus.Panel;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Objects.Booking;
 import Objects.BookingDataFile;
-import Objects.Car;
 
 /**
  *
  * @author JUSTIN
  */
-public class ConfirmBookingMenu extends javax.swing.JPanel {
+public class CancelBookingMenu extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageBooking
      */
-    public ConfirmBookingMenu() {
+    public CancelBookingMenu() {
         initComponents();
     }
 
@@ -55,7 +52,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
         confirmBookingPanel = new javax.swing.JPanel();
         bookingIDLabel = new javax.swing.JLabel();
         bookingIDField = new javax.swing.JTextField();
-        confirmButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         bookingPanel = new javax.swing.JPanel();
         bookingQueryPanel = new javax.swing.JPanel();
         addQueryButton = new javax.swing.JButton();
@@ -74,7 +71,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
 
 
-        confirmBookingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Confirm Client Booking", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        confirmBookingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cancel Client Booking", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         bookingIDLabel.setText("Booking ID:");
         confirmBookingPanel.add(bookingIDLabel);
@@ -83,13 +80,13 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
         bookingIDField.setColumns(30);
         confirmBookingPanel.add(bookingIDField);
 
-        confirmButton.setText("Confirm");
-        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmButttonActionPerformed(evt);
+                cancelButttonActionPerformed(evt);
             }
         });
-        confirmBookingPanel.add(confirmButton);
+        confirmBookingPanel.add(cancelButton);
 
         bookingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clients", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
@@ -192,7 +189,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
         
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        titleLabel.setText("CONFIRM BOOKING");
+        titleLabel.setText("CANCEL BOOKING");
         titlePanel.add(titleLabel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -267,14 +264,14 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
 
 
             for (Booking booking : bookingList) {
-                if (booking.isConfirmed.equals(false)) {
+                if (booking.isConfirmed.equals(true)) {
                     model.addRow(new Object[] {booking.getId(), booking.startDate, booking.endDate, booking.isConfirmed, booking.isCanceled, booking.car.getId(), booking.car.model, booking.car.rentalCost, booking.car.isRented, booking.client.getId(), booking.client.username});
                 }
             }
         }
     }
     
-    private void confirmButttonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void cancelButttonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             String bookingID = bookingIDField.getText();
 
@@ -286,17 +283,16 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
 
             HashMap<String, String> updateMap = new HashMap<String, String>();
 
-            updateMap.put("Confirmed", true+"");
+            updateMap.put("Cancelled", true+"");
 
             if (booking.update(updateMap)) {
-                JOptionPane.showMessageDialog(null, "Booking is Confirmed");
+                JOptionPane.showMessageDialog(null, "Booking is Cancelled");
             } else {
                 JOptionPane.showMessageDialog(null, "An Error Occured");
-            }
+            }   
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
-        
     }
 
     private void bookingTableMouseClicked(java.awt.event.MouseEvent evt) {
@@ -319,7 +315,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
     private javax.swing.JPanel bookingQueryPanel;
     private javax.swing.JTable bookingTable;
     private javax.swing.JPanel confirmBookingPanel;
-    private javax.swing.JButton confirmButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JScrollPane queryScroll;
     private javax.swing.JButton searchButtton;
     private javax.swing.JScrollPane tableScroll;

@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 import Objects.PersonDataFile;
 
 public class ClientQuery extends javax.swing.JPanel {
@@ -179,51 +181,56 @@ public class ClientQuery extends javax.swing.JPanel {
     public HashMap<String, String> getQueryData() {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
 
-        String DOBSymbol = DOBButton.getText();
+        try {
+            String DOBSymbol = DOBButton.getText();
 
-        String DOBQuery = null;
+            String DOBQuery = null;
 
-        if (DOBField.getDate() != null) {
-            LocalDate dob1 = DOBField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        switch (DOBSymbol) {
-            case "<":
-                DOBQuery = "* " + dob1;
-                break;
-            case "=":
-                DOBQuery = dob1+"";
-                break;
-            case ">":
-                DOBQuery = dob1 + " *";
-                break;
-            case "~":
-                if (DOBField1.getDate() != null) {
-                    LocalDate dob2 = DOBField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    DOBQuery = dob1 + " " + dob2;
-                } else {
+            if (DOBField.getDate() != null) {
+                LocalDate dob1 = DOBField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            switch (DOBSymbol) {
+                case "<":
+                    DOBQuery = "* " + dob1;
+                    break;
+                case "=":
+                    DOBQuery = dob1+"";
+                    break;
+                case ">":
                     DOBQuery = dob1 + " *";
+                    break;
+                case "~":
+                    if (DOBField1.getDate() != null) {
+                        LocalDate dob2 = DOBField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        DOBQuery = dob1 + " " + dob2;
+                    } else {
+                        DOBQuery = dob1 + " *";
+                    }
+                    break;
+                case "*":
+                    DOBQuery = "*";
+                    break;
+                default:
+                    break;
                 }
-                break;
-            case "*":
+            } else {
                 DOBQuery = "*";
-                break;
-            default:
-                break;
             }
-        } else {
-            DOBQuery = "*";
+
+            String clientID = clientIdField.getText().equals("") ? "*" : clientIdField.getText();
+
+            String username = usernameField.getText().equals("") ? "*" : usernameField.getText();
+
+            String email = emailField.getText().equals("") ? "*" : emailField.getText();
+
+            String name = nameField.getText().equals("") ? "*" : nameField.getText();
+
+            String[] clientQuery = {clientID, "client", "*", DOBQuery, username, email, name};
+
+            return pdf.createQuery(clientQuery);   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
-
-        String clientID = clientIdField.getText().equals("") ? "*" : clientIdField.getText();
-
-        String username = usernameField.getText().equals("") ? "*" : usernameField.getText();
-
-        String email = emailField.getText().equals("") ? "*" : emailField.getText();
-
-        String name = nameField.getText().equals("") ? "*" : nameField.getText();
-
-        String[] clientQuery = {clientID, "client", "*", DOBQuery, username, email, name};
-
-        return pdf.createQuery(clientQuery);
+        return null;
     }
 
     public void setQueryLabel(String label) {

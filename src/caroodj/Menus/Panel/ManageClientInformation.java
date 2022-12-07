@@ -546,29 +546,34 @@ public class ManageClientInformation extends javax.swing.JPanel {
     }// </editor-fold>                        
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String username = usernameField.getText();
-        String name = nameField.getText();
-
-        String password = String.valueOf(passwordField.getPassword());
-
-        String email = emailField.getText();
-
-        LocalDate DOB = DOBField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
-
-        String type = adminButton.isSelected() ? "admin" : "client";
-
-
-        String[] entry = {(type.equals("admin") ? "AD:" : "CL:") + EntityId.generateId(), type, password, DOB+"", username, email, name};
-
         try {
-            pdf.addEntry(pdf.constructEntry(entry));
-            JOptionPane.showMessageDialog(null, "Person Successfully Added!");
-        } catch(IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "An Error Occured!");
+            String username = usernameField.getText();
+            String name = nameField.getText();
+    
+            String password = String.valueOf(passwordField.getPassword());
+    
+            String email = emailField.getText();
+    
+            LocalDate DOB = DOBField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    
+            PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+    
+            String type = adminButton.isSelected() ? "admin" : "client";
+    
+    
+            String[] entry = {(type.equals("admin") ? "AD:" : "CL:") + EntityId.generateId(), type, password, DOB+"", username, email, name};
+    
+            try {
+                pdf.addEntry(pdf.constructEntry(entry));
+                JOptionPane.showMessageDialog(null, "Person Successfully Added!");
+            } catch(IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "An Error Occured!");
+            }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
+        
     }                                         
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -582,7 +587,7 @@ public class ManageClientInformation extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Person Successfully Removed!");
             } catch (IOException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "An Error Occurred!");
+                JOptionPane.showMessageDialog(null, "No Person With That ID!");
             }
         }
     }                                            
@@ -669,40 +674,43 @@ public class ManageClientInformation extends javax.swing.JPanel {
         }
     }                                                 
 
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        String clientId = clientID.getText();
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {             
+        try {
+            String clientId = clientID.getText();
 
-        String username = usernameField1.getText();
-
-        String name = nameField1.getText();
-
-        String password = String.valueOf(passwordField1.getPassword());
-
-        String email = emailField1.getText();
-
-        LocalDate DOB = DOBField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+            String username = usernameField1.getText();
+    
+            String name = nameField1.getText();
+    
+            String password = String.valueOf(passwordField1.getPassword());
+    
+            String email = emailField1.getText();
+    
+            LocalDate DOB = DOBField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    
+            PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+            
+            String[] query = {clientId, "client", "*", "*", "*", "*", "*"};
+    
+            Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(query)).first());
+    
+            HashMap<String, String> updateMap = new HashMap<String, String>();
+    
+            updateMap.put("Username", username);
+            updateMap.put("Name", name);
+            updateMap.put("Password", password);
+            updateMap.put("Email", email);
+            updateMap.put("DOB", DOB+"");
+    
+            if (client.update(updateMap)) {
+                JOptionPane.showMessageDialog(null, "Client is Updated!");
+            } else {
+                JOptionPane.showMessageDialog(null, "An Error Occurred!");
+            }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+        }                                
         
-        String[] query = {clientId, "client", "*", "*", "*", "*", "*"};
-
-        Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(query)).first());
-
-
-
-        HashMap<String, String> updateMap = new HashMap<String, String>();
-
-        updateMap.put("Username", username);
-        updateMap.put("Name", name);
-        updateMap.put("Password", password);
-        updateMap.put("Email", email);
-        updateMap.put("DOB", DOB+"");
-
-        if (client.update(updateMap)) {
-            JOptionPane.showMessageDialog(null, "Client is Updated!");
-        } else {
-            JOptionPane.showMessageDialog(null, "An Error Occurred!");
-        }
     }
     
     private void clientTableMouseClicked(java.awt.event.MouseEvent evt) {

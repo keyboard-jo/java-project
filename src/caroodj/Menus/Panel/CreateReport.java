@@ -6,10 +6,9 @@ package Menus.Panel;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import Objects.Car;
-import Objects.Client;
 import Objects.Report;
 
 /**
@@ -39,7 +38,6 @@ public class CreateReport extends javax.swing.JPanel {
         reportPanel = new javax.swing.JPanel();
         startDateLabel = new javax.swing.JLabel();
         endDateLabel = new javax.swing.JLabel();
-        createButton = new javax.swing.JButton();
         endDateMonth = new com.toedter.calendar.JMonthChooser();
         startDateMonth = new com.toedter.calendar.JMonthChooser();
         yearPicker = new com.toedter.calendar.JYearChooser();
@@ -50,15 +48,15 @@ public class CreateReport extends javax.swing.JPanel {
         clientTable = new javax.swing.JTable();
         carScroll = new javax.swing.JScrollPane();
         carTable = new javax.swing.JTable();
-        topPanel = new javax.swing.JPanel();
-        topClientPanel = new javax.swing.JPanel();
-        topCarPanel = new javax.swing.JPanel();
         statisticsPanel = new javax.swing.JPanel();
         statisticsScroll = new javax.swing.JScrollPane();
         statisticsTable = new javax.swing.JTable();
+        createReportPanel = new javax.swing.JPanel();
+        comboBoxReport = new javax.swing.JComboBox<>();
+        createButton = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(1670, 1012));
-        setPreferredSize(new java.awt.Dimension(1670, 1012));
+        setMinimumSize(new java.awt.Dimension(1298, 1012));
+        setPreferredSize(new java.awt.Dimension(1298, 1012));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         titleLabel.setText("CREATE REPORT");
@@ -69,13 +67,6 @@ public class CreateReport extends javax.swing.JPanel {
         startDateLabel.setText("Start Date:");
 
         endDateLabel.setText("End Date:");
-
-        createButton.setText("CREATE");
-        createButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createButtonActionPerformed(evt);
-            }
-        });
 
         yearLabel.setText("Year:");
 
@@ -102,15 +93,12 @@ public class CreateReport extends javax.swing.JPanel {
                             .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(startDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(reportPanelLayout.createSequentialGroup()
-                            .addComponent(searchButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(createButton))
+                        .addComponent(searchButton)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPanelLayout.createSequentialGroup()
                             .addComponent(endDateLabel)
                             .addGap(65, 65, 65)
                             .addComponent(endDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(543, Short.MAX_VALUE))
         );
         reportPanelLayout.setVerticalGroup(
             reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,9 +116,7 @@ public class CreateReport extends javax.swing.JPanel {
                             .addGroup(reportPanelLayout.createSequentialGroup()
                                 .addComponent(endDateLabel)
                                 .addGap(30, 30, 30)
-                                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(createButton)
-                                    .addComponent(searchButton)))
+                                .addComponent(searchButton))
                             .addComponent(endDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(startDateLabel))
                 .addGap(34, 34, 34))
@@ -184,31 +170,6 @@ public class CreateReport extends javax.swing.JPanel {
 
         mapPanel.add(carScroll);
 
-        topPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Top Client & Car"));
-
-        topClientPanel.setMinimumSize(new java.awt.Dimension(1286, 50));
-        topClientPanel.setPreferredSize(new java.awt.Dimension(1286, 50));
-
-        topCarPanel.setMinimumSize(new java.awt.Dimension(1286, 50));
-        topCarPanel.setPreferredSize(new java.awt.Dimension(1286, 50));
-
-        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
-        topPanel.setLayout(topPanelLayout);
-        topPanelLayout.setHorizontalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addComponent(topCarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        topPanelLayout.setVerticalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addComponent(topClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(topCarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         statisticsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Statistics"));
 
         statisticsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -236,9 +197,20 @@ public class CreateReport extends javax.swing.JPanel {
         statisticsPanelLayout.setVerticalGroup(
             statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statisticsPanelLayout.createSequentialGroup()
-                .addComponent(statisticsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(statisticsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        comboBoxReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Statistics", "Car To Count", "Client To Sales"}));
+        createReportPanel.add(comboBoxReport);
+
+        createButton.setText("CREATE");
+        createButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createButtonActionPerformed(evt);
+            }
+        });
+        createReportPanel.add(createButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -249,9 +221,9 @@ public class CreateReport extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(reportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1286, Short.MAX_VALUE)
                     .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(createReportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -263,64 +235,82 @@ public class CreateReport extends javax.swing.JPanel {
                 .addComponent(reportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mapPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(createReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>                        
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        Integer year = yearPicker.getYear();
+        try {
+            Integer year = yearPicker.getYear();
 
-        LocalDate starDateBoundry = LocalDate.of(year, startDateMonth.getMonth() + 1, 1);
+            LocalDate starDateBoundry = LocalDate.of(year, startDateMonth.getMonth() + 1, 1);
 
-        LocalDate endDate = LocalDate.of((startDateMonth.getMonth() > endDateMonth.getMonth()) ? year + 1: year, endDateMonth.getMonth() + 1, 1);
+            LocalDate endDate = LocalDate.of((startDateMonth.getMonth() > endDateMonth.getMonth()) ? year + 1: year, endDateMonth.getMonth() + 1, 1);
 
-        LocalDate endDateBoundry = endDate.withDayOfMonth(endDate.getMonth().length(endDate.isLeapYear()));
+            LocalDate endDateBoundry = endDate.withDayOfMonth(endDate.getMonth().length(endDate.isLeapYear()));
 
-        Report report = new Report(starDateBoundry, endDateBoundry);
+            Report report = new Report(starDateBoundry, endDateBoundry);
 
-        DefaultTableModel modelClientTable = (DefaultTableModel) clientTable.getModel();
-        modelClientTable.setRowCount(0);
+            DefaultTableModel modelClientTable = (DefaultTableModel) clientTable.getModel();
+            modelClientTable.setRowCount(0);
 
-        for (String key : report.getClientToRent().keySet()) {
-            modelClientTable.addRow(new Object[] {key, report.getClientToRent().get(key)});
+            for (String key : report.getClientToRent().keySet()) {
+                modelClientTable.addRow(new Object[] {key, report.getClientToRent().get(key)});
+            }
+
+            DefaultTableModel modelCarTable = (DefaultTableModel) carTable.getModel();
+            modelCarTable.setRowCount(0);
+
+            for (String key : report.getCarToCount().keySet()) {
+                modelCarTable.addRow(new Object[] {key, report.getCarToCount().get(key)});
+            }
+
+            DefaultTableModel modelStatisticsTable = (DefaultTableModel) statisticsTable.getModel();
+            modelStatisticsTable.setRowCount(0);
+
+            modelStatisticsTable.addRow(new Object[] {"Total Sales", report.getTotalSales()});
+            modelStatisticsTable.addRow(new Object[] {"Number of Bookings", report.getnSales()});
+            modelStatisticsTable.addRow(new Object[] {"Unique Number of Clients", report.getnClient()});
+            modelStatisticsTable.addRow(new Object[] {"Unique Number of Car", report.getnCar()});
+            modelStatisticsTable.addRow(new Object[] {"Top Car", report.getTopCar().get(0).getId()});
+            modelStatisticsTable.addRow(new Object[] {"Top Client", report.getTopClient().get(0).getId()});
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
-
-        DefaultTableModel modelCarTable = (DefaultTableModel) carTable.getModel();
-        modelCarTable.setRowCount(0);
-
-        for (String key : report.getCarToCount().keySet()) {
-            modelCarTable.addRow(new Object[] {key, report.getCarToCount().get(key)});
-        }
-
-        topClientPanel.removeAll();
-
-        for (Client client : report.getTopClient()) {
-            topClientPanel.add(new javax.swing.JLabel(client.getId()));
-        }
-        topClientPanel.revalidate();
-
-        topCarPanel.removeAll();
-
-        for (Car car: report.getTopCar()) {
-            topCarPanel.add(new javax.swing.JLabel(car.getId()));
-        }
-        topCarPanel.revalidate();
-
-        DefaultTableModel modelStatisticsTable = (DefaultTableModel) statisticsTable.getModel();
-        modelStatisticsTable.setRowCount(0);
-
-        modelStatisticsTable.addRow(new Object[] {"Total Sales", report.getTotalSales()});
-        modelStatisticsTable.addRow(new Object[] {"Number of Bookings", report.getnSales()});
-        modelStatisticsTable.addRow(new Object[] {"Unique Number of Clients", report.getnClient()});
-        modelStatisticsTable.addRow(new Object[] {"Unique Number of Car", report.getnCar()});
-
     }                                            
 
-    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String reportType = (String)comboBoxReport.getSelectedItem();
+        switch (reportType) {
+            case "Statistics":
+                try {
+                    statisticsTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Unable to Print");
+                }
+                break;
+            case "Car To Count":
+                try {
+                    carTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Unable to Print");
+                }
+                break;
+            case "Client To Sales":
+                try {
+                    clientTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Unable to Print");
+                }
+                break;
+            default:
+                break;
+        }
     }                                            
 
 
@@ -329,7 +319,9 @@ public class CreateReport extends javax.swing.JPanel {
     private javax.swing.JTable carTable;
     private javax.swing.JScrollPane clientScroll;
     private javax.swing.JTable clientTable;
+    private javax.swing.JComboBox<String> comboBoxReport;
     private javax.swing.JButton createButton;
+    private javax.swing.JPanel createReportPanel;
     private javax.swing.JLabel endDateLabel;
     private com.toedter.calendar.JMonthChooser endDateMonth;
     private javax.swing.JPanel mapPanel;
@@ -342,9 +334,6 @@ public class CreateReport extends javax.swing.JPanel {
     private javax.swing.JTable statisticsTable;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
-    private javax.swing.JPanel topCarPanel;
-    private javax.swing.JPanel topClientPanel;
-    private javax.swing.JPanel topPanel;
     private javax.swing.JLabel yearLabel;
     private com.toedter.calendar.JYearChooser yearPicker;
     // End of variables declaration                   

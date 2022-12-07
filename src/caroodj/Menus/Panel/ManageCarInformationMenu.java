@@ -568,53 +568,62 @@ public class ManageCarInformationMenu extends javax.swing.JPanel {
 
     }                                       
 
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        String carId = carID.getText();
-        String manufacture = manufactureField1.getText();
-        String model = modelField1.getText();
-        LocalDate yop = yopField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Double rent = Double.parseDouble(rentField1.getText());
-        Boolean isRented = rentedCarBox.isSelected();
-
-        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
-
-        String[] query = {carId, "*", "*", "*", "*", "*"};
-
-        Car car = cdf.queryDatabase(cdf.createQuery(query)).first();
-
-        HashMap<String, String> updateMap = new HashMap<String, String>();
-
-        updateMap.put("Manufacture", manufacture);
-        updateMap.put("Model", model);
-        updateMap.put("Year", yop+"");
-        updateMap.put("Rent", rent+"");
-        updateMap.put("isRented", isRented+"");
-
-        if (car.update(updateMap)) {
-            JOptionPane.showMessageDialog(null, "Car is Updated!");
-        } else {
-            JOptionPane.showMessageDialog(null, "An Error is Occurred!");
-        }
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+        try {
+            String carId = carID.getText();
+            String manufacture = manufactureField1.getText();
+            String model = modelField1.getText();
+            LocalDate yop = yopField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Double rent = Double.parseDouble(rentField1.getText());
+            Boolean isRented = rentedCarBox.isSelected();
+    
+            CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+    
+            String[] query = {carId, "*", "*", "*", "*", "*"};
+    
+            Car car = cdf.queryDatabase(cdf.createQuery(query)).first();
+    
+            HashMap<String, String> updateMap = new HashMap<String, String>();
+    
+            updateMap.put("Manufacture", manufacture);
+            updateMap.put("Model", model);
+            updateMap.put("Year", yop+"");
+            updateMap.put("Rent", rent+"");
+            updateMap.put("isRented", isRented+"");
+    
+            if (car.update(updateMap)) {
+                JOptionPane.showMessageDialog(null, "Car is Updated!");
+            } else {
+                JOptionPane.showMessageDialog(null, "An Error is Occurred!");
+            }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+        }                                        
+        
     }                                          
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        String manufacture = manufactureField.getText();
-        String model = modelField.getText();
-        LocalDate yop = yopField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Double rent = Double.parseDouble(rentField.getText());
-
-        Car car = new Car(manufacture, model, yop, rent, false);
-        car.setId("CA:" + EntityId.generateId());
-
-        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
-
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {      
         try {
-            cdf.addEntry(cdf.constructEntry(car));
-            JOptionPane.showMessageDialog(null, "Car Successfully Added!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "An Error Occured!");
-        }
+            String manufacture = manufactureField.getText();
+            String model = modelField.getText();
+            LocalDate yop = yopField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Double rent = Double.parseDouble(rentField.getText());
+
+            Car car = new Car(manufacture, model, yop, rent, false);
+            car.setId("CA:" + EntityId.generateId());
+
+            CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+
+            try {
+                cdf.addEntry(cdf.constructEntry(car));
+                JOptionPane.showMessageDialog(null, "Car Successfully Added!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "An Error Occured!");
+            }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+        }                                    
     }                                         
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -650,7 +659,7 @@ public class ManageCarInformationMenu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Car Successfully Removed!");
             } catch (IOException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "An Error Occurred!");
+                JOptionPane.showMessageDialog(null, "No Car With That ID!");
             }
         }
     }
