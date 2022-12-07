@@ -85,11 +85,11 @@ public class ClientAccountDetail extends javax.swing.JPanel {
 
         AccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Username", null},
-                {"Password", null},
-                {"Name", null},
-                {"Email", null},
-                {"Date of Birth", null}
+                {"Username", this.usernameDefault},
+                {"Password", this.passwordDefault},
+                {"Name", this.nameDefault},
+                {"Email", this.emailDefault},
+                {"Date of Birth", DOBDefault}
             },
             new String [] {
                 "Key", "Value"
