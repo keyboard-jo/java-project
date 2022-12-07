@@ -4,6 +4,7 @@ import java.awt.CardLayout;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+import java.util.function.Function;
 
 import Objects.PersonDataFile;
 
@@ -28,10 +29,13 @@ public class SidePanel extends javax.swing.JPanel {
     private ConfirmBookingMenu confirmBookingMenu;
     private AdminAccountDetail adminAccountDetail;
 
+    private Function<java.awt.event.ActionEvent, Void> goToLoginMenu;
+
     private String personId;
     private Boolean isAdmin;
     private String username;
-    public SidePanel(String personID) {
+    public SidePanel(String personID, Function<java.awt.event.ActionEvent, Void> goToLoginMenu) {
+        this.goToLoginMenu = goToLoginMenu;
         initPerson(personID);
         initComponents();
         cardLayout = (CardLayout)(MainPanel.getLayout());
@@ -75,13 +79,15 @@ public class SidePanel extends javax.swing.JPanel {
         GreetingText = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
         extraAdminButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1298, 1012));
         setMinimumSize(new java.awt.Dimension(1298, 1012));
         setPreferredSize(new java.awt.Dimension(1298, 1012));
 
         SidePanel.setBackground(new java.awt.Color(49, 74, 86));
-        SidePanel.setPreferredSize(new java.awt.Dimension(239, 554));
+        SidePanel.setPreferredSize(new java.awt.Dimension(250, 554));
+        // 239
 
         LogoText.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 60)); // NOI18N
         LogoText.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,6 +115,11 @@ public class SidePanel extends javax.swing.JPanel {
         extraAdminButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 24));
         extraAdminButton.setForeground(new java.awt.Color(255, 255, 255));
 
+        logoutButton.setBackground(new java.awt.Color(49, 74, 86));
+        logoutButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 24));
+        logoutButton.setForeground(new java.awt.Color(255, 255, 255));
+        logoutButton.setText("Logout");
+
         GreetingText.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         GreetingText.setForeground(new java.awt.Color(255, 255, 255));
         GreetingText.setText("Hello, " + this.username);
@@ -116,8 +127,8 @@ public class SidePanel extends javax.swing.JPanel {
         javax.swing.GroupLayout SidePanelLayout = new javax.swing.GroupLayout(SidePanel);
         SidePanel.setLayout(SidePanelLayout);
 
-        MainPanel.setMinimumSize(new java.awt.Dimension(1298, 1012));
-        MainPanel.setPreferredSize(new java.awt.Dimension(1298, 1012));
+        MainPanel.setMinimumSize(new java.awt.Dimension(1670, 1012));
+        MainPanel.setPreferredSize(new java.awt.Dimension(1670, 1012));
         MainPanel.setLayout(new java.awt.CardLayout());
 
         if (this.isAdmin) {
@@ -125,7 +136,7 @@ public class SidePanel extends javax.swing.JPanel {
             BookCarButton.setText("Car Information");
             HomeButton.setText("Client Information");
             HistoryButton.setText("Confirm Booking");
-            extraAdminButton.setText("Home");
+            extraAdminButton.setText("Account");
 
             createReport = new CreateReport();
             manageCarInformationMenu = new ManageCarInformationMenu();
@@ -150,7 +161,8 @@ public class SidePanel extends javax.swing.JPanel {
                                 .addComponent(BookCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(HistoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(AccountButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(extraAdminButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(extraAdminButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap())
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidePanelLayout.createSequentialGroup()
                             .addGap(0, 11, Short.MAX_VALUE)
@@ -182,6 +194,8 @@ public class SidePanel extends javax.swing.JPanel {
                     .addComponent(HistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(extraAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         } else {
             AccountButton.setText("Account");
@@ -209,7 +223,8 @@ public class SidePanel extends javax.swing.JPanel {
                                 .addComponent(HomeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BookCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(HistoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(AccountButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(AccountButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap())
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidePanelLayout.createSequentialGroup()
                             .addGap(0, 11, Short.MAX_VALUE)
@@ -239,6 +254,8 @@ public class SidePanel extends javax.swing.JPanel {
                     .addComponent(AccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(HistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         }
 
@@ -289,6 +306,12 @@ public class SidePanel extends javax.swing.JPanel {
                 extraAdminButtonActionPerformed(evt);
             }
         });
+
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
     }// </editor-fold>                        
 
     private void AccountButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +348,10 @@ public class SidePanel extends javax.swing.JPanel {
     
     private void extraAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.cardLayout.show(MainPanel, "adminAccountDetail");
+    }
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.goToLoginMenu.apply(evt);
     }
 
     // Variables declaration - do not modify                     
@@ -335,6 +361,7 @@ public class SidePanel extends javax.swing.JPanel {
     private javax.swing.JButton HomeButton;
     
     private javax.swing.JButton extraAdminButton;
+    private javax.swing.JButton logoutButton;
     
     private javax.swing.JLabel GreetingText;
     private javax.swing.JLabel LogoText;
