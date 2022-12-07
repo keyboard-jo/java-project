@@ -1,9 +1,8 @@
 import Menus.Base;
 
-// TODO: Implement try catch in every user form
-// TODO: add input validation for forms
-// TODO: Create logout
-// TODO: find a way to view/cancel booking
+// TODO: add input validation for forms, try catch
+// TODO: Add cancel booking in confirm booking menu
+// TODO: print Jtable to pdf
 
 // ASssumption: admin can double book
 public class Main {
