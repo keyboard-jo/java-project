@@ -118,6 +118,7 @@ public class AdminAccountDetail extends javax.swing.JPanel {
             }
         });
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,7 +197,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.DOBDefault, 4, 1);
 
     }
-
 
     // Variables declaration - do not modify                     
     private javax.swing.JScrollPane AccountScroll;
