@@ -27,6 +27,7 @@ public class SidePanel extends javax.swing.JPanel {
     private ManageClientInformation manageClientInformation;
     private ConfirmBookingMenu confirmBookingMenu;
     private AdminAccountDetail adminAccountDetail;
+    private CancelBookingMenu cancelBookingMenu;
 
     private Function<java.awt.event.ActionEvent, Void> goToLoginMenu;
 
@@ -78,6 +79,7 @@ public class SidePanel extends javax.swing.JPanel {
         GreetingText = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
         extraAdminButton = new javax.swing.JButton();
+        extraAdminButton1 = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1298, 1012));
@@ -114,6 +116,10 @@ public class SidePanel extends javax.swing.JPanel {
         extraAdminButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 24));
         extraAdminButton.setForeground(new java.awt.Color(255, 255, 255));
 
+        extraAdminButton1.setBackground(new java.awt.Color(49, 74, 86));
+        extraAdminButton1.setFont(new java.awt.Font("Yu Gothic UI", 1, 24));
+        extraAdminButton1.setForeground(new java.awt.Color(255, 255, 255));
+
         logoutButton.setBackground(new java.awt.Color(49, 74, 86));
         logoutButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 24));
         logoutButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,18 +141,21 @@ public class SidePanel extends javax.swing.JPanel {
             BookCarButton.setText("Car Information");
             HomeButton.setText("Client Information");
             HistoryButton.setText("Confirm Booking");
+            extraAdminButton1.setText("Cancel Booking");
             extraAdminButton.setText("Account");
 
             createReport = new CreateReport();
             manageCarInformationMenu = new ManageCarInformationMenu();
             manageClientInformation = new ManageClientInformation();
             confirmBookingMenu = new ConfirmBookingMenu();
+            cancelBookingMenu = new CancelBookingMenu();
             adminAccountDetail = new AdminAccountDetail(this.personId);
 
             MainPanel.add(createReport, "createReport");
             MainPanel.add(manageCarInformationMenu, "manageCarInformationMenu");
             MainPanel.add(manageClientInformation, "manageClientInformation");
             MainPanel.add(confirmBookingMenu, "confirmBookingMenu");
+            MainPanel.add(cancelBookingMenu, "cancelBookingMenu");
             MainPanel.add(adminAccountDetail, "adminAccountDetail");
 
             SidePanelLayout.setHorizontalGroup(
@@ -160,6 +169,7 @@ public class SidePanel extends javax.swing.JPanel {
                                 .addComponent(BookCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(HistoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(AccountButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(extraAdminButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(extraAdminButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap())
@@ -191,6 +201,8 @@ public class SidePanel extends javax.swing.JPanel {
                     .addComponent(AccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(HistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(extraAdminButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(extraAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -303,6 +315,11 @@ public class SidePanel extends javax.swing.JPanel {
                 extraAdminButtonActionPerformed(evt);
             }
         });
+        extraAdminButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extraAdminButton1ActionPerformed(evt);
+            }
+        });
 
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,6 +364,10 @@ public class SidePanel extends javax.swing.JPanel {
         this.cardLayout.show(MainPanel, "adminAccountDetail");
     }
 
+    private void extraAdminButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        this.cardLayout.show(MainPanel, "cancelBookingMenu");
+    }
+
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.goToLoginMenu.apply(evt);
     }
@@ -359,6 +380,7 @@ public class SidePanel extends javax.swing.JPanel {
     private javax.swing.JButton HomeButton;
     
     private javax.swing.JButton extraAdminButton;
+    private javax.swing.JButton extraAdminButton1;
     private javax.swing.JButton logoutButton;
     
     private javax.swing.JLabel GreetingText;

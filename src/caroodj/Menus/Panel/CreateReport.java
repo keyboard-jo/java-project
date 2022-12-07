@@ -6,6 +6,7 @@ package Menus.Panel;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import Objects.Car;
@@ -139,12 +140,7 @@ public class CreateReport extends javax.swing.JPanel {
         mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Client and Rental Cost & Car and Count"));
 
         clientTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            null,
             new String [] {
                 "Client Id", "Total Amount"
             }
@@ -162,12 +158,7 @@ public class CreateReport extends javax.swing.JPanel {
         mapPanel.add(clientScroll);
 
         carTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            null,
             new String [] {
                 "Car Id", "Car Count"
             }
@@ -212,12 +203,7 @@ public class CreateReport extends javax.swing.JPanel {
         statisticsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Statistics"));
 
         statisticsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            null,
             new String [] {
                 "Key", "Value"
             }
@@ -270,53 +256,57 @@ public class CreateReport extends javax.swing.JPanel {
         );
     }// </editor-fold>                        
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        Integer year = yearPicker.getYear();
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {      
+        try {
+            Integer year = yearPicker.getYear();
 
-        LocalDate starDateBoundry = LocalDate.of(year, startDateMonth.getMonth() + 1, 1);
+            LocalDate starDateBoundry = LocalDate.of(year, startDateMonth.getMonth() + 1, 1);
 
-        LocalDate endDate = LocalDate.of((startDateMonth.getMonth() > endDateMonth.getMonth()) ? year + 1: year, endDateMonth.getMonth() + 1, 1);
+            LocalDate endDate = LocalDate.of((startDateMonth.getMonth() > endDateMonth.getMonth()) ? year + 1: year, endDateMonth.getMonth() + 1, 1);
 
-        LocalDate endDateBoundry = endDate.withDayOfMonth(endDate.getMonth().length(endDate.isLeapYear()));
+            LocalDate endDateBoundry = endDate.withDayOfMonth(endDate.getMonth().length(endDate.isLeapYear()));
 
-        Report report = new Report(starDateBoundry, endDateBoundry);
+            Report report = new Report(starDateBoundry, endDateBoundry);
 
-        DefaultTableModel modelClientTable = (DefaultTableModel) clientTable.getModel();
-        modelClientTable.setRowCount(0);
+            DefaultTableModel modelClientTable = (DefaultTableModel) clientTable.getModel();
+            modelClientTable.setRowCount(0);
 
-        for (String key : report.getClientToRent().keySet()) {
-            modelClientTable.addRow(new Object[] {key, report.getClientToRent().get(key)});
-        }
+            for (String key : report.getClientToRent().keySet()) {
+                modelClientTable.addRow(new Object[] {key, report.getClientToRent().get(key)});
+            }
 
-        DefaultTableModel modelCarTable = (DefaultTableModel) carTable.getModel();
-        modelCarTable.setRowCount(0);
+            DefaultTableModel modelCarTable = (DefaultTableModel) carTable.getModel();
+            modelCarTable.setRowCount(0);
 
-        for (String key : report.getCarToCount().keySet()) {
-            modelCarTable.addRow(new Object[] {key, report.getCarToCount().get(key)});
-        }
+            for (String key : report.getCarToCount().keySet()) {
+                modelCarTable.addRow(new Object[] {key, report.getCarToCount().get(key)});
+            }
 
-        topClientPanel.removeAll();
+            topClientPanel.removeAll();
 
-        for (Client client : report.getTopClient()) {
-            topClientPanel.add(new javax.swing.JLabel(client.getId()));
-        }
-        topClientPanel.revalidate();
+            for (Client client : report.getTopClient()) {
+                topClientPanel.add(new javax.swing.JLabel(client.getId()));
+            }
+            topClientPanel.revalidate();
 
-        topCarPanel.removeAll();
+            topCarPanel.removeAll();
 
-        for (Car car: report.getTopCar()) {
-            topCarPanel.add(new javax.swing.JLabel(car.getId()));
-        }
-        topCarPanel.revalidate();
+            for (Car car: report.getTopCar()) {
+                topCarPanel.add(new javax.swing.JLabel(car.getId()));
+            }
+            topCarPanel.revalidate();
 
-        DefaultTableModel modelStatisticsTable = (DefaultTableModel) statisticsTable.getModel();
-        modelStatisticsTable.setRowCount(0);
+            DefaultTableModel modelStatisticsTable = (DefaultTableModel) statisticsTable.getModel();
+            modelStatisticsTable.setRowCount(0);
 
-        modelStatisticsTable.addRow(new Object[] {"Total Sales", report.getTotalSales()});
-        modelStatisticsTable.addRow(new Object[] {"Number of Bookings", report.getnSales()});
-        modelStatisticsTable.addRow(new Object[] {"Unique Number of Clients", report.getnClient()});
-        modelStatisticsTable.addRow(new Object[] {"Unique Number of Car", report.getnCar()});
+            modelStatisticsTable.addRow(new Object[] {"Total Sales", report.getTotalSales()});
+            modelStatisticsTable.addRow(new Object[] {"Number of Bookings", report.getnSales()});
+            modelStatisticsTable.addRow(new Object[] {"Unique Number of Clients", report.getnClient()});
+            modelStatisticsTable.addRow(new Object[] {"Unique Number of Car", report.getnCar()});
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+        }                                       
     }                                            
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             

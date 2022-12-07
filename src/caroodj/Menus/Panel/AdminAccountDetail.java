@@ -69,7 +69,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         AccountTable = new javax.swing.JTable();
         SaveButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1670, 1012));
         setVerifyInputWhenFocusTarget(false);
@@ -119,13 +118,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
             }
         });
 
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,7 +134,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ResetButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutButton)
                 .addGap(425, 425, 425))
         );
         layout.setVerticalGroup(
@@ -154,39 +145,45 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
-                    .addComponent(ResetButton)
-                    .addComponent(logoutButton))
+                    .addComponent(ResetButton))
                 .addGap(0, 881, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
         DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
-        
-        String username = (String)model.getValueAt(0, 1);
-        String password = (String)model.getValueAt(1, 1);
-        String name = (String)model.getValueAt(2, 1);
-        String email = (String)model.getValueAt(3, 1);
-        String dateOfBirth = (String)model.getValueAt(4, 1);
 
-        HashMap<String, String> updateMap = new HashMap<String, String>();
+        try {
+            String username = (String)model.getValueAt(0, 1);
+            String password = (String)model.getValueAt(1, 1);
+            String name = (String)model.getValueAt(2, 1);
+            String email = (String)model.getValueAt(3, 1);
+            String dateOfBirth = (String)model.getValueAt(4, 1);
 
-        updateMap.put("Username", username);
-        updateMap.put("Name", name);
-        updateMap.put("Password", password);
-        updateMap.put("Email", email);
-        updateMap.put("DOB", dateOfBirth+"");
+            HashMap<String, String> updateMap = new HashMap<String, String>();
 
-        if (this.admin.update(updateMap)) {
-            JOptionPane.showMessageDialog(null, "Admin is Updated!");
-            this.usernameDefault = username;
-            this.nameDefault = name;
-            this.passwordDefault = password;
-            this.emailDefault = email;
-            this.DOBDefault = LocalDate.parse(dateOfBirth);
-        } else {
-            JOptionPane.showMessageDialog(null, "An Error Occurred!");
+            updateMap.put("Username", username);
+            updateMap.put("Name", name);
+            updateMap.put("Password", password);
+            updateMap.put("Email", email);
+            updateMap.put("DOB", dateOfBirth+"");
+            
+
+            if (this.admin.update(updateMap)) {
+                JOptionPane.showMessageDialog(null, "Admin is Updated!");
+                this.usernameDefault = username;
+                this.nameDefault = name;
+                this.passwordDefault = password;
+                this.emailDefault = email;
+                this.DOBDefault = LocalDate.parse(dateOfBirth);
+            } else {
+                JOptionPane.showMessageDialog(null, "An Error Occurred!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
+
+        
     }                                          
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -199,10 +196,6 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.DOBDefault, 4, 1);
 
     }
-    
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        
-    }
 
 
     // Variables declaration - do not modify                     
@@ -213,6 +206,5 @@ public class AdminAccountDetail extends javax.swing.JPanel {
     private javax.swing.JLabel TitleAccount;
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JTable AccountTable;
-    private javax.swing.JButton logoutButton;
     // End of variables declaration                   
 }
