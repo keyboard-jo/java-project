@@ -107,6 +107,7 @@ public class BookCarClient extends javax.swing.JPanel {
             }
         });
 
+        
         javax.swing.GroupLayout QueryPanelLayout = new javax.swing.GroupLayout(QueryPanel);
         QueryPanel.setLayout(QueryPanelLayout);
         QueryPanelLayout.setHorizontalGroup(
