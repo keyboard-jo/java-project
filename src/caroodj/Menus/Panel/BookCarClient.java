@@ -107,6 +107,9 @@ public class BookCarClient extends javax.swing.JPanel {
             }
         });
 
+        queryScroll.setMinimumSize(new java.awt.Dimension(1276, 200));
+        queryScroll.setPreferredSize(new java.awt.Dimension(1276, 200));
+        
         javax.swing.GroupLayout QueryPanelLayout = new javax.swing.GroupLayout(QueryPanel);
         QueryPanel.setLayout(QueryPanelLayout);
         QueryPanelLayout.setHorizontalGroup(
@@ -121,6 +124,11 @@ public class BookCarClient extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SearchButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(QueryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QueryPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(queryScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1270, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         QueryPanelLayout.setVerticalGroup(
             QueryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,6 +140,11 @@ public class BookCarClient extends javax.swing.JPanel {
                     .addComponent(ClearQueryButton)
                     .addComponent(SearchButton))
                 .addContainerGap())
+            .addGroup(QueryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(QueryPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(queryScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(32, Short.MAX_VALUE)))
         );
 
         TablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Car Table"));
