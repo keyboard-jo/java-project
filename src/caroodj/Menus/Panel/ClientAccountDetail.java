@@ -1,11 +1,17 @@
 package Menus.Panel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import Objects.Booking;
 import Objects.Person;
 import Objects.PersonDataFile;
 
+import Objects.Client;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -20,18 +26,34 @@ public class ClientAccountDetail extends javax.swing.JPanel {
     /**
      * Creates new form AccountClient
      */
-    private String nameDefault;
     private String usernameDefault;
-    //make ini klo di reset
+    private String passwordDefault;
+    private String nameDefault;
+    private String emailDefault;
+    private LocalDate DOBDefault;
+
+    private Client client;
+    
     private String clientID;
     public ClientAccountDetail(String clientID) {
         this.clientID = clientID;
-        initComponents();
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
-        String[] personQuery = {clientID,"*", "*", "*", "*", "*", "*"};
-        ArrayList<String[]> personList = pdf.queryDatabase(pdf.createQuery(personQuery)).all();
-        
 
+        String query[] = {clientID, "*", "*", "*", "*", "*", "*"};
+
+        this.client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(query)).first());
+
+        this.usernameDefault = this.client.username;
+
+        this.passwordDefault = this.client.getPassword();
+
+        this.nameDefault = this.client.getName();
+
+        this.emailDefault = this.client.getEmail();
+
+        this.DOBDefault = this.client.getDateOfBirth();
+
+        initComponents();
     }
 
     /**
@@ -60,11 +82,11 @@ public class ClientAccountDetail extends javax.swing.JPanel {
 
         AccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Username", null},
-                {"Password", null},
-                {"Name", null},
-                {"Email", null},
-                {"Date of Birth", null}
+                {"Username", this.usernameDefault},
+                {"Password", this.passwordDefault},
+                {"Name", this.nameDefault},
+                {"Email", this.emailDefault},
+                {"Date of Birth", this.DOBDefault}
             },
             new String [] {
                 "Key", "Value"
@@ -150,11 +172,57 @@ public class ClientAccountDetail extends javax.swing.JPanel {
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                          
+        DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
+        
+        String username = (String)model.getValueAt(0, 1);
+        String password = (String)model.getValueAt(1, 1);
+        String name = (String)model.getValueAt(2, 1);
+        String email = (String)model.getValueAt(3, 1);
+        String dateOfBirth = (String)model.getValueAt(4, 1);
+
+        HashMap<String, String> updateMap = new HashMap<String, String>();
+
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(dateOfBirth);
+        System.out.println(client.getId());
+
+        updateMap.put("Username", username);
+        updateMap.put("Name", name);
+        updateMap.put("Password", password);
+        updateMap.put("Email", email);
+        updateMap.put("DOB", dateOfBirth+"");
+
+        if (this.client.update(updateMap)) {
+            JOptionPane.showMessageDialog(null, "Admin is Updated!");
+            this.usernameDefault = username;
+            this.nameDefault = name;
+            this.passwordDefault = password;
+            this.emailDefault = email;
+            this.DOBDefault = LocalDate.parse(dateOfBirth);
+        } else {
+            JOptionPane.showMessageDialog(null, "An Error Occurred!");
+        }
+    }
+                                        
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }                                           
+        DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
+
+        model.setValueAt(this.usernameDefault, 0, 1);
+        model.setValueAt(this.passwordDefault, 1, 1);
+        model.setValueAt(this.nameDefault, 2, 1);
+        model.setValueAt(this.emailDefault, 3, 1);
+        model.setValueAt(this.DOBDefault, 4, 1);
+
+
+        System.out.println("HIT");
+        System.out.println(this.nameDefault);
+    }                                          
+                                              
 
     // Variables declaration - do not modify                     
     private javax.swing.JScrollPane jScrollPane1;

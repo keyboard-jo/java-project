@@ -1,5 +1,16 @@
 package Menus.Panel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
+import Objects.Car;
+import Objects.CarDataFile;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -26,6 +37,16 @@ public class BookCarClient extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+        
+        queryFull = new JPanel();
+
+        queryFull.setLayout(new BoxLayout(queryFull, BoxLayout.Y_AXIS));
+
+        carQueries.add(new CarQuery());
+
+        queryFull.add(carQueries.get(0));
+
+        queryScroll = new javax.swing.JScrollPane(queryFull);
 
         TitlePanel = new javax.swing.JPanel();
         BookCarTitle = new javax.swing.JLabel();
@@ -275,20 +296,69 @@ public class BookCarClient extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+        carQueries.add(new CarQuery());
+
+        CarQuery lastCarQuery = carQueries.get(carQueries.size() - 1);
+
+        this.queryCount += 1;
+
+        lastCarQuery.setQueryLabel("Query " + this.queryCount);
+
+        queryFull.add(lastCarQuery);
+        queryFull.revalidate();
+    }                                   
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+        if (this.queryCount == 1) {
+            JOptionPane.showMessageDialog(null, "Cannot Remove Anymore Query");
+        } else {
+            queryFull.remove(carQueries.get(carQueries.size() - 1));
+    
+            carQueries.remove(carQueries.size() - 1);
+    
+            this.queryCount -= 1;
+    
+            queryFull.revalidate();
+        }
+    }                                    
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+        for (Integer i = (carQueries.size() - 1); i >= 1; i--) {
+            queryFull.remove(carQueries.size() - 1);
+            carQueries.remove(carQueries.size() - 1);
+            this.queryCount -= 1;
+        }
+
+        queryFull.revalidate();
+    }                                     
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+        DefaultTableModel model = (DefaultTableModel) BookCarTable.getModel();
+        model.setRowCount(0);
 
+        for (CarQuery carQuery :carQueries) {
+            CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+
+            HashMap<String, String> query = carQuery.getQueryData();
+
+            ArrayList<Car> carList = cdf.queryDatabase(query).all();
+
+            for (Car car : carList) {
+                model.addRow(new Object[] {car.getId(), car.manufacture, car.model, car.year, car.rentalCost, car.isRented});
+            }
+        }
+
+    }
+                                       
+
+    private ArrayList<CarQuery> carQueries = new ArrayList<CarQuery>();
+
+    private Integer queryCount = 1;
+
+    private JPanel queryFull;
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton BookCarButton;
@@ -309,5 +379,6 @@ public class BookCarClient extends javax.swing.JPanel {
     private javax.swing.JButton RemoveQueryButton;
     private javax.swing.JButton ClearQueryButton;
     private javax.swing.JButton SearchButton;
+    private javax.swing.JScrollPane queryScroll;
     // End of variables declaration                   
 }

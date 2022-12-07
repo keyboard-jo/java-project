@@ -21,6 +21,7 @@ public class SidePanel extends javax.swing.JPanel {
     private HistoryClient historyClient;
     private ClientAccountDetail clientAccountDetail;
     private ClientHome clientHome;
+    private BookCarClient bookCarClient;
 
     private CreateReport createReport;
     private ManageCarInformationMenu manageCarInformationMenu;
@@ -205,10 +206,12 @@ public class SidePanel extends javax.swing.JPanel {
             clientAccountDetail = new ClientAccountDetail(this.personId);
             historyClient = new HistoryClient(this.personId);
             clientHome = new ClientHome(this.personId);
+            bookCarClient= new BookCarClient();
             
             MainPanel.add(clientHome,"clientHome");
             MainPanel.add(clientAccountDetail,"clientAccountDetail");
             MainPanel.add(historyClient,"historyClient");
+            MainPanel.add(bookCarClient,"bookCarClient");
             
             SidePanelLayout.setHorizontalGroup(
                 SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +326,7 @@ public class SidePanel extends javax.swing.JPanel {
         if (this.isAdmin) {
             this.cardLayout.show(MainPanel,"manageCarInformationMenu");
         } else {
-
+            this.cardLayout.show(MainPanel,"bookCarClient");
         }
     }                                             
 
