@@ -77,6 +77,7 @@ public class BookCarClient extends javax.swing.JPanel {
         StartDateField = new com.toedter.calendar.JDateChooser();
         EndDateText = new javax.swing.JLabel();
         EndDateField = new com.toedter.calendar.JDateChooser();
+        paymentMethod = new PaymentMethod();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setMaximumSize(new java.awt.Dimension(1298, 1012));
@@ -328,16 +329,21 @@ public class BookCarClient extends javax.swing.JPanel {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(new String[] {clientID, "*", "*", "*", "*", "*", "*"})).first());
         Car car = cdf.queryDatabase(cdf.createQuery(new String[]{carID, "*", "*", "*", "*", "*"})).first();
-        Booking booking = new Booking(StartDate, EndDate, false, false, car, client, "cash");
-        booking.setId("BO:"+EntityId.generateId());
-        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        try {
-            bdf.addEntry(bdf.constructEntry(booking));
-            JOptionPane.showMessageDialog(null, "Car has been Booked");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            JOptionPane.showMessageDialog(null, "An Error is Occurred!");
-        }
+        paymentMethod.setData(StartDate, EndDate, false, false, car, client, "cash");
+
+        JOptionPane.showMessageDialog(null, paymentMethod, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+
+        // Booking booking = new Booking(StartDate, EndDate, false, false, car, client, "cash");
+        // booking.setId("BO:"+EntityId.generateId());
+        // BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        // try {
+        //     bdf.addEntry(bdf.constructEntry(booking));
+        //     JOptionPane.showMessageDialog(null, "Car has been Booked");
+        // } catch (IOException e) {
+        //     // TODO Auto-generated catch block
+        //     JOptionPane.showMessageDialog(null, "An Error is Occurred!");
+        // }
     }                                             
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -408,6 +414,8 @@ public class BookCarClient extends javax.swing.JPanel {
     private Integer queryCount = 1;
 
     private JPanel queryFull;
+
+    private PaymentMethod paymentMethod;
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton BookCarButton;
