@@ -42,14 +42,13 @@ public class Car extends EntityId{
             }
         }
 
-        Boolean isChanged = false;
-
         try {
-            isChanged = cdf.updateEntry(this);
+            Boolean isChanged = cdf.updateEntry(this);
+            return isChanged;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
 
-        return isChanged;
     }
 }

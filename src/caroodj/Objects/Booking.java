@@ -56,14 +56,13 @@ public class Booking extends EntityId{
             }
         }
 
-        Boolean isChanged = false;
-
         try {
-            isChanged = bdf.updateEntry(this);
+            Boolean isChanged = bdf.updateEntry(this);
+            return isChanged;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         
-        return isChanged;
     }
 }

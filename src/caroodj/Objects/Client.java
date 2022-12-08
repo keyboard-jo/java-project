@@ -92,16 +92,16 @@ public class Client extends Person{
             }
         }
 
-        Boolean isChanged = false;
 
         String[] person = {super.getId(), this.type, this.getPassword(), this.getDateOfBirth()+"", this.username, this.getEmail(), this.getName()};
 
         try {
-            isChanged = pdf.updateEntry(person);
+            Boolean isChanged = pdf.updateEntry(person);
+            return isChanged;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
 
-        return isChanged;
     }
 }
