@@ -1,5 +1,8 @@
 package Menus.Panel;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,9 +10,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.parser.Entity;
 
+import Objects.Booking;
+import Objects.BookingDataFile;
 import Objects.Car;
 import Objects.CarDataFile;
+import Objects.Client;
+import Objects.EntityId;
+import Objects.PersonDataFile;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -25,7 +34,9 @@ public class BookCarClient extends javax.swing.JPanel {
     /**
      * Creates new form BookCarClient
      */
-    public BookCarClient() {
+    private String clientID;
+    public BookCarClient(String clientID) {
+        this.clientID = clientID;
         initComponents();
     }
 
@@ -174,6 +185,11 @@ public class BookCarClient extends javax.swing.JPanel {
                 BookCarTableComponentResized(evt);
             }
         });
+        BookCarTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                carTableMouseClicked(evt);
+            }
+        });
         BookCarTableScroll.setViewportView(BookCarTable);
         if (BookCarTable.getColumnModel().getColumnCount() > 0) {
             BookCarTable.getColumnModel().getColumn(0).setResizable(false);
@@ -305,6 +321,23 @@ public class BookCarClient extends javax.swing.JPanel {
 
     private void BookCarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
+        String carID = CarIDField.getText();
+        LocalDate StartDate = StartDateField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate EndDate = EndDateField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+        Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(new String[] {clientID, "*", "*", "*", "*", "*", "*"})).first());
+        Car car = cdf.queryDatabase(cdf.createQuery(new String[]{carID, "*", "*", "*", "*", "*"})).first();
+        Booking booking = new Booking(StartDate, EndDate, false, false, car, client);
+        booking.setId("BO:"+EntityId.generateId());
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        try {
+            bdf.addEntry(bdf.constructEntry(booking));
+            JOptionPane.showMessageDialog(null, "Car has been Booked");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "An Error is Occurred!");
+        }
     }                                             
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -365,7 +398,11 @@ public class BookCarClient extends javax.swing.JPanel {
         }
 
     }
-                                       
+    private void carTableMouseClicked(java.awt.event.MouseEvent evt) {
+        Integer row = BookCarTable.getSelectedRow();
+        CarIDField.setText((String)BookCarTable.getValueAt(row, 0));
+
+    }                                  
 
     private ArrayList<CarQuery> carQueries = new ArrayList<CarQuery>();
 
