@@ -401,7 +401,6 @@ public class BookCarClient extends javax.swing.JPanel {
     private void carTableMouseClicked(java.awt.event.MouseEvent evt) {
         Integer row = BookCarTable.getSelectedRow();
         CarIDField.setText((String)BookCarTable.getValueAt(row, 0));
-
     }                                  
 
     private ArrayList<CarQuery> carQueries = new ArrayList<CarQuery>();
