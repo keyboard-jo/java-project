@@ -181,6 +181,7 @@ public class AdminAccountDetail extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "An Error Occurred!");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
 
