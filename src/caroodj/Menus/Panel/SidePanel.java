@@ -218,7 +218,7 @@ public class SidePanel extends javax.swing.JPanel {
             clientAccountDetail = new ClientAccountDetail(this.personId);
             historyClient = new HistoryClient(this.personId);
             clientHome = new ClientHome(this.personId);
-            bookCarClient= new BookCarClient();
+            bookCarClient= new BookCarClient(this.personId);
             
             MainPanel.add(clientHome,"clientHome");
             MainPanel.add(clientAccountDetail,"clientAccountDetail");
