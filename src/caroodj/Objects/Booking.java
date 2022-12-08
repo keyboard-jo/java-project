@@ -11,14 +11,16 @@ public class Booking extends EntityId{
     public Boolean isCanceled;
     public Car car;
     public Client client;
+    public String paymentMethod;
 
-    public Booking(LocalDate startDate, LocalDate endDate, Boolean isConfirmed, Boolean isCanceled, Car car, Client client) {
+    public Booking(LocalDate startDate, LocalDate endDate, Boolean isConfirmed, Boolean isCanceled, Car car, Client client, String paymentMethod) {
         this.car = car;
         this.client = client;
         this.startDate = startDate;
         this.endDate = endDate;
         this.isConfirmed = isConfirmed;
         this.isCanceled = isCanceled;
+        this.paymentMethod = paymentMethod;
     }
 
     public Boolean update(HashMap<String, String> updateMap) {
@@ -50,6 +52,9 @@ public class Booking extends EntityId{
                 case "Client":
                     String[] queryClient = {updateMap.get(key), "*", "*", "*", "*", "*"};
                     this.client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(queryClient)).first());
+                    break;
+                case "Payment":
+                    this.paymentMethod = updateMap.get(key);
                     break;
                 default:
                     break;

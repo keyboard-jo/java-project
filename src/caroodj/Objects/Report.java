@@ -2,10 +2,8 @@ package Objects;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Report {
     public LocalDate startDate;
