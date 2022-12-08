@@ -41,7 +41,7 @@ public class ClientHome extends javax.swing.JPanel {
         model.setRowCount(0);
         LocalDate now = LocalDate.now(); 
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        String[] bookingQuery = {"*", "*", "*", "*", "false", "*",ClientID};
+        String[] bookingQuery = {"*", "*", "*", "*", "false", "*",ClientID, "*"};
         
         ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
@@ -260,7 +260,7 @@ public class ClientHome extends javax.swing.JPanel {
 
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
 
-        String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*"};
+        String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*", "*"};
 
         Booking booking = bdf.queryDatabase(bdf.createQuery(bookingQuery)).first();
 

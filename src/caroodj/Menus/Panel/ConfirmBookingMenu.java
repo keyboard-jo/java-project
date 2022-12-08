@@ -280,7 +280,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
 
             BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
 
-            String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*"};
+            String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*", "*"};
 
             Booking booking = bdf.queryDatabase(bdf.createQuery(bookingQuery)).first();
 

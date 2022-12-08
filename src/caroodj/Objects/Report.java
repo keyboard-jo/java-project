@@ -192,7 +192,7 @@ public class Report {
 
         System.out.println(startDateQuery);
 
-        String[] query = {"*", startDateQuery, "*", "true", "false", "*", "*"};
+        String[] query = {"*", startDateQuery, "*", "true", "false", "*", "*", "*"};
 
         setBookingRange(bdf.queryDatabase(bdf.createQuery(query)).all());
     }

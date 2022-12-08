@@ -30,7 +30,7 @@ public class HistoryClient extends javax.swing.JPanel {
         model.setRowCount(0);
 
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        String[] bookingQuery = {"*", "*", "*", "*", "*", "*",clientID};
+        String[] bookingQuery = {"*", "*", "*", "*", "*", "*",clientID, "*"};
 
         ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
