@@ -1,11 +1,21 @@
 package Menus.Panel;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import Objects.Booking;
 import Objects.BookingDataFile;
+import Objects.Car;
+import Objects.CarDataFile;
+import Objects.Client;
+import Objects.DataFile;
+import Objects.PersonDataFile;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,20 +31,25 @@ public class ClientHome extends javax.swing.JPanel {
     /**
      * Creates new form HomeClient
      */
+    private String clientID;
     public ClientHome(String ClientID) {
+        this.clientID = clientID;
         initComponents();
         TableOngoingBooking.getColumnModel().getColumn(0).setPreferredWidth(200);
+        TableOngoingBooking.getColumnModel().getColumn(1).setPreferredWidth(200);
         DefaultTableModel model = (DefaultTableModel) TableOngoingBooking.getModel();
         model.setRowCount(0);
-
+        LocalDate now = LocalDate.now(); 
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        String[] bookingQuery = {"*", "*", "*", "false", "*", "*",ClientID};
+        String[] bookingQuery = {"*", "*", "*", "*", "false", "*",ClientID};
         
         ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
         for (Booking booking : bookingList) {
-            model.addRow(new Object[] {booking.getId(), booking.car.manufacture, booking.car.model, 
+            if (DataFile.isHigher(booking.startDate, now)){
+            model.addRow(new Object[] {booking.getId(),booking.car.getId(), booking.car.manufacture, booking.car.model, 
                 booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate});
+            }
         }
     }
 
@@ -47,66 +62,23 @@ public class ClientHome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        CancelBookPanel = new javax.swing.JPanel();
-        BookingIDField = new javax.swing.JTextField();
-        CancelBook = new javax.swing.JButton();
-        BookingIDText = new javax.swing.JLabel();
         MottoPanel = new javax.swing.JPanel();
         MottoText = new javax.swing.JLabel();
+        BaseTitlePanel = new javax.swing.JPanel();
         TitlePanel = new javax.swing.JPanel();
         TitleHome = new javax.swing.JLabel();
         TablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableOngoingBooking = new javax.swing.JTable();
+        CancelBookingPanel = new javax.swing.JPanel();
+        BookingIDText = new javax.swing.JLabel();
+        BookingIDField = new javax.swing.JTextField();
+        CancelBookingButton = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(1298, 1012));
-        setMinimumSize(new java.awt.Dimension(1298, 1012));
+        setMaximumSize(new java.awt.Dimension(1670, 1008));
+        setMinimumSize(new java.awt.Dimension(1670, 1008));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1298, 1012));
-
-        CancelBookPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Car ID to Cancel"));
-
-        BookingIDField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BookingIDFieldActionPerformed(evt);
-            }
-        });
-
-        CancelBook.setText("Cancel Book");
-        CancelBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelBookActionPerformed(evt);
-            }
-        });
-
-        BookingIDText.setText("Enter Booking ID");
-
-        javax.swing.GroupLayout CancelBookPanelLayout = new javax.swing.GroupLayout(CancelBookPanel);
-        CancelBookPanel.setLayout(CancelBookPanelLayout);
-        CancelBookPanelLayout.setHorizontalGroup(
-            CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CancelBookPanelLayout.createSequentialGroup()
-                .addGroup(CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(CancelBookPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CancelBook))
-                    .addGroup(CancelBookPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(BookingIDText)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(BookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28))
-        );
-        CancelBookPanelLayout.setVerticalGroup(
-            CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CancelBookPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(CancelBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BookingIDText))
-                .addGap(18, 18, 18)
-                .addComponent(CancelBook))
-        );
+        setPreferredSize(new java.awt.Dimension(1670, 1008));
 
         MottoPanel.setBackground(new java.awt.Color(15, 129, 185));
 
@@ -121,7 +93,7 @@ public class ClientHome extends javax.swing.JPanel {
             .addGroup(MottoPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(MottoText)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         MottoPanelLayout.setVerticalGroup(
             MottoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,36 +113,43 @@ public class ClientHome extends javax.swing.JPanel {
         TitlePanel.setLayout(TitlePanelLayout);
         TitlePanelLayout.setHorizontalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TitlePanelLayout.createSequentialGroup()
-                .addGap(343, 343, 343)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitlePanelLayout.createSequentialGroup()
+                .addContainerGap(364, Short.MAX_VALUE)
                 .addComponent(TitleHome)
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addGap(356, 356, 356))
         );
         TitlePanelLayout.setVerticalGroup(
             TitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TitlePanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(TitleHome)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
+
+        BaseTitlePanel.add(TitlePanel);
 
         TableOngoingBooking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date"
+                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TableOngoingBooking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                historyTableMouseClicked(evt);
             }
         });
         TableOngoingBooking.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -183,23 +162,64 @@ public class ClientHome extends javax.swing.JPanel {
             TableOngoingBooking.getColumnModel().getColumn(4).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(5).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(6).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
         TablePanel.setLayout(TablePanelLayout);
         TablePanelLayout.setHorizontalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TablePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1670, Short.MAX_VALUE))
         );
         TablePanelLayout.setVerticalGroup(
             TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TablePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 439, Short.MAX_VALUE)
+            .addGroup(TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(TablePanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        CancelBookingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Booking ID to Cancel Order"));
+
+        BookingIDText.setText("Enter Booking ID :");
+
+        CancelBookingButton.setText("Cancel Booking");
+        CancelBookingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelBookingButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CancelBookingPanelLayout = new javax.swing.GroupLayout(CancelBookingPanel);
+        CancelBookingPanel.setLayout(CancelBookingPanelLayout);
+        CancelBookingPanelLayout.setHorizontalGroup(
+            CancelBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CancelBookingPanelLayout.createSequentialGroup()
+                .addGroup(CancelBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CancelBookingPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(BookingIDText)
+                        .addGap(18, 18, 18)
+                        .addComponent(BookingIDField, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CancelBookingPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CancelBookingButton)))
+                .addContainerGap())
+        );
+        CancelBookingPanelLayout.setVerticalGroup(
+            CancelBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CancelBookingPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(CancelBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BookingIDText)
+                    .addComponent(BookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CancelBookingButton)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -207,45 +227,64 @@ public class ClientHome extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MottoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BaseTitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1664, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(CancelBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(TitlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(108, 108, 108))
+                        .addComponent(CancelBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MottoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TitlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BaseTitlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CancelBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addComponent(CancelBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
-    }// </editor-fold>                        
+    }// </editor-fold>
 
     private void BookingIDFieldActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
     }                                              
 
-    private void CancelBookActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void CancelBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                          
+        String bookingID = BookingIDField.getText();
 
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+
+        String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*"};
+
+        Booking booking = bdf.queryDatabase(bdf.createQuery(bookingQuery)).first();
+
+        HashMap<String, String> updateMap = new HashMap<String, String>();
+
+        updateMap.put("Confirmed", false+"");
+
+        if (booking.update(updateMap)) {
+            JOptionPane.showMessageDialog(null, "Booking is Cancelled");
+        } else {
+            JOptionPane.showMessageDialog(null, "An Error Occured");
+        }
+    }                                          
+    private void historyTableMouseClicked(java.awt.event.MouseEvent evt) {
+        Integer row = TableOngoingBooking.getSelectedRow();
+        BookingIDField.setText((String)TableOngoingBooking.getValueAt(row, 0));
+    }     
 
     // Variables declaration - do not modify                     
+    private javax.swing.JPanel BaseTitlePanel;
     private javax.swing.JTextField BookingIDField;
     private javax.swing.JLabel BookingIDText;
-    private javax.swing.JButton CancelBook;
-    private javax.swing.JPanel CancelBookPanel;
+    private javax.swing.JButton CancelBookingButton;
+    private javax.swing.JPanel CancelBookingPanel;
     private javax.swing.JPanel MottoPanel;
     private javax.swing.JLabel MottoText;
     private javax.swing.JTable TableOngoingBooking;
