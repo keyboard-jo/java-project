@@ -195,7 +195,7 @@ public class AdminAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.passwordDefault, 1, 1);
         model.setValueAt(this.nameDefault, 2, 1);
         model.setValueAt(this.emailDefault, 3, 1);
-        model.setValueAt(this.DOBDefault, 4, 1);
+        model.setValueAt(this.DOBDefault+"", 4, 1);
 
     }
 

@@ -352,6 +352,7 @@ public class SidePanel extends javax.swing.JPanel {
             this.cardLayout.show(MainPanel,"manageClientInformation");
         } else {
             this.cardLayout.show(MainPanel,"clientHome");
+            this.clientHome.getOngoingBooking();
         }
     }                                          
 
