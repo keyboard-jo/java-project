@@ -89,7 +89,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
                 {"Password", this.passwordDefault},
                 {"Name", this.nameDefault},
                 {"Email", this.emailDefault},
-                {"Date of Birth", DOBDefault}
+                {"Date of Birth", this.DOBDefault+""}
             },
             new String [] {
                 "Key", "Value"
@@ -197,11 +197,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
         model.setValueAt(this.passwordDefault, 1, 1);
         model.setValueAt(this.nameDefault, 2, 1);
         model.setValueAt(this.emailDefault, 3, 1);
-        model.setValueAt(this.DOBDefault, 4, 1);
-
-
-        System.out.println("HIT");
-        System.out.println(this.nameDefault);
+        model.setValueAt(this.DOBDefault+"", 4, 1);
     }                                          
                                               
 

@@ -31,26 +31,13 @@ public class ClientHome extends javax.swing.JPanel {
     /**
      * Creates new form HomeClient
      */
-    private String clientID;
     public ClientHome(String ClientID) {
-        this.clientID = clientID;
+        this.clientID = ClientID;
+
         initComponents();
         TableOngoingBooking.getColumnModel().getColumn(0).setPreferredWidth(200);
         TableOngoingBooking.getColumnModel().getColumn(1).setPreferredWidth(200);
-        DefaultTableModel model = (DefaultTableModel) TableOngoingBooking.getModel();
-        model.setRowCount(0);
-        LocalDate now = LocalDate.now(); 
-        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        String[] bookingQuery = {"*", "*", "*", "*", "false", "*",ClientID, "*"};
-        
-        ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
-
-        for (Booking booking : bookingList) {
-            if (DataFile.isHigher(booking.startDate, now)){
-            model.addRow(new Object[] {booking.getId(),booking.car.getId(), booking.car.manufacture, booking.car.model, 
-                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate});
-            }
-        }
+        getOngoingBooking();
     }
 
     /**
@@ -277,7 +264,30 @@ public class ClientHome extends javax.swing.JPanel {
     private void historyTableMouseClicked(java.awt.event.MouseEvent evt) {
         Integer row = TableOngoingBooking.getSelectedRow();
         BookingIDField.setText((String)TableOngoingBooking.getValueAt(row, 0));
-    }     
+    }
+
+    public void getOngoingBooking() {
+        DefaultTableModel model = (DefaultTableModel) TableOngoingBooking.getModel();
+        model.setRowCount(0);
+        LocalDate now = LocalDate.now(); 
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        String[] bookingQuery = {"*", "*", "*", "*", "false", "*",this.clientID, "*"};
+
+        for (String i : bookingQuery) {
+            System.out.println(i);
+        }
+        
+        ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
+
+        for (Booking booking : bookingList) {
+            if (DataFile.isHigher(booking.startDate, now)){
+                model.addRow(new Object[] {booking.getId(),booking.car.getId(), booking.car.manufacture, booking.car.model, 
+                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate});
+            }
+        }
+    }
+
+    private String clientID;
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel BaseTitlePanel;
