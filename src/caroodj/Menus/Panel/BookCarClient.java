@@ -328,7 +328,7 @@ public class BookCarClient extends javax.swing.JPanel {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(new String[] {clientID, "*", "*", "*", "*", "*", "*"})).first());
         Car car = cdf.queryDatabase(cdf.createQuery(new String[]{carID, "*", "*", "*", "*", "*"})).first();
-        Booking booking = new Booking(StartDate, EndDate, false, false, car, client);
+        Booking booking = new Booking(StartDate, EndDate, false, false, car, client, "cash");
         booking.setId("BO:"+EntityId.generateId());
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
         try {
