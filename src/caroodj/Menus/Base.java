@@ -8,8 +8,6 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.util.function.Function;
 
-import javax.swing.Action;
-
 import Menus.Panel.LoginPanel;
 import Menus.Panel.RegisterPanel;
 import Menus.Panel.SidePanel;
@@ -40,6 +38,8 @@ public class Base extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Car Rental Service");
+
+        setPreferredSize(new java.awt.Dimension(1920, 1012));
 
         cPane = getContentPane();
         card = new java.awt.CardLayout();

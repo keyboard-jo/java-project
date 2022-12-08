@@ -198,82 +198,87 @@ public class BookingQuery extends javax.swing.JPanel {
 
     public HashMap<String, String> getQueryData() {
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        
+        try {
+            String startDateSymbol = startDateButton.getText();
+            String endDateSymbol = endDateButton.getText();
 
-        String startDateSymbol = startDateButton.getText();
-        String endDateSymbol = endDateButton.getText();
+            String startDateQuery = null;
+            String endDateQuery = null;
 
-        String startDateQuery = null;
-        String endDateQuery = null;
-
-        if (datePickerStart1.getDate() != null) {
-            LocalDate dps1 = datePickerStart1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            switch (startDateSymbol) {
-                case "<":
-                startDateQuery = "* " + dps1;
-                    break;
-                case "=":
-                startDateQuery = dps1+"";
-                    break;
-                case ">":
-                startDateQuery = dps1+ " *";
-                    break;
-                case "~":
-                if (datePickerEnd2.getDate() != null) {
-                    LocalDate dps2 = datePickerStart2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    startDateQuery = dps1 + " " + dps2;
-                } else {
-                    startDateQuery = dps1 + " *";
+            if (datePickerStart1.getDate() != null) {
+                LocalDate dps1 = datePickerStart1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                switch (startDateSymbol) {
+                    case "<":
+                    startDateQuery = "* " + dps1;
+                        break;
+                    case "=":
+                    startDateQuery = dps1+"";
+                        break;
+                    case ">":
+                    startDateQuery = dps1+ " *";
+                        break;
+                    case "~":
+                    if (datePickerEnd2.getDate() != null) {
+                        LocalDate dps2 = datePickerStart2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        startDateQuery = dps1 + " " + dps2;
+                    } else {
+                        startDateQuery = dps1 + " *";
+                    }
+                        break;
+                    case "*":
+                    startDateQuery = "*";
+                        break;
+                    default:
+                        break;
                 }
-                    break;
-                case "*":
+            } else {
                 startDateQuery = "*";
-                    break;
-                default:
-                    break;
             }
-        } else {
-            startDateQuery = "*";
-        }
 
-        if (datePickerEnd1.getDate() != null) {
-            LocalDate dpe1 = datePickerEnd1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            switch (endDateSymbol) {
-                case "<":
-                endDateQuery = "* " + dpe1;
-                    break;
-                case "=":
-                endDateQuery = dpe1+"";
-                    break;
-                case ">":
-                endDateQuery = dpe1 + " *";
-                    break;
-                case "~":
-                if (datePickerEnd2.getDate() != null) {
-                    LocalDate dpe2 = datePickerEnd2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    endDateQuery = dpe1 + " " + dpe2;
-                } else {
+            if (datePickerEnd1.getDate() != null) {
+                LocalDate dpe1 = datePickerEnd1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                switch (endDateSymbol) {
+                    case "<":
+                    endDateQuery = "* " + dpe1;
+                        break;
+                    case "=":
+                    endDateQuery = dpe1+"";
+                        break;
+                    case ">":
                     endDateQuery = dpe1 + " *";
+                        break;
+                    case "~":
+                    if (datePickerEnd2.getDate() != null) {
+                        LocalDate dpe2 = datePickerEnd2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        endDateQuery = dpe1 + " " + dpe2;
+                    } else {
+                        endDateQuery = dpe1 + " *";
+                    }
+                        break;
+                    case "*":
+                    endDateQuery = "*";
+                        break;
+                    default:
+                        break;
                 }
-                    break;
-                case "*":
+            } else {
                 endDateQuery = "*";
-                    break;
-                default:
-                    break;
             }
-        } else {
-            endDateQuery = "*";
+            
+            String bookingIDQuery = (bookingIDField.getText().equals("") ? "*" : bookingIDField.getText());
+
+            String carIDQuery = (carIDField.getText().equals("") ? "*" : carIDField.getText());
+
+            String clientIDQuery =  (clientIDField.getText().equals("") ? "*" : clientIDField.getText());
+            
+            String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "*", "*", carIDQuery, clientIDQuery};
+
+            return bdf.createQuery(bookingQuery);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
-        
-        String bookingIDQuery = (bookingIDField.getText().equals("") ? "*" : bookingIDField.getText());
-
-        String carIDQuery = (carIDField.getText().equals("") ? "*" : carIDField.getText());
-
-        String clientIDQuery =  (clientIDField.getText().equals("") ? "*" : clientIDField.getText());
-        
-        String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "*", "*", carIDQuery, clientIDQuery};
-
-        return bdf.createQuery(bookingQuery);
+        return null;
     }
 
     private com.toedter.calendar.JDateChooser datePickerStart2;

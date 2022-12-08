@@ -153,31 +153,39 @@ public class AdminAccountDetail extends javax.swing.JPanel {
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
         DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
-        
-        String username = (String)model.getValueAt(0, 1);
-        String password = (String)model.getValueAt(1, 1);
-        String name = (String)model.getValueAt(2, 1);
-        String email = (String)model.getValueAt(3, 1);
-        String dateOfBirth = (String)model.getValueAt(4, 1);
 
-        HashMap<String, String> updateMap = new HashMap<String, String>();
+        try {
+            String username = (String)model.getValueAt(0, 1);
+            String password = (String)model.getValueAt(1, 1);
+            String name = (String)model.getValueAt(2, 1);
+            String email = (String)model.getValueAt(3, 1);
+            String dateOfBirth = (String)model.getValueAt(4, 1);
 
-        updateMap.put("Username", username);
-        updateMap.put("Name", name);
-        updateMap.put("Password", password);
-        updateMap.put("Email", email);
-        updateMap.put("DOB", dateOfBirth+"");
+            HashMap<String, String> updateMap = new HashMap<String, String>();
 
-        if (this.admin.update(updateMap)) {
-            JOptionPane.showMessageDialog(null, "Admin is Updated!");
-            this.usernameDefault = username;
-            this.nameDefault = name;
-            this.passwordDefault = password;
-            this.emailDefault = email;
-            this.DOBDefault = LocalDate.parse(dateOfBirth);
-        } else {
-            JOptionPane.showMessageDialog(null, "An Error Occurred!");
+            updateMap.put("Username", username);
+            updateMap.put("Name", name);
+            updateMap.put("Password", password);
+            updateMap.put("Email", email);
+            updateMap.put("DOB", dateOfBirth+"");
+            
+
+            if (this.admin.update(updateMap)) {
+                JOptionPane.showMessageDialog(null, "Admin is Updated!");
+                this.usernameDefault = username;
+                this.nameDefault = name;
+                this.passwordDefault = password;
+                this.emailDefault = email;
+                this.DOBDefault = LocalDate.parse(dateOfBirth);
+            } else {
+                JOptionPane.showMessageDialog(null, "An Error Occurred!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
+
+        
     }                                          
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            

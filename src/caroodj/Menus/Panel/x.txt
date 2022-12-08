@@ -4,34 +4,27 @@
  */
 package Menus.Panel;
 
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
-import Objects.PersonDataFile;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import Objects.Car;
+import Objects.Client;
+import Objects.Report;
 
 /**
  *
  * @author JUSTIN
  */
-public class ClientQuery extends javax.swing.JPanel {
+public class CreateReport extends javax.swing.JPanel {
 
     /**
-     * Creates new form ClientQuery
+     * Creates new form CreateReport
      */
-    public ClientQuery() {
-        comparisonSymbol = new ArrayList<String>();
-
-        comparisonSymbol.add("=");
-        comparisonSymbol.add(">");
-        comparisonSymbol.add("<");
-        comparisonSymbol.add("~");
-        comparisonSymbol.add("*");
-
-        comparisonSymbolDOBIterator = comparisonSymbol.iterator();
-
+    public CreateReport() {
         initComponents();
     }
 
@@ -44,205 +37,313 @@ public class ClientQuery extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        clientIdLabel = new javax.swing.JLabel();
-        usernameLabel = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        clientIdField = new javax.swing.JTextField();
-        usernameField = new javax.swing.JTextField();
-        emailField = new javax.swing.JTextField();
-        nameField = new javax.swing.JTextField();
-        DOBPAnel = new javax.swing.JPanel();
-        DOBLabel = new javax.swing.JLabel();
-        DOBField = new com.toedter.calendar.JDateChooser();
-        DOBButton = new javax.swing.JButton();
-        queryLabel = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        DOBField1 = new com.toedter.calendar.JDateChooser();
+        titlePanel = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
+        reportPanel = new javax.swing.JPanel();
+        startDateLabel = new javax.swing.JLabel();
+        endDateLabel = new javax.swing.JLabel();
+        createButton = new javax.swing.JButton();
+        endDateMonth = new com.toedter.calendar.JMonthChooser();
+        startDateMonth = new com.toedter.calendar.JMonthChooser();
+        yearPicker = new com.toedter.calendar.JYearChooser();
+        yearLabel = new javax.swing.JLabel();
+        searchButton = new javax.swing.JButton();
+        mapPanel = new javax.swing.JPanel();
+        clientScroll = new javax.swing.JScrollPane();
+        clientTable = new javax.swing.JTable();
+        carScroll = new javax.swing.JScrollPane();
+        carTable = new javax.swing.JTable();
+        topPanel = new javax.swing.JPanel();
+        topClientPanel = new javax.swing.JPanel();
+        topCarPanel = new javax.swing.JPanel();
+        statisticsPanel = new javax.swing.JPanel();
+        statisticsScroll = new javax.swing.JScrollPane();
+        statisticsTable = new javax.swing.JTable();
 
-        setMinimumSize(new java.awt.Dimension(1264, 100));
-        setPreferredSize(new java.awt.Dimension(1264, 100));
+        setMinimumSize(new java.awt.Dimension(1670, 1012));
+        setPreferredSize(new java.awt.Dimension(1670, 1012));
 
-        clientIdLabel.setText("Client ID:");
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        titleLabel.setText("CREATE REPORT");
+        titlePanel.add(titleLabel);
 
-        usernameLabel.setText("Username:");
+        reportPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Create Report"));
 
-        emailLabel.setText("Email:");
+        startDateLabel.setText("Start Date:");
 
-        nameLabel.setText("Name:");
+        endDateLabel.setText("End Date:");
 
-        clientIdField.setMinimumSize(new java.awt.Dimension(178, 22));
-        clientIdField.setPreferredSize(new java.awt.Dimension(178, 22));
-
-        usernameField.setMinimumSize(new java.awt.Dimension(178, 22));
-        usernameField.setPreferredSize(new java.awt.Dimension(178, 22));
-
-        emailField.setMinimumSize(new java.awt.Dimension(178, 22));
-        emailField.setPreferredSize(new java.awt.Dimension(178, 22));
-
-        nameField.setMinimumSize(new java.awt.Dimension(178, 22));
-        nameField.setPreferredSize(new java.awt.Dimension(178, 22));
-
-        DOBLabel.setText("DOB:");
-        DOBPAnel.add(DOBLabel);
-
-        DOBField.setPreferredSize(new java.awt.Dimension(150, 22));
-        DOBPAnel.add(DOBField);
-
-        DOBButton.setText("<");
-        DOBButton.addActionListener(new java.awt.event.ActionListener() {
+        createButton.setText("CREATE");
+        createButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DOBButtonActionPerformed(evt);
+                createButtonActionPerformed(evt);
             }
         });
-        DOBPAnel.add(DOBButton);
 
-        queryLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        queryLabel.setText("Query 1");
+        yearLabel.setText("Year:");
+
+        searchButton.setText("SEARCH");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout reportPanelLayout = new javax.swing.GroupLayout(reportPanel);
+        reportPanel.setLayout(reportPanelLayout);
+        reportPanelLayout.setHorizontalGroup(
+            reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportPanelLayout.createSequentialGroup()
+                .addGap(489, 489, 489)
+                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(reportPanelLayout.createSequentialGroup()
+                        .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(startDateLabel)
+                            .addComponent(yearLabel))
+                        .addGap(65, 65, 65)
+                        .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(startDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(reportPanelLayout.createSequentialGroup()
+                            .addComponent(searchButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(createButton))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPanelLayout.createSequentialGroup()
+                            .addComponent(endDateLabel)
+                            .addGap(65, 65, 65)
+                            .addComponent(endDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        reportPanelLayout.setVerticalGroup(
+            reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(yearPicker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(reportPanelLayout.createSequentialGroup()
+                        .addComponent(startDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(reportPanelLayout.createSequentialGroup()
+                                .addComponent(endDateLabel)
+                                .addGap(30, 30, 30)
+                                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(createButton)
+                                    .addComponent(searchButton)))
+                            .addComponent(endDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(startDateLabel))
+                .addGap(34, 34, 34))
+        );
+
+        mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Client and Rental Cost & Car and Count"));
+
+        clientTable.setModel(new javax.swing.table.DefaultTableModel(
+            null,
+            new String [] {
+                "Client Id", "Total Amount"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        clientScroll.setViewportView(clientTable);
+
+        mapPanel.add(clientScroll);
+
+        carTable.setModel(new javax.swing.table.DefaultTableModel(
+            null,
+            new String [] {
+                "Car Id", "Car Count"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        carScroll.setViewportView(carTable);
+
+        mapPanel.add(carScroll);
+
+        topClientPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Top Client"));
+        topClientPanel.setMinimumSize(new java.awt.Dimension(1286, 50));
+        topClientPanel.setPreferredSize(new java.awt.Dimension(1286, 50));
+
+        topCarPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Top Car"));
+        topCarPanel.setMinimumSize(new java.awt.Dimension(1286, 50));
+        topCarPanel.setPreferredSize(new java.awt.Dimension(1286, 50));
+
+        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(topPanelLayout);
+        topPanelLayout.setHorizontalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(topClientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addComponent(topCarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        topPanelLayout.setVerticalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addComponent(topClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(topCarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        statisticsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Statistics"));
+
+        statisticsTable.setModel(new javax.swing.table.DefaultTableModel(
+            null,
+            new String [] {
+                "Key", "Value"
+            }
+        ));
+        statisticsScroll.setViewportView(statisticsTable);
+
+        javax.swing.GroupLayout statisticsPanelLayout = new javax.swing.GroupLayout(statisticsPanel);
+        statisticsPanel.setLayout(statisticsPanelLayout);
+        statisticsPanelLayout.setHorizontalGroup(
+            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statisticsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(statisticsScroll)
+                .addContainerGap())
+        );
+        statisticsPanelLayout.setVerticalGroup(
+            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statisticsPanelLayout.createSequentialGroup()
+                .addComponent(statisticsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(406, 406, 406)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(queryLabel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(emailLabel)
-                            .addComponent(usernameLabel)
-                            .addComponent(clientIdLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(clientIdField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(nameLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(DOBPAnel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jSeparator1))
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(queryLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(clientIdLabel)
-                        .addComponent(clientIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(DOBPAnel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel)
-                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(reportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mapPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
-    private void DOBButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        if (!comparisonSymbolDOBIterator.hasNext()) {
-            comparisonSymbolDOBIterator = comparisonSymbol.iterator();
-        }
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {      
+        try {
+            Integer year = yearPicker.getYear();
 
-        DOBButton.setText(comparisonSymbolDOBIterator.next());
+            LocalDate starDateBoundry = LocalDate.of(year, startDateMonth.getMonth() + 1, 1);
 
-        if (DOBButton.getText().equals("~")) {
-            DOBPAnel.add(DOBField1);
-        } else {
-            DOBPAnel.remove(DOBField);
-        }
-    }         
-    
-    public void setQueryLabel(String label) {
-        this.queryLabel.setText(label);
-    }
+            LocalDate endDate = LocalDate.of((startDateMonth.getMonth() > endDateMonth.getMonth()) ? year + 1: year, endDateMonth.getMonth() + 1, 1);
 
-    public HashMap<String, String> getQueryData() {
-        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+            LocalDate endDateBoundry = endDate.withDayOfMonth(endDate.getMonth().length(endDate.isLeapYear()));
 
-        String DOBSymbol = DOBButton.getText();
+            Report report = new Report(starDateBoundry, endDateBoundry);
 
-        String DOBQuery = null;
+            DefaultTableModel modelClientTable = (DefaultTableModel) clientTable.getModel();
+            modelClientTable.setRowCount(0);
 
-        if (DOBField.getDate() != null) {
-            LocalDate dob1 = DOBField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        switch (DOBSymbol) {
-            case "<":
-                DOBQuery = "* " + dob1;
-                break;
-            case "=":
-                DOBQuery = dob1+"";
-                break;
-            case ">":
-                DOBQuery = dob1 + " *";
-                break;
-            case "~":
-                if (DOBField1.getDate() != null) {
-                    LocalDate dob2 = DOBField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    DOBQuery = dob1 + " " + dob2;
-                } else {
-                    DOBQuery = dob1 + " *";
-                }
-                break;
-            case "*":
-                DOBQuery = "*";
-                break;
-            default:
-                break;
+            for (String key : report.getClientToRent().keySet()) {
+                modelClientTable.addRow(new Object[] {key, report.getClientToRent().get(key)});
             }
-        } else {
-            DOBQuery = "*";
+
+            DefaultTableModel modelCarTable = (DefaultTableModel) carTable.getModel();
+            modelCarTable.setRowCount(0);
+
+            for (String key : report.getCarToCount().keySet()) {
+                modelCarTable.addRow(new Object[] {key, report.getCarToCount().get(key)});
+            }
+
+            topClientPanel.removeAll();
+
+            for (Client client : report.getTopClient()) {
+                topClientPanel.add(new javax.swing.JLabel(client.getId()));
+            }
+            topClientPanel.revalidate();
+
+            topCarPanel.removeAll();
+
+            for (Car car: report.getTopCar()) {
+                topCarPanel.add(new javax.swing.JLabel(car.getId() + ", "));
+            }
+            topCarPanel.revalidate();
+
+            DefaultTableModel modelStatisticsTable = (DefaultTableModel) statisticsTable.getModel();
+            modelStatisticsTable.setRowCount(0);
+
+            modelStatisticsTable.addRow(new Object[] {"Total Sales", report.getTotalSales()});
+            modelStatisticsTable.addRow(new Object[] {"Number of Bookings", report.getnSales()});
+            modelStatisticsTable.addRow(new Object[] {"Unique Number of Clients", report.getnClient()});
+            modelStatisticsTable.addRow(new Object[] {"Unique Number of Car", report.getnCar()});
+            modelStatisticsTable.addRow(new Object[] {"Top Car", report.getTopCar().get(0).getId()});
+            modelStatisticsTable.addRow(new Object[] {"Top Client", report.getTopClient().get(0).getId()});
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+        }                                       
+    }                                            
+
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        try {
+            statisticsTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+        } catch (PrinterException e) {
+            e.printStackTrace();
         }
+    }                                            
 
-        String clientID = clientIdField.getText().equals("") ? "*" : clientIdField.getText();
 
-        String username = usernameField.getText().equals("") ? "*" : usernameField.getText();
-
-        String email = emailField.getText().equals("") ? "*" : emailField.getText();
-
-        String name = nameField.getText().equals("") ? "*" : nameField.getText();
-
-        String[] clientQuery = {clientID, "client", "*", DOBQuery, username, email, name};
-
-        return pdf.createQuery(clientQuery);
-    }
-
-    private com.toedter.calendar.JDateChooser DOBField1;
-
-    private ArrayList<String> comparisonSymbol;
-    private Iterator<String> comparisonSymbolDOBIterator;
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton DOBButton;
-    private com.toedter.calendar.JDateChooser DOBField;
-    private javax.swing.JLabel DOBLabel;
-    private javax.swing.JPanel DOBPAnel;
-    private javax.swing.JTextField clientIdField;
-    private javax.swing.JLabel clientIdLabel;
-    private javax.swing.JTextField emailField;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField nameField;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel queryLabel;
-    private javax.swing.JTextField usernameField;
-    private javax.swing.JLabel usernameLabel;
+    // Variables declaration - do not modify                     
+    private javax.swing.JScrollPane carScroll;
+    private javax.swing.JTable carTable;
+    private javax.swing.JScrollPane clientScroll;
+    private javax.swing.JTable clientTable;
+    private javax.swing.JButton createButton;
+    private javax.swing.JLabel endDateLabel;
+    private com.toedter.calendar.JMonthChooser endDateMonth;
+    private javax.swing.JPanel mapPanel;
+    private javax.swing.JPanel reportPanel;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel startDateLabel;
+    private com.toedter.calendar.JMonthChooser startDateMonth;
+    private javax.swing.JPanel statisticsPanel;
+    private javax.swing.JScrollPane statisticsScroll;
+    private javax.swing.JTable statisticsTable;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JPanel titlePanel;
+    private javax.swing.JPanel topCarPanel;
+    private javax.swing.JPanel topClientPanel;
+    private javax.swing.JPanel topPanel;
+    private javax.swing.JLabel yearLabel;
+    private com.toedter.calendar.JYearChooser yearPicker;
     // End of variables declaration                   
 }

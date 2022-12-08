@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 import Objects.CarDataFile;
 
 /**
@@ -185,90 +187,95 @@ public class CarQuery extends javax.swing.JPanel {
     public HashMap<String, String> getQueryData() {
         CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
-        String yopSymbol = yopButton.getText();
+        try {
+            String yopSymbol = yopButton.getText();
 
-        String rentSymbol = rentalButton.getText();
+            String rentSymbol = rentalButton.getText();
 
-        String yopQuery = null;
-        String rentQuery = null;
+            String yopQuery = null;
+            String rentQuery = null;
 
-        if (yopField1.getDate() != null) {
-            LocalDate yop1 = yopField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        switch (yopSymbol) {
-            case "<":
-                yopQuery = "* " + yop1;
-                break;
-            case "=":
-                yopQuery = yop1+"";
-                break;
-            case ">":
-                yopQuery = yop1 + " *";
-                break;
-            case "~":
-                if (yopField2.getDate() != null) {
-                    LocalDate yop2 = yopField2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    yopQuery = yop1 + " " + yop2;
-                } else {
+            if (yopField1.getDate() != null) {
+                LocalDate yop1 = yopField1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            switch (yopSymbol) {
+                case "<":
+                    yopQuery = "* " + yop1;
+                    break;
+                case "=":
+                    yopQuery = yop1+"";
+                    break;
+                case ">":
                     yopQuery = yop1 + " *";
+                    break;
+                case "~":
+                    if (yopField2.getDate() != null) {
+                        LocalDate yop2 = yopField2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        yopQuery = yop1 + " " + yop2;
+                    } else {
+                        yopQuery = yop1 + " *";
+                    }
+                    break;
+                case "*":
+                    yopQuery = "*";
+                    break;
+                default:
+                    break;
                 }
-                break;
-            case "*":
+            } else {
                 yopQuery = "*";
-                break;
-            default:
-                break;
             }
-        } else {
-            yopQuery = "*";
-        }
 
-        if (!rentField1.getText().equals("")) {
-            try {
-                Double rent1 = Double.parseDouble(rentField1.getText());
-                switch (rentSymbol) {
-                    case "<":
-                        rentQuery = "* "+ rent1;
-                        break;
-                    case "=":
-                        rentQuery = rent1+"";
-                        break;
-                    case ">":
-                        rentQuery = rent1 + " *";
-                        break;
-                    case "~":
-                        if (!rentField2.getText().equals("")) {
-                            try {
-                                Double rent2 = Double.parseDouble(rentField2.getText());
-                                rentQuery = rent1 + " " + rent2;    
-                            } catch (Exception e) {
-                                System.out.println("Cannnot Parse");
-                                return null;
-                            }
-                        } else {
+            if (!rentField1.getText().equals("")) {
+                try {
+                    Double rent1 = Double.parseDouble(rentField1.getText());
+                    switch (rentSymbol) {
+                        case "<":
+                            rentQuery = "* "+ rent1;
+                            break;
+                        case "=":
+                            rentQuery = rent1+"";
+                            break;
+                        case ">":
                             rentQuery = rent1 + " *";
-                        }
-                        break;
-                    case "*":
-                        rentQuery = "*";
-                        break;
-                    default:
-                        break;
+                            break;
+                        case "~":
+                            if (!rentField2.getText().equals("")) {
+                                try {
+                                    Double rent2 = Double.parseDouble(rentField2.getText());
+                                    rentQuery = rent1 + " " + rent2;    
+                                } catch (Exception e) {
+                                    System.out.println("Cannnot Parse");
+                                    return null;
+                                }
+                            } else {
+                                rentQuery = rent1 + " *";
+                            }
+                            break;
+                        case "*":
+                            rentQuery = "*";
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Cannnot Parse");
+                    return null;
                 }
-            } catch (Exception e) {
-                System.out.println("Cannnot Parse");
-                return null;
+            } else {
+                rentQuery = "*";
             }
-        } else {
-            rentQuery = "*";
+
+            String manufactureQuery = (manufactureField.getText().equals("") ? "*" : manufactureField.getText());
+
+            String modelQuery = (modelField.getText().equals("") ? "*" : modelField.getText());
+
+            String[] carQuery = {"*", manufactureQuery, modelQuery, yopQuery, rentQuery, "*"};
+
+            return cdf.createQuery(carQuery);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }
-
-        String manufactureQuery = (manufactureField.getText().equals("") ? "*" : manufactureField.getText());
-
-        String modelQuery = (modelField.getText().equals("") ? "*" : modelField.getText());
-
-        String[] carQuery = {"*", manufactureQuery, modelQuery, yopQuery, rentQuery, "*"};
-
-        return cdf.createQuery(carQuery);
+        return null;
     }
 
     private com.toedter.calendar.JDateChooser yopField2;
