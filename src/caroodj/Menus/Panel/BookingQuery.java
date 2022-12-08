@@ -4,7 +4,7 @@
  */
 package Menus.Panel;
 
-import java.awt.Dimension;
+import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -25,18 +25,6 @@ public class BookingQuery extends javax.swing.JPanel {
      * Creates new form BookingQuery
      */
     public BookingQuery() {
-
-        comparisonSymbol = new ArrayList<String>();
-
-        comparisonSymbol.add("=");
-        comparisonSymbol.add(">");
-        comparisonSymbol.add("<");
-        comparisonSymbol.add("~");
-        comparisonSymbol.add("*");
-
-        comparisonSymbolStartIterator = comparisonSymbol.iterator();
-        comparisonSymbolEndIterator = comparisonSymbol.iterator();
-
         initComponents();
     }
 
@@ -65,13 +53,11 @@ public class BookingQuery extends javax.swing.JPanel {
         endDateLabel1 = new javax.swing.JLabel();
         datePickerEnd1 = new com.toedter.calendar.JDateChooser();
         endDateButton = new javax.swing.JButton();
-        datePickerStart2 = new com.toedter.calendar.JDateChooser();
-        datePickerEnd2 = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
-        datePickerEnd1.setPreferredSize(new Dimension(150, 22));
-        datePickerEnd2.setPreferredSize(new Dimension(150, 22));
-        datePickerStart1.setPreferredSize(new Dimension(150, 22));
-        datePickerStart2.setPreferredSize(new Dimension(150, 22));
+        setMinimumSize(new java.awt.Dimension(1276, 200));
+        setPreferredSize(new java.awt.Dimension(1276, 200));
 
         bookingIDLabel.setText("Booking ID:");
 
@@ -84,9 +70,11 @@ public class BookingQuery extends javax.swing.JPanel {
 
         startDateLabel1.setText("Start Date:");
         startDatePanel.add(startDateLabel1);
+
+        datePickerStart1.setPreferredSize(new java.awt.Dimension(150, 22));
         startDatePanel.add(datePickerStart1);
 
-        startDateButton.setText("=");
+        startDateButton.setText("<");
         startDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startDateButtonActionPerformed(evt);
@@ -96,9 +84,11 @@ public class BookingQuery extends javax.swing.JPanel {
 
         endDateLabel1.setText("End Date:");
         endDatePanel.add(endDateLabel1);
+
+        datePickerEnd1.setPreferredSize(new java.awt.Dimension(150, 22));
         endDatePanel.add(datePickerEnd1);
 
-        endDateButton.setText("=");
+        endDateButton.setText("<");
         endDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 endDateButtonActionPerformed(evt);
@@ -106,16 +96,18 @@ public class BookingQuery extends javax.swing.JPanel {
         });
         endDatePanel.add(endDateButton);
 
+        jLabel1.setText("Payment:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cash", "card", "*"}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(240, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(seperatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(queryLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(queryLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bookingIDLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,24 +117,41 @@ public class BookingQuery extends javax.swing.JPanel {
                                     .addComponent(carIDLabel))
                                 .addGap(13, 13, 13)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(startDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(startDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(carIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(clientIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(endDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(571, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(endDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addComponent(seperatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(21, 35, Short.MAX_VALUE)
+                .addComponent(queryLabel)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bookingIDLabel)
+                        .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(carIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,21 +159,13 @@ public class BookingQuery extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(clientIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clientIDLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(queryLabel)
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(bookingIDLabel)
-                                .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(startDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(endDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)))
-                .addGap(18, 18, 18)
+                            .addComponent(clientIDLabel)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(endDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(seperatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>                        
 
@@ -180,7 +181,7 @@ public class BookingQuery extends javax.swing.JPanel {
         }
     }                                               
 
-    private void endDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void endDateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (!comparisonSymbolEndIterator.hasNext()) {
             comparisonSymbolEndIterator = comparisonSymbol.iterator();
         }                                     
@@ -191,7 +192,7 @@ public class BookingQuery extends javax.swing.JPanel {
             endDatePanel.remove(datePickerEnd2);
         }
     }
-    
+
     public void setQueryLabel(String label) {
         this.queryLabel.setText(label);
     }
@@ -271,8 +272,14 @@ public class BookingQuery extends javax.swing.JPanel {
             String carIDQuery = (carIDField.getText().equals("") ? "*" : carIDField.getText());
 
             String clientIDQuery =  (clientIDField.getText().equals("") ? "*" : clientIDField.getText());
+
+            String paymentMethodQuery =  (String)jComboBox1.getSelectedItem();
             
-            String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "*", "*", carIDQuery, clientIDQuery};
+            String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "*", "*", carIDQuery, clientIDQuery, paymentMethodQuery};
+
+            for (String i : bookingQuery) {
+                System.out.println(i);
+            }
 
             return bdf.createQuery(bookingQuery);
         } catch (Exception e) {
@@ -280,13 +287,14 @@ public class BookingQuery extends javax.swing.JPanel {
         }
         return null;
     }
-
+    
     private com.toedter.calendar.JDateChooser datePickerStart2;
     private com.toedter.calendar.JDateChooser datePickerEnd2;
 
     private ArrayList<String> comparisonSymbol;
     private Iterator<String> comparisonSymbolStartIterator;
     private Iterator<String> comparisonSymbolEndIterator;
+
     // Variables declaration - do not modify                     
     private javax.swing.JTextField bookingIDField;
     private javax.swing.JLabel bookingIDLabel;
@@ -298,6 +306,8 @@ public class BookingQuery extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser datePickerStart1;
     private javax.swing.JButton endDateButton;
     private javax.swing.JLabel endDateLabel1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel startDatePanel;
     private javax.swing.JPanel endDatePanel;
     private javax.swing.JLabel queryLabel;

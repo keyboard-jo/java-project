@@ -162,11 +162,11 @@ public class CancelBookingMenu extends javax.swing.JPanel {
         bookingTable.setModel(new javax.swing.table.DefaultTableModel(
             null,
             new String [] {
-                "Booking ID", "Start Date", "End Date", "Confirmed", "Cancelled", "Car ID", "Car Model", " Car Rental Cost", "Car Rented", "Client ID", "Client Username"
+                "Booking ID", "Start Date", "End Date", "Confirmed", "Cancelled", "Car ID", "Car Model", " Car Rental Cost", "Car Rented", "Client ID", "Client Username", "Paymenyt Method"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -262,10 +262,12 @@ public class CancelBookingMenu extends javax.swing.JPanel {
 
             ArrayList<Booking> bookingList = bdf.queryDatabase(query).all();
 
+            System.out.println(bookingList.size());
+
 
             for (Booking booking : bookingList) {
                 if (booking.isConfirmed.equals(true)) {
-                    model.addRow(new Object[] {booking.getId(), booking.startDate, booking.endDate, booking.isConfirmed, booking.isCanceled, booking.car.getId(), booking.car.model, booking.car.rentalCost, booking.car.isRented, booking.client.getId(), booking.client.username});
+                    model.addRow(new Object[] {booking.getId(), booking.startDate, booking.endDate, booking.isConfirmed, booking.isCanceled, booking.car.getId(), booking.car.model, booking.car.rentalCost, booking.car.isRented, booking.client.getId(), booking.client.username, booking.paymentMethod});
                 }
             }
         }

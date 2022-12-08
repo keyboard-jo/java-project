@@ -43,7 +43,11 @@ public class Admin extends Person {
         for (String key : updateMap.keySet()) {
             switch (key) {
                 case "Username":
-                    this.username = updateMap.get(key);
+                    if (pdf.checkUsername(this.getId(), updateMap.get(key))) {
+                        this.username = updateMap.get(key);
+                    } else {
+                        return false;
+                    }
                     break;
                 case "Type":
                     this.type = updateMap.get(key);
@@ -66,7 +70,6 @@ public class Admin extends Person {
         }
 
         String[] person = {super.getId(), this.type, this.getPassword(), this.getDateOfBirth()+"", this.username, this.getEmail(), this.getName()};
-
         try {
             Boolean isChanged = pdf.updateEntry(person);
             return isChanged;

@@ -120,6 +120,22 @@ public class PersonDataFile extends DataFile<String[]> {
         return true;
     }
 
+    public Boolean checkUsername(String personId, String username) {
+        Scanner dataFile = super.openFileRead();
+        while (dataFile.hasNextLine()) {
+            String data = dataFile.nextLine();
+            String[] person = deconstructEntry(data);
+            if (personId.equals(person[0])) {
+                continue;
+            } else {
+                if (username.equals(person[4])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean checkPassword(String username, String password) {
         Scanner dataFile = super.openFileRead();
         while (dataFile.hasNextLine()) {

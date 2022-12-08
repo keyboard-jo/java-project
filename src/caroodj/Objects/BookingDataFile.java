@@ -16,7 +16,7 @@ public class BookingDataFile extends DataFile<Booking> {
 
     @Override
     public String constructEntry(Booking booking) {
-        String entry = booking.getId() + ";" + booking.startDate + ";" + booking.endDate + ";" + booking.isConfirmed + ";" + booking.isCanceled + ";" + booking.car.getId() + ";" + booking.client.getId();
+        String entry = booking.getId() + ";" + booking.startDate + ";" + booking.endDate + ";" + booking.isConfirmed + ";" + booking.isCanceled + ";" + booking.car.getId() + ";" + booking.client.getId() + ";" + booking.paymentMethod;
         return entry;
     }
 
@@ -32,6 +32,7 @@ public class BookingDataFile extends DataFile<Booking> {
         Boolean isConfirmed = Boolean.parseBoolean(attributes[3]);
         Boolean isCanceled = Boolean.parseBoolean(attributes[4]);
 
+        
         CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
 
         String[] queryCar = {attributes[5], "*", "*", "*", "*", "*"};
@@ -42,11 +43,14 @@ public class BookingDataFile extends DataFile<Booking> {
 
         String[] queryClient = {attributes[6], "*", "*", "*", "*", "*", "*"};
 
+        
         String[] clientParams = pdf.queryDatabase(pdf.createQuery(queryClient)).first();
-
+        
         Client client = Client.convertToClient(clientParams);
 
-        Booking booking = new Booking(starDate, endDate, isConfirmed, isCanceled, car, client);
+        String paymentMeyhod = attributes[7];
+
+        Booking booking = new Booking(starDate, endDate, isConfirmed, isCanceled, car, client, paymentMeyhod);
 
         booking.setId(attributes[0]);
 
@@ -64,6 +68,7 @@ public class BookingDataFile extends DataFile<Booking> {
         query.put("Cancelled", booking[4]);
         query.put("Car", booking[5]);
         query.put("Client", booking[6]);
+        query.put("Payment", booking[7]);
         return query;
     }
 
@@ -111,8 +116,9 @@ public class BookingDataFile extends DataFile<Booking> {
         String isCancelled = query.get("Cancelled");
         String carId = query.get("Car");
         String clientId = query.get("Client");
+        String paymentMehod = query.get("Payment");
 
-        String [] featureVal = {id, startDate, endDate, isConfirmed, isCancelled, carId, clientId};
+        String [] featureVal = {id, startDate, endDate, isConfirmed, isCancelled, carId, clientId, paymentMehod};
 
         while (datafile.hasNextLine()) {
             String data = datafile.nextLine();
@@ -206,6 +212,10 @@ public class BookingDataFile extends DataFile<Booking> {
                         if (booking.client.getId().equals(featureVal[i])) {
                             arrayBooking.add(booking);
                         }
+                    } else if (i == 7) {
+                        if (booking.paymentMethod.equals(featureVal[i])) {
+                            arrayBooking.add(booking);
+                        } 
                     }
                 }    
             bookingList.clear();

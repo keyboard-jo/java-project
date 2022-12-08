@@ -29,16 +29,16 @@ public class Client extends Person{
         }
     }
 
-    public void createCarBooking(Car car, LocalDate startDate, LocalDate endDate) throws IOException {
-        Booking booking = new Booking(startDate, endDate, false, false, car, this);
-        booking.setId("BO:" + EntityId.generateId());
+    // public void createCarBooking(Car car, LocalDate startDate, LocalDate endDate) throws IOException {
+    //     Booking booking = new Booking(startDate, endDate, false, false, car, this);
+    //     booking.setId("BO:" + EntityId.generateId());
         
-        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+    //     BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
 
-        String bookingEntry = bdf.constructEntry(booking);
+    //     String bookingEntry = bdf.constructEntry(booking);
 
-        bdf.addEntry(bookingEntry);
-    }
+    //     bdf.addEntry(bookingEntry);
+    // }
 
     public void viewCarBookingHistory() {
 
@@ -70,7 +70,11 @@ public class Client extends Person{
         for (String key : updateMap.keySet()) {
             switch (key) {
                 case "Username":
-                    this.username = updateMap.get(key);
+                    if (pdf.checkUsername(this.getId(), updateMap.get(key))) {
+                        this.username = updateMap.get(key);
+                    } else {
+                        return false;
+                    }
                     break;
                 case "Type":
                     this.type = updateMap.get(key);
