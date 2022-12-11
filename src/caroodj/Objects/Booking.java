@@ -62,6 +62,7 @@ public class Booking extends EntityId{
         }
 
         try {
+            System.out.println(this.isCanceled);
             Boolean isChanged = bdf.updateEntry(this);
             return isChanged;
         } catch (IOException e) {
