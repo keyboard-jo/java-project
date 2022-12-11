@@ -1,6 +1,5 @@
 import Menus.Base;
 
-// TODO: Implement try catch in every user form
 // TODO: change type and payment method with enum
 // TODO: migrate gui functionlaity to objects
 //qq1122gg
