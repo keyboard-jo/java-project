@@ -151,8 +151,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
         );
     }// </editor-fold>    
 
-    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
         DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
         
         String username = (String)model.getValueAt(0, 1);
@@ -189,8 +188,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
     }
                                         
 
-    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
 
         model.setValueAt(this.usernameDefault, 0, 1);

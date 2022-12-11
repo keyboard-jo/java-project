@@ -18,7 +18,6 @@ public class Admin extends Person {
         String id = params[0];
         String type = params[1];
         String password = params[2];
-        // Add try catch date
         LocalDate dateOfBirth = LocalDate.parse(params[3]);
         String username = params[4];
         String email = params[5];
@@ -95,14 +94,5 @@ public class Admin extends Person {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void editCar() {
-
-    }
-
-    public void confirmCarBooking() {
-
     }
 }

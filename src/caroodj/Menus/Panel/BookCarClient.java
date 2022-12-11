@@ -17,6 +17,7 @@ import Objects.BookingDataFile;
 import Objects.Car;
 import Objects.CarDataFile;
 import Objects.Client;
+import Objects.DataFile;
 import Objects.EntityId;
 import Objects.PersonDataFile;
 
@@ -169,11 +170,11 @@ public class BookCarClient extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Car ID", "Car Manufacture", "Car Model", "Production Year", "Start Date", "End Date", "Rental Cost"
+                "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,11 +182,6 @@ public class BookCarClient extends javax.swing.JPanel {
             }
         });
         BookCarTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        BookCarTable.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                BookCarTableComponentResized(evt);
-            }
-        });
         BookCarTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 carTableMouseClicked(evt);
@@ -198,7 +194,6 @@ public class BookCarClient extends javax.swing.JPanel {
             BookCarTable.getColumnModel().getColumn(2).setResizable(false);
             BookCarTable.getColumnModel().getColumn(3).setResizable(false);
             BookCarTable.getColumnModel().getColumn(4).setResizable(false);
-            BookCarTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
@@ -218,12 +213,6 @@ public class BookCarClient extends javax.swing.JPanel {
         );
 
         BookFieldPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Information to Book Car"));
-
-        CarIDField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CarIDFieldActionPerformed(evt);
-            }
-        });
 
         BookCarButton.setText("Book Car");
         BookCarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -310,44 +299,32 @@ public class BookCarClient extends javax.swing.JPanel {
                 .addComponent(BookFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
         );
-    }// </editor-fold>                        
+    }// </editor-fold>
 
-    private void BookCarTableComponentResized(java.awt.event.ComponentEvent evt) {                                              
-        // TODO add your handling code here:
+    private void BookCarButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String carID = CarIDField.getText();
+            LocalDate StartDate = StartDateField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate EndDate = EndDateField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (DataFile.isHigher(StartDate, EndDate)) {
+                JOptionPane.showMessageDialog(null, "End date is earlier than start date!");
+            } else {
+                CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+                PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
+                Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(new String[] {clientID, "*", "*", "*", "*", "*", "*"})).first());
+                Car car = cdf.queryDatabase(cdf.createQuery(new String[]{carID, "*", "*", "*", "*", "*"})).first();
+                paymentMethod.setData(StartDate, EndDate, false, false, car, client, null);
+        
+                JOptionPane.showMessageDialog(null, paymentMethod, "Information", JOptionPane.INFORMATION_MESSAGE);
+            }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Wrong Format! or Car Id not Found!");
+        }
+        
     }                                             
 
-    private void CarIDFieldActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    private void BookCarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-        String carID = CarIDField.getText();
-        LocalDate StartDate = StartDateField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate EndDate = EndDateField.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
-        PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
-        Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(new String[] {clientID, "*", "*", "*", "*", "*", "*"})).first());
-        Car car = cdf.queryDatabase(cdf.createQuery(new String[]{carID, "*", "*", "*", "*", "*"})).first();
-        paymentMethod.setData(StartDate, EndDate, false, false, car, client, "cash");
-
-        JOptionPane.showMessageDialog(null, paymentMethod, "Information", JOptionPane.INFORMATION_MESSAGE);
-
-
-        // Booking booking = new Booking(StartDate, EndDate, false, false, car, client, "cash");
-        // booking.setId("BO:"+EntityId.generateId());
-        // BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
-        // try {
-        //     bdf.addEntry(bdf.constructEntry(booking));
-        //     JOptionPane.showMessageDialog(null, "Car has been Booked");
-        // } catch (IOException e) {
-        //     // TODO Auto-generated catch block
-        //     JOptionPane.showMessageDialog(null, "An Error is Occurred!");
-        // }
-    }                                             
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         carQueries.add(new CarQuery());
 
         CarQuery lastCarQuery = carQueries.get(carQueries.size() - 1);
@@ -360,8 +337,7 @@ public class BookCarClient extends javax.swing.JPanel {
         queryFull.revalidate();
     }                                   
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         if (this.queryCount == 1) {
             JOptionPane.showMessageDialog(null, "Cannot Remove Anymore Query");
         } else {
@@ -376,7 +352,6 @@ public class BookCarClient extends javax.swing.JPanel {
     }                                    
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
         for (Integer i = (carQueries.size() - 1); i >= 1; i--) {
             queryFull.remove(carQueries.size() - 1);
             carQueries.remove(carQueries.size() - 1);
@@ -386,8 +361,7 @@ public class BookCarClient extends javax.swing.JPanel {
         queryFull.revalidate();
     }                                     
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         DefaultTableModel model = (DefaultTableModel) BookCarTable.getModel();
         model.setRowCount(0);
 
@@ -399,7 +373,7 @@ public class BookCarClient extends javax.swing.JPanel {
             ArrayList<Car> carList = cdf.queryDatabase(query).all();
 
             for (Car car : carList) {
-                model.addRow(new Object[] {car.getId(), car.manufacture, car.model, car.year, car.rentalCost, car.isRented});
+                model.addRow(new Object[] {car.getId(), car.manufacture, car.model, car.year, car.rentalCost});
             }
         }
 

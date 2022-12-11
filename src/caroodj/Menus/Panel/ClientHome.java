@@ -123,11 +123,11 @@ public class ClientHome extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date"
+                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date", "Payment Method"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -150,6 +150,7 @@ public class ClientHome extends javax.swing.JPanel {
             TableOngoingBooking.getColumnModel().getColumn(5).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(6).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(7).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(8).setResizable(false);
         }
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
@@ -237,28 +238,27 @@ public class ClientHome extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
-    private void BookingIDFieldActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-    }                                              
+    private void CancelBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String bookingID = BookingIDField.getText();
 
-    private void CancelBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-        String bookingID = BookingIDField.getText();
+            BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
 
-        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+            String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*", "*"};
 
-        String[] bookingQuery = {bookingID, "*", "*", "*", "*", "*", "*", "*"};
+            Booking booking = bdf.queryDatabase(bdf.createQuery(bookingQuery)).first();
 
-        Booking booking = bdf.queryDatabase(bdf.createQuery(bookingQuery)).first();
+            HashMap<String, String> updateMap = new HashMap<String, String>();
 
-        HashMap<String, String> updateMap = new HashMap<String, String>();
+            updateMap.put("Confirmed", false+"");
 
-        updateMap.put("Confirmed", false+"");
-
-        if (booking.update(updateMap)) {
-            JOptionPane.showMessageDialog(null, "Booking is Cancelled");
-        } else {
-            JOptionPane.showMessageDialog(null, "An Error Occured");
+            if (booking.update(updateMap)) {
+                JOptionPane.showMessageDialog(null, "Booking is Cancelled");
+            } else {
+                JOptionPane.showMessageDialog(null, "An Error Occured");
+            }   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Booking ID not found");
         }
     }                                          
     private void historyTableMouseClicked(java.awt.event.MouseEvent evt) {
@@ -282,7 +282,7 @@ public class ClientHome extends javax.swing.JPanel {
         for (Booking booking : bookingList) {
             if (DataFile.isHigher(booking.startDate, now)){
                 model.addRow(new Object[] {booking.getId(),booking.car.getId(), booking.car.manufacture, booking.car.model, 
-                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate});
+                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate, booking.paymentMethod});
             }
         }
     }

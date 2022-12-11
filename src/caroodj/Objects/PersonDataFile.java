@@ -108,7 +108,7 @@ public class PersonDataFile extends DataFile<String[]> {
         return person;
     }
 
-    public boolean checkDuplicate(String username) {
+    public Boolean checkDuplicate(String username) {
         Scanner dataFile = super.openFileRead();
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
@@ -136,7 +136,7 @@ public class PersonDataFile extends DataFile<String[]> {
         return true;
     }
 
-    public boolean checkPassword(String username, String password) {
+    public Boolean checkPassword(String username, String password) {
         Scanner dataFile = super.openFileRead();
         while (dataFile.hasNextLine()) {
             String data = dataFile.nextLine();
