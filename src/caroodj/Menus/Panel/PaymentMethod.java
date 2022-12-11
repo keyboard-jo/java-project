@@ -100,6 +100,8 @@ public class PaymentMethod extends javax.swing.JPanel {
 
         cvvLabel.setText("CVV:");
 
+        cvvField.setPreferredSize(new java.awt.Dimension(50, 22));
+
         javax.swing.GroupLayout cardPanelLayout = new javax.swing.GroupLayout(cardPanel);
         cardPanel.setLayout(cardPanelLayout);
         cardPanelLayout.setHorizontalGroup(
@@ -183,7 +185,6 @@ public class PaymentMethod extends javax.swing.JPanel {
             bdf.addEntry(bdf.constructEntry(booking));
             JOptionPane.showMessageDialog(null, "Car has been Booked");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             JOptionPane.showMessageDialog(null, "An Error is Occurred!");
         }
     }     

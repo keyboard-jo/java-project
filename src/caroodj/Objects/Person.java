@@ -19,13 +19,7 @@ public abstract class Person extends EntityId{
         this.password = password;
         this.dateOfBirth = dateOfBirth;
     }
-
-    // Test function
-    public void sayHello() {
-        System.out.println("My name is " + this.username + ". I am a " + this.type);
-    }
     
-    // Encapsulation setter
     public void setPassword(String password) {
         this.password = password;
     }
@@ -42,7 +36,6 @@ public abstract class Person extends EntityId{
         this.dateOfBirth = dateOfBirth;
     }
 
-    // Encapsulation getter
     public String getPassword() {
         return this.password;
     }
@@ -59,8 +52,6 @@ public abstract class Person extends EntityId{
         return dateOfBirth;
     }
 
-    // Login to the Menu
-    // Fix return of person
     public static String login(String username, String password) {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         if (pdf.checkPassword(username, password)) {
@@ -70,9 +61,4 @@ public abstract class Person extends EntityId{
         }
         return null;
     }
-
-    // Logout of the Menu
-    public void logout() {
-
-    };
 }

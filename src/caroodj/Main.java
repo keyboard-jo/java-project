@@ -1,9 +1,8 @@
 import Menus.Base;
 
 // TODO: Implement try catch in every user form
-// TODO: add input validation for forms
-// TODO: Create logout
-// TODO: find a way to view/cancel booking
+// TODO: change type and payment method with enum
+// TODO: migrate gui functionlaity to objects
 //qq1122gg
 
 // ASssumption: admin can double book

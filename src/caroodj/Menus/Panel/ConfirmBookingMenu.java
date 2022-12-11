@@ -294,7 +294,7 @@ public class ConfirmBookingMenu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "An Error Occured");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+            JOptionPane.showMessageDialog(null, "Booking ID not found");
         }
         
     }

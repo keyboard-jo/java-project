@@ -6,12 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public abstract class DataFile<T> {
-    String path;
+    private String path;
     public DataFileQueryOperator<T> dfqo = new DataFileQueryOperator<T>(null);
     public DataFile(String path) {
         this.path = path;
@@ -22,7 +21,6 @@ public abstract class DataFile<T> {
         try {
             File dataFile = new File(this.path);
             Scanner dataFileReader = new Scanner(dataFile);
-            // System.out.println("File exist!");
             return dataFileReader;
         } catch (FileNotFoundException e) {
             System.out.println("File does not exist!");

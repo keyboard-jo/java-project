@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-// TODO: Fix range query for car and booking, fix the range to account for "x *" and "* x"
-
 public class CarDataFile extends DataFile<Car>{
 
     public CarDataFile(String path) {
