@@ -250,7 +250,7 @@ public class ClientHome extends javax.swing.JPanel {
 
             HashMap<String, String> updateMap = new HashMap<String, String>();
 
-            updateMap.put("Confirmed", false+"");
+            updateMap.put("Cancelled", true+"");
 
             if (booking.update(updateMap)) {
                 JOptionPane.showMessageDialog(null, "Booking is Cancelled");
@@ -272,10 +272,6 @@ public class ClientHome extends javax.swing.JPanel {
         LocalDate now = LocalDate.now(); 
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
         String[] bookingQuery = {"*", "*", "*", "*", "false", "*",this.clientID, "*"};
-
-        for (String i : bookingQuery) {
-            System.out.println(i);
-        }
         
         ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
