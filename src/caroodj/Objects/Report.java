@@ -114,7 +114,7 @@ public class Report {
 
             String [] query = {carId, "*", "*", "*", "*", "*", "*"};
 
-            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().rentalCost;
+            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().getRentalCost();
 
             if (clientIdToRent.containsKey(clientId)) {
                 clientIdToRent.put(clientId, clientIdToRent.get(clientId) + carRent);
@@ -212,7 +212,7 @@ public class Report {
 
             String [] query = {carId, "*", "*", "*", "*", "*", "*"};
 
-            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().rentalCost;
+            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().getRentalCost();
 
             this.totalSales += carRent;
 

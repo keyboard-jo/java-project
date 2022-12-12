@@ -49,15 +49,15 @@ public class CarDataFile extends DataFile<Car>{
             if (!super.isStar(featureVal[i])) {
                 for (Car car : carList) {
                     if (i == 1) {
-                        if (car.manufacture.equals(featureVal[i])) {
+                        if (car.getManufacture().equals(featureVal[i])) {
                             arrayCar.add(car);
                         }
                     } else if (i == 2) {
-                        if (car.model.equals(featureVal[i])) {
+                        if (car.getModel().equals(featureVal[i])) {
                             arrayCar.add(car);
                         }
                     } else if (i == 3) {
-                        if (car.isRented.equals(Boolean.parseBoolean(featureVal[i]))) {
+                        if (car.getIsRented().equals(Boolean.parseBoolean(featureVal[i]))) {
                             arrayCar.add(car);
                         }
                     } else if (i == 4) {
@@ -66,24 +66,24 @@ public class CarDataFile extends DataFile<Car>{
                             String[] yearsRange = featureVal[i].split(" ", 2);
                             if (yearsRange[0].equals("*")) {
                                 LocalDate yearHigh = LocalDate.parse(yearsRange[1]);
-                                if (super.isLower(car.year, yearHigh)) {
+                                if (super.isLower(car.getYear(), yearHigh)) {
                                     arrayCar.add(car);
                                 }
                             } else if (yearsRange[1].equals("*")) {
                                 LocalDate yearLow = LocalDate.parse(yearsRange[0]);
-                                if (super.isHigher(car.year, yearLow)) {
+                                if (super.isHigher(car.getYear(), yearLow)) {
                                     arrayCar.add(car);
                                 }
                             } else {
                                 LocalDate yearLow = LocalDate.parse(yearsRange[0]);
                                 LocalDate yearHigh = LocalDate.parse(yearsRange[1]);
-                                if (super.isBetween(yearLow, car.year, yearHigh)) {
+                                if (super.isBetween(yearLow, car.getYear(), yearHigh)) {
                                     arrayCar.add(car);
                                 }
                             }
                         } else {
                             LocalDate year = LocalDate.parse(featureVal[i]);
-                            if (car.year.equals(year)) {
+                            if (car.getYear().equals(year)) {
                                 arrayCar.add(car);
                             }
                         }
@@ -93,24 +93,24 @@ public class CarDataFile extends DataFile<Car>{
                             String[] rentRange = featureVal[i].split(" ", 2);
                             if (rentRange[0].equals("*")) {
                                 Double rentHigh = Double.parseDouble(rentRange[1]);
-                                if (super.isLower(car.rentalCost, rentHigh)) {
+                                if (super.isLower(car.getRentalCost(), rentHigh)) {
                                     arrayCar.add(car);
                                 }
                             } else if (rentRange[1].equals("*")) {
                                 Double rentLow = Double.parseDouble(rentRange[0]);
-                                if (super.isHigher(car.rentalCost, rentLow)) {
+                                if (super.isHigher(car.getRentalCost(), rentLow)) {
                                     arrayCar.add(car);
                                 }
                             } else {
                                 Double rentLow = Double.parseDouble(rentRange[0]);
                                 Double rentHigh = Double.parseDouble(rentRange[1]);
-                                if (super.isBetween(rentLow, car.rentalCost, rentHigh)) {
+                                if (super.isBetween(rentLow, car.getRentalCost(), rentHigh)) {
                                     arrayCar.add(car);
                                 }
                             }
                         } else {
                             Double rentDouble = Double.parseDouble(featureVal[i]);
-                            if (car.rentalCost.equals(rentDouble)) {
+                            if (car.getRentalCost().equals(rentDouble)) {
                                 arrayCar.add(car);
                             }
                         }
@@ -139,7 +139,7 @@ public class CarDataFile extends DataFile<Car>{
     }
 
     public String constructEntry(Car car) {
-        String entry = car.getId() + ";" + car.manufacture + ";" + car.model + ";" + car.year + ";" + car.rentalCost + ";" + car.isRented;
+        String entry = car.getId() + ";" + car.getManufacture() + ";" + car.getModel() + ";" + car.getYear() + ";" + car.getRentalCost() + ";" + car.getYear();
         return entry;
     }
 

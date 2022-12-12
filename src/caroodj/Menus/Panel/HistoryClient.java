@@ -35,8 +35,8 @@ public class HistoryClient extends javax.swing.JPanel {
         ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
         for (Booking booking : bookingList) {
-            model.addRow(new Object[] {booking.getId(), booking.getCar().manufacture, booking.getCar().model, 
-                booking.getCar().year, booking.getCar().rentalCost, booking.getStartDate(), booking.getEndDate(), booking.getIsConfirmed()});
+            model.addRow(new Object[] {booking.getId(), booking.getCar().getManufacture(), booking.getCar().getModel(), 
+                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getIsConfirmed()});
         }
     }
 

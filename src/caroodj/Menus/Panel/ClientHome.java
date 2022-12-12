@@ -278,8 +278,8 @@ public class ClientHome extends javax.swing.JPanel {
 
         for (Booking booking : bookingList) {
             if (DataFile.isHigher(booking.getStartDate(), now)){
-                model.addRow(new Object[] {booking.getId(),booking.getCar().getId(), booking.getCar().manufacture, booking.getCar().model, 
-                booking.getCar().year, booking.getCar().rentalCost, booking.getStartDate(), booking.getEndDate(), booking.getPaymentMethod(), booking.getIsConfirmed()});
+                model.addRow(new Object[] {booking.getId(),booking.getCar().getId(), booking.getCar().getManufacture(), booking.getCar().getModel(), 
+                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getPaymentMethod(), booking.getIsConfirmed()});
             }
         }
     }

@@ -40,7 +40,7 @@ public class AdminAccountDetail extends javax.swing.JPanel {
 
         this.admin = Admin.convertToAdmin(pdf.queryDatabase(pdf.createQuery(query)).first());
 
-        this.usernameDefault = this.admin.username;
+        this.usernameDefault = this.admin.getUsername();
 
         this.passwordDefault = this.admin.getPassword();
 

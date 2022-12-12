@@ -7,16 +7,16 @@ import java.util.HashMap;
 public class Client extends Person{
     public Client(String username, String password, LocalDate dateOfBirth) {
         super(username, password, dateOfBirth);
-        super.type = "client";
+        setType("client");
     }
 
     // Register to the DatabaseSystem
     public Boolean register() {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
         // Fixx this to match query
-        String[] personData = {super.getId(), this.type, super.getPassword(), super.getDateOfBirth()+"", super.username, super.getEmail(), super.getName()};
+        String[] personData = {super.getId(), this.getType(), super.getPassword(), super.getDateOfBirth()+"", super.getUsername(), super.getEmail(), super.getName()};
         String entry = pdf.constructEntry(personData);
-        if (pdf.checkDuplicate(username)) {
+        if (pdf.checkDuplicate(getUsername())) {
             try {
                 pdf.addEntry(entry);
             } catch (IOException e) {
@@ -46,7 +46,7 @@ public class Client extends Person{
         client.setId(id);
         client.setEmail(email);
         client.setName(name);
-        client.type = type;
+        client.setType(type);
 
         return client;
     }
@@ -57,13 +57,13 @@ public class Client extends Person{
             switch (key) {
                 case "Username":
                     if (pdf.checkUsername(this.getId(), updateMap.get(key))) {
-                        this.username = updateMap.get(key);
+                        this.setUsername(updateMap.get(key));
                     } else {
                         return false;
                     }
                     break;
                 case "Type":
-                    this.type = updateMap.get(key);
+                    this.setType(updateMap.get(key));
                     break;
                 case "Name":
                     this.setName(updateMap.get(key));
@@ -83,7 +83,7 @@ public class Client extends Person{
         }
 
 
-        String[] person = {super.getId(), this.type, this.getPassword(), this.getDateOfBirth()+"", this.username, this.getEmail(), this.getName()};
+        String[] person = {super.getId(), this.getType(), this.getPassword(), this.getDateOfBirth()+"", this.getUsername(), this.getEmail(), this.getName()};
 
         try {
             Boolean isChanged = pdf.updateEntry(person);
