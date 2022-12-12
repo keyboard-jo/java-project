@@ -108,13 +108,13 @@ public class Report {
         HashMap<String, Double> clientIdToRent = new HashMap<String, Double>();
 
         for (Booking booking : getBookingRange()) {
-            String clientId = booking.client.getId();
+            String clientId = booking.getClient().getId();
 
-            String carId = booking.car.getId();
+            String carId = booking.getCar().getId();
 
             String [] query = {carId, "*", "*", "*", "*", "*", "*"};
 
-            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().rentalCost;
+            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().getRentalCost();
 
             if (clientIdToRent.containsKey(clientId)) {
                 clientIdToRent.put(clientId, clientIdToRent.get(clientId) + carRent);
@@ -153,7 +153,7 @@ public class Report {
         
 
         for (Booking booking : getBookingRange()) {
-            String carId = booking.car.getId();
+            String carId = booking.getCar().getId();
 
             if (carIdToCount.containsKey(carId)) {
                 carIdToCount.put(carId, carIdToCount.get(carId) + 1);
@@ -206,13 +206,13 @@ public class Report {
         
 
         for (Booking booking : getBookingRange()) {
-            String carId = booking.car.getId();
+            String carId = booking.getCar().getId();
 
-            String clientId = booking.client.getId();
+            String clientId = booking.getClient().getId();
 
             String [] query = {carId, "*", "*", "*", "*", "*", "*"};
 
-            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().rentalCost;
+            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().getRentalCost();
 
             this.totalSales += carRent;
 

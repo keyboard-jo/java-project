@@ -266,8 +266,8 @@ public class CancelBookingMenu extends javax.swing.JPanel {
 
 
             for (Booking booking : bookingList) {
-                if (booking.isConfirmed.equals(true)) {
-                    model.addRow(new Object[] {booking.getId(), booking.startDate, booking.endDate, booking.isConfirmed, booking.isCanceled, booking.car.getId(), booking.car.model, booking.car.rentalCost, booking.car.isRented, booking.client.getId(), booking.client.username, booking.paymentMethod});
+                if (booking.getIsConfirmed().equals(true)) {
+                    model.addRow(new Object[] {booking.getId(), booking.getStartDate(), booking.getEndDate(), booking.getIsConfirmed(), booking.getIsCanceled(), booking.getCar().getId(), booking.getCar().getModel(), booking.getCar().getRentalCost(), booking.getCar().getIsRented(), booking.getClient().getId(), booking.getClient().getUsername(), booking.getPaymentMethod()});
                 }
             }
         }

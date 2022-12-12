@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 // Abbstarct class
 public abstract class Person extends EntityId{
-    public String type;
+    private String type;
     private String password;
-    public String username;
+    private String username;
     private LocalDate dateOfBirth;
 
     // Optional
@@ -50,6 +50,22 @@ public abstract class Person extends EntityId{
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static String login(String username, String password) {

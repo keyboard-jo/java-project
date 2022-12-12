@@ -43,7 +43,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
 
         this.client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(query)).first());
 
-        this.usernameDefault = this.client.username;
+        this.usernameDefault = this.client.getUsername();
 
         this.passwordDefault = this.client.getPassword();
 

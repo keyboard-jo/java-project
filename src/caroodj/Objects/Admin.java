@@ -11,7 +11,7 @@ public class Admin extends Person {
 
     public Admin(String username, String password, LocalDate dateOfBirth) {
         super(username, password, dateOfBirth);
-        super.type = "admin";
+        super.setType("admin");
     }
 
     public static Admin convertToAdmin(String[] params) {
@@ -32,7 +32,7 @@ public class Admin extends Person {
 
         admin.setName(name);
 
-        admin.type = type;
+        admin.setType(type);
 
         return admin;
     }
@@ -43,13 +43,13 @@ public class Admin extends Person {
             switch (key) {
                 case "Username":
                     if (pdf.checkUsername(this.getId(), updateMap.get(key))) {
-                        this.username = updateMap.get(key);
+                        this.setUsername(updateMap.get(key));
                     } else {
                         return false;
                     }
                     break;
                 case "Type":
-                    this.type = updateMap.get(key);
+                    this.setType(updateMap.get(key));
                     break;
                 case "Name":
                     this.setName(updateMap.get(key));
@@ -68,7 +68,7 @@ public class Admin extends Person {
             }
         }
 
-        String[] person = {super.getId(), this.type, this.getPassword(), this.getDateOfBirth()+"", this.username, this.getEmail(), this.getName()};
+        String[] person = {super.getId(), this.getType(), this.getPassword(), this.getDateOfBirth()+"", this.getUsername(), this.getEmail(), this.getName()};
         try {
             Boolean isChanged = pdf.updateEntry(person);
             return isChanged;

@@ -373,7 +373,7 @@ public class BookCarClient extends javax.swing.JPanel {
             ArrayList<Car> carList = cdf.queryDatabase(query).all();
 
             for (Car car : carList) {
-                model.addRow(new Object[] {car.getId(), car.manufacture, car.model, car.year, car.rentalCost});
+                model.addRow(new Object[] {car.getId(), car.getManufacture(), car.getModel(), car.getYear(), car.getRentalCost()});
             }
         }
 

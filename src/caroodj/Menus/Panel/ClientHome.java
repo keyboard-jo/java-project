@@ -277,9 +277,9 @@ public class ClientHome extends javax.swing.JPanel {
         ArrayList<Booking> bookingList = bdf.queryDatabase(bdf.createQuery(bookingQuery)).all();
 
         for (Booking booking : bookingList) {
-            if (DataFile.isHigher(booking.startDate, now)){
-                model.addRow(new Object[] {booking.getId(),booking.car.getId(), booking.car.manufacture, booking.car.model, 
-                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate, booking.paymentMethod, booking.isConfirmed});
+            if (DataFile.isHigher(booking.getStartDate(), now)){
+                model.addRow(new Object[] {booking.getId(),booking.getCar().getId(), booking.getCar().getManufacture(), booking.getCar().getModel(), 
+                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getPaymentMethod(), booking.getIsConfirmed()});
             }
         }
     }

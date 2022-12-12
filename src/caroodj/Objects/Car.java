@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Car extends EntityId{
-    public String manufacture;
-    public String model;
-    public LocalDate year;
-    public Double rentalCost;
-    public Boolean isRented;
+    private String manufacture;
+    private String model;
+    private LocalDate year;
+    private Double rentalCost;
+    private Boolean isRented;
 
     public Car(String manufacture, String model, LocalDate year, Double rentalCost, Boolean isRented) {
         this.manufacture = manufacture;
@@ -17,6 +17,37 @@ public class Car extends EntityId{
         this.year = year;
         this.rentalCost = rentalCost;
         this.isRented = isRented;
+    }
+
+    public Boolean getIsRented() {
+        return isRented;
+    }
+    public String getManufacture() {
+        return manufacture;
+    }
+    public String getModel() {
+        return model;
+    }
+    public Double getRentalCost() {
+        return rentalCost;
+    }
+    public LocalDate getYear() {
+        return year;
+    }
+    public void setIsRented(Boolean isRented) {
+        this.isRented = isRented;
+    }
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
+    }
+    public void setModel(String model) {
+        this.model = model;
+    }
+    public void setRentalCost(Double rentalCost) {
+        this.rentalCost = rentalCost;
+    }
+    public void setYear(LocalDate year) {
+        this.year = year;
     }
 
     public Boolean update(HashMap<String, String> updateMap) {

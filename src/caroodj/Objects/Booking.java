@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Booking extends EntityId{
-    public LocalDate startDate;
-    public LocalDate endDate;
-    public Boolean isConfirmed;
-    public Boolean isCanceled;
-    public Car car;
-    public Client client;
-    public String paymentMethod;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Boolean isConfirmed;
+    private Boolean isCanceled;
+    private Car car;
+    private Client client;
+    private String paymentMethod;
 
     public Booking(LocalDate startDate, LocalDate endDate, Boolean isConfirmed, Boolean isCanceled, Car car, Client client, String paymentMethod) {
         this.car = car;
@@ -21,6 +21,49 @@ public class Booking extends EntityId{
         this.isConfirmed = isConfirmed;
         this.isCanceled = isCanceled;
         this.paymentMethod = paymentMethod;
+    }
+    
+    public Car getCar() {
+        return car;
+    }
+    public Client getClient() {
+        return client;
+    }
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+    public Boolean getIsCanceled() {
+        return isCanceled;
+    }
+    public Boolean getIsConfirmed() {
+        return isConfirmed;
+    }
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+    public void setCar(Car car) {
+        this.car = car;
+    }
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+    public void setIsCanceled(Boolean isCanceled) {
+        this.isCanceled = isCanceled;
+    }
+    public void setIsConfirmed(Boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
+    }
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public Boolean update(HashMap<String, String> updateMap) {
