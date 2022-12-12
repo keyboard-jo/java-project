@@ -564,14 +564,18 @@ public class ManageClientInformation extends javax.swing.JPanel {
             String[] entry = {(type.equals("admin") ? "AD:" : "CL:") + EntityId.generateId(), type, password, DOB+"", username, email, name};
     
             try {
-                pdf.addEntry(pdf.constructEntry(entry));
-                JOptionPane.showMessageDialog(null, "Person Successfully Added!");
+                if (pdf.checkDuplicate(username)) {
+                    pdf.addEntry(pdf.constructEntry(entry));
+                    JOptionPane.showMessageDialog(null, "Person Successfully Added!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username Already Taken!");
+                }
             } catch(IOException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "An Error Occured!");
             }    
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
+            JOptionPane.showMessageDialog(null, "Please use the correct format for each field or Missing Value");
         }
         
     }                                         

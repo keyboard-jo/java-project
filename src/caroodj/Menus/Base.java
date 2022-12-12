@@ -8,6 +8,8 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.util.function.Function;
 
+import javax.swing.JOptionPane;
+
 import Menus.Panel.LoginPanel;
 import Menus.Panel.RegisterPanel;
 import Menus.Panel.SidePanel;
@@ -63,6 +65,7 @@ public class Base extends javax.swing.JFrame {
 
     private Function<java.awt.event.ActionEvent, Void> goToLoginMenuButton = e -> {
         this.card.show(this.cPane, "Login");
+        JOptionPane.showMessageDialog(null, "Logout successful!");
         return null;
     };
 
@@ -79,6 +82,7 @@ public class Base extends javax.swing.JFrame {
     private Function<String, Void> goToHomeMenu = p -> {
         this.addPersonHomeMenu.apply(p);
         this.card.show(this.cPane, "Home");
+        JOptionPane.showMessageDialog(null, "Login successful!");
         return null;
     };
 }

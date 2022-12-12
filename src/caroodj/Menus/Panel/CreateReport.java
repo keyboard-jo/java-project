@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import Objects.DataFile;
 import Objects.Report;
 
 /**
@@ -125,12 +126,7 @@ public class CreateReport extends javax.swing.JPanel {
         mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Client and Rental Cost & Car and Count"));
 
         clientTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            null,
             new String [] {
                 "Client Id", "Total Amount"
             }
@@ -148,12 +144,7 @@ public class CreateReport extends javax.swing.JPanel {
         mapPanel.add(clientScroll);
 
         carTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            null,
             new String [] {
                 "Car Id", "Car Count"
             }
@@ -173,12 +164,7 @@ public class CreateReport extends javax.swing.JPanel {
         statisticsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Statistics"));
 
         statisticsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            null,
             new String [] {
                 "Key", "Value"
             }
@@ -289,21 +275,33 @@ public class CreateReport extends javax.swing.JPanel {
         switch (reportType) {
             case "Statistics":
                 try {
-                    statisticsTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                    if (statisticsTable.getModel().getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Statistic Table is Empty!");
+                    } else {
+                        statisticsTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Unable to Print");
                 }
                 break;
             case "Car To Count":
                 try {
-                    carTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                    if (carTable.getModel().getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Car Table is Empty!");
+                    } else {
+                        carTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Unable to Print");
                 }
                 break;
             case "Client To Sales":
                 try {
-                    clientTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                    if (clientTable.getModel().getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Client Table is Empty!");
+                    } else {
+                        clientTable.print(javax.swing.JTable.PrintMode.FIT_WIDTH, null, null);
+                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Unable to Print");
                 }

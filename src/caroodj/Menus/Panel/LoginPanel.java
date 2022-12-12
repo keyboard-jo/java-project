@@ -7,6 +7,8 @@ package Menus.Panel;
 import java.util.Objects;
 import java.util.function.Function;
 
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -141,6 +143,8 @@ public class LoginPanel extends javax.swing.JPanel {
             jTextField1.setText("");
             jPasswordField1.setText("");
             goToHomeMenu.apply(personId);
+        } else {
+            JOptionPane.showMessageDialog(null, "Login Fail! Check your Username and Password");
         }
         
     }

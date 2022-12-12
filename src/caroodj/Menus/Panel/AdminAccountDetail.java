@@ -161,24 +161,28 @@ public class AdminAccountDetail extends javax.swing.JPanel {
             String email = (String)model.getValueAt(3, 1);
             String dateOfBirth = (String)model.getValueAt(4, 1);
 
-            HashMap<String, String> updateMap = new HashMap<String, String>();
-
-            updateMap.put("Username", username);
-            updateMap.put("Name", name);
-            updateMap.put("Password", password);
-            updateMap.put("Email", email);
-            updateMap.put("DOB", dateOfBirth+"");
-            
-
-            if (this.admin.update(updateMap)) {
-                JOptionPane.showMessageDialog(null, "Admin is Updated!");
-                this.usernameDefault = username;
-                this.nameDefault = name;
-                this.passwordDefault = password;
-                this.emailDefault = email;
-                this.DOBDefault = LocalDate.parse(dateOfBirth);
+            if (username.equals("") || password.equals("") || dateOfBirth.equals("")) {
+                JOptionPane.showMessageDialog(null, "Username, Password, and DOB is compulsary");
             } else {
-                JOptionPane.showMessageDialog(null, "An Error Occurred!");
+                HashMap<String, String> updateMap = new HashMap<String, String>();
+                
+                updateMap.put("Username", username);
+                updateMap.put("Name", name);
+                updateMap.put("Password", password);
+                updateMap.put("Email", email);
+                updateMap.put("DOB", dateOfBirth+"");
+                
+
+                if (this.admin.update(updateMap)) {
+                    JOptionPane.showMessageDialog(null, "Admin is Updated!");
+                    this.usernameDefault = username;
+                    this.nameDefault = name;
+                    this.passwordDefault = password;
+                    this.emailDefault = email;
+                    this.DOBDefault = LocalDate.parse(dateOfBirth);
+                } else {
+                    JOptionPane.showMessageDialog(null, "An Error Occurred!");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
