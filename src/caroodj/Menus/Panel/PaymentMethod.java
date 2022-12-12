@@ -180,11 +180,14 @@ public class PaymentMethod extends javax.swing.JPanel {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         Booking booking = new Booking(this.starDate, this.endDate, this.isConfirmed, this.isCancelled, this.car, this.client, (String)paymentCombo.getSelectedItem());
         booking.setId("BO:"+EntityId.generateId());
-        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+
         try {
-            bdf.addEntry(bdf.constructEntry(booking));
-            JOptionPane.showMessageDialog(null, "Car has been Booked");
-        } catch (IOException e) {
+            if (booking.record()) {
+                JOptionPane.showMessageDialog(null, "Car has been Booked");
+            } else {
+                JOptionPane.showMessageDialog(null, "An Error is Occurred!");    
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "An Error is Occurred!");
         }
     }     

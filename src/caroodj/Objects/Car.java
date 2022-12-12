@@ -1,5 +1,6 @@
 package Objects;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -50,5 +51,11 @@ public class Car extends EntityId{
             return false;
         }
 
+    }
+
+    public Boolean record() throws IOException {
+        CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
+        cdf.addEntry(cdf.constructEntry(this));
+        return isRented;
     }
 }

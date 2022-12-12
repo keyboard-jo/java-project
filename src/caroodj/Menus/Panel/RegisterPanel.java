@@ -215,7 +215,6 @@ public class RegisterPanel extends javax.swing.JPanel {
         add(jDateChooser1, gridBagConstraints);
     }// </editor-fold>                        
 
-    // TODO: Implement try catch instead
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         if ((jTextField1.getText().equals("")) || (String.valueOf(jPasswordField1.getPassword()).equals("")) || (jDateChooser1.getDate() == null)) {
             JOptionPane.showMessageDialog(null, "Please fill all compulsary fields");

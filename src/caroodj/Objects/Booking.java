@@ -69,6 +69,11 @@ public class Booking extends EntityId{
             e.printStackTrace();
             return false;
         }
-        
+    }
+
+    public Boolean record() throws IOException {
+        BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
+        bdf.addEntry(bdf.constructEntry(this));
+        return true;
     }
 }
