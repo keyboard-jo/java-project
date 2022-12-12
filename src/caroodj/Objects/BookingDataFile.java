@@ -16,7 +16,7 @@ public class BookingDataFile extends DataFile<Booking> {
 
     @Override
     public String constructEntry(Booking booking) {
-        String entry = booking.getId() + ";" + booking.startDate + ";" + booking.endDate + ";" + booking.isConfirmed + ";" + booking.isCanceled + ";" + booking.car.getId() + ";" + booking.client.getId() + ";" + booking.paymentMethod;
+        String entry = booking.getId() + ";" + booking.getStartDate() + ";" + booking.getEndDate() + ";" + booking.getIsConfirmed() + ";" + booking.getIsCanceled() + ";" + booking.getCar().getId() + ";" + booking.getClient().getId() + ";" + booking.getPaymentMethod();
         return entry;
     }
 
@@ -147,25 +147,25 @@ public class BookingDataFile extends DataFile<Booking> {
                             String [] startDateRange = featureVal[i].split(" ", 2);
                             if (startDateRange[0].equals("*")) {
                                 LocalDate startDateHigh = LocalDate.parse(startDateRange[1]);
-                                if (super.isLower(booking.startDate, startDateHigh)) {
+                                if (super.isLower(booking.getStartDate(), startDateHigh)) {
                                     arrayBooking.add(booking);
                                 }
                             } else if (startDateRange[1].equals("*")) {
                                 LocalDate startDateLow = LocalDate.parse(startDateRange[0]);
-                                if (super.isHigher(booking.startDate, startDateLow)) {
+                                if (super.isHigher(booking.getStartDate(), startDateLow)) {
                                     arrayBooking.add(booking);
                                 }
                             } else {
                                 LocalDate startDateHigh = LocalDate.parse(startDateRange[1]);
                                 LocalDate startDateLow = LocalDate.parse(startDateRange[0]);
-                                if (super.isBetween(startDateLow, booking.startDate, startDateHigh)) {
+                                if (super.isBetween(startDateLow, booking.getStartDate(), startDateHigh)) {
                                     arrayBooking.add(booking);
                                 }
 
                             }
                         } else {
                             LocalDate startDateEqual = LocalDate.parse(featureVal[i]);
-                            if (booking.startDate.equals(startDateEqual)) {
+                            if (booking.getStartDate().equals(startDateEqual)) {
                                 arrayBooking.add(booking);
                             }
                         }
@@ -175,47 +175,47 @@ public class BookingDataFile extends DataFile<Booking> {
                             String [] endDateRange = featureVal[i].split(" ", 2);
                             if (endDateRange[0].equals("*")) {
                                 LocalDate endDateHigh = LocalDate.parse(endDateRange[1]);
-                                if (super.isLower(booking.endDate, endDateHigh)) {
+                                if (super.isLower(booking.getEndDate(), endDateHigh)) {
                                     arrayBooking.add(booking);
                                 }
                             } else if (endDateRange[1].equals("*")) {
                                 LocalDate endDateLow = LocalDate.parse(endDateRange[0]);
-                                if (super.isHigher(booking.endDate, endDateLow)) {
+                                if (super.isHigher(booking.getEndDate(), endDateLow)) {
                                     arrayBooking.add(booking);
                                 }
                             } else {
                                 LocalDate endDateHigh = LocalDate.parse(endDateRange[1]);
                                 LocalDate endDateLow = LocalDate.parse(endDateRange[0]);
-                                if (super.isBetween(endDateLow, booking.endDate, endDateHigh)) {
+                                if (super.isBetween(endDateLow, booking.getEndDate(), endDateHigh)) {
                                     arrayBooking.add(booking);
                                 }
 
                             }
                         } else {
                             LocalDate endDateEqual = LocalDate.parse(featureVal[i]);
-                            if (booking.endDate.equals(endDateEqual)) {
+                            if (booking.getEndDate().equals(endDateEqual)) {
                                 arrayBooking.add(booking);
                             }
                         }
                     } else if (i == 3) {
-                        if (booking.isConfirmed.equals(Boolean.parseBoolean(featureVal[i]))) {
+                        if (booking.getIsConfirmed().equals(Boolean.parseBoolean(featureVal[i]))) {
                             arrayBooking.add(booking);
                         }
                     } else if (i == 4) {
-                        if (booking.isCanceled.equals(Boolean.parseBoolean(featureVal[i]))) {
+                        if (booking.getIsCanceled().equals(Boolean.parseBoolean(featureVal[i]))) {
                             arrayBooking.add(booking);
                         }
 
                     } else if (i == 5) {
-                        if (booking.car.getId().equals(featureVal[i])) {
+                        if (booking.getCar().getId().equals(featureVal[i])) {
                             arrayBooking.add(booking);
                         }
                     } else if (i == 6) {
-                        if (booking.client.getId().equals(featureVal[i])) {
+                        if (booking.getClient().getId().equals(featureVal[i])) {
                             arrayBooking.add(booking);
                         }
                     } else if (i == 7) {
-                        if (booking.paymentMethod.equals(featureVal[i])) {
+                        if (booking.getPaymentMethod().equals(featureVal[i])) {
                             arrayBooking.add(booking);
                         } 
                     }
