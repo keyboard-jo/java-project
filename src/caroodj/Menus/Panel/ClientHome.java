@@ -123,11 +123,11 @@ public class ClientHome extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date", "Payment Method"
+                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date", "Payment Method", "Confirmed"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -151,6 +151,7 @@ public class ClientHome extends javax.swing.JPanel {
             TableOngoingBooking.getColumnModel().getColumn(6).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(7).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(8).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(9).setResizable(false);
         }
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
@@ -278,7 +279,7 @@ public class ClientHome extends javax.swing.JPanel {
         for (Booking booking : bookingList) {
             if (DataFile.isHigher(booking.startDate, now)){
                 model.addRow(new Object[] {booking.getId(),booking.car.getId(), booking.car.manufacture, booking.car.model, 
-                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate, booking.paymentMethod});
+                booking.car.year, booking.car.rentalCost, booking.startDate, booking.endDate, booking.paymentMethod, booking.isConfirmed});
             }
         }
     }
