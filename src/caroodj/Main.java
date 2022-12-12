@@ -2,7 +2,6 @@ import Menus.Base;
 
 // TODO: change type and payment method with enum
 // TODO: migrate gui functionlaity to objects
-// TODO: add confirmation status in client home
 // TODO: client information fix username, password, dob cannot be empty
 //qq1122gg
 
