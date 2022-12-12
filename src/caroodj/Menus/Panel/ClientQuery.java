@@ -174,7 +174,7 @@ public class ClientQuery extends javax.swing.JPanel {
         if (DOBButton.getText().equals("~")) {
             DOBPAnel.add(DOBField1);
         } else {
-            DOBPAnel.remove(DOBField);
+            DOBPAnel.remove(DOBField1);
         }
     }     
 
