@@ -612,15 +612,15 @@ public class ManageCarInformationMenu extends javax.swing.JPanel {
             Car car = new Car(manufacture, model, yop, rent, false);
             car.setId("CA:" + EntityId.generateId());
 
-            CarDataFile cdf = new CarDataFile("src\\caroodj\\Data\\Car.txt");
-
             try {
-                cdf.addEntry(cdf.constructEntry(car));
-                JOptionPane.showMessageDialog(null, "Car Successfully Added!");
-            } catch (IOException e) {
-                e.printStackTrace();
+                if (car.record()) {
+                    JOptionPane.showMessageDialog(null, "Car Successfully Added!");    
+                } else {
+                    JOptionPane.showMessageDialog(null, "An Error Occured!");
+                }
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "An Error Occured!");
-            }    
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please use the correct format for each field");
         }                                    
