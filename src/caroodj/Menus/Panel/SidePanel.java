@@ -87,7 +87,7 @@ public class SidePanel extends javax.swing.JPanel {
 
         LogoText.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 60)); // NOI18N
         LogoText.setForeground(new java.awt.Color(255, 255, 255));
-        LogoText.setIcon(new javax.swing.ImageIcon(getClass().getResource("zs.png"))); // NOI18N
+        LogoText.setIcon(new javax.swing.ImageIcon(getClass().getResource("zsnew.png"))); // NOI18N
 
         jSeparatorSide.setBackground(new java.awt.Color(255, 255, 255));
 
