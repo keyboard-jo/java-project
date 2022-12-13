@@ -87,7 +87,6 @@ public class PersonDataFile extends DataFile<String[]> {
         return entry;
     }
 
-    // Fix person abstarcxt class
     public String[] deconstructEntry(String entry) {
 
         String[] attributes = entry.split(";", 7);
@@ -96,7 +95,6 @@ public class PersonDataFile extends DataFile<String[]> {
         String type = attributes[1];
         String password = attributes[2];
 
-        // Add try catch date
         String dateOfBirth = attributes[3];
 
         String username = attributes[4];

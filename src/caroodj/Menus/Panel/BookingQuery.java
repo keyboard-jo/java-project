@@ -277,10 +277,6 @@ public class BookingQuery extends javax.swing.JPanel {
             
             String[] bookingQuery = {bookingIDQuery, startDateQuery, endDateQuery, "*", "*", carIDQuery, clientIDQuery, paymentMethodQuery};
 
-            for (String i : bookingQuery) {
-                System.out.println(i);
-            }
-
             return bdf.createQuery(bookingQuery);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please use the correct format for each field");

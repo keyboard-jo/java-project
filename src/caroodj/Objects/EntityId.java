@@ -6,7 +6,6 @@ public abstract class EntityId {
     public EntityId() {
     }
 
-    // Generate id number
     public static String generateId() {
         UUID formatId = UUID.randomUUID();
         return formatId.toString();

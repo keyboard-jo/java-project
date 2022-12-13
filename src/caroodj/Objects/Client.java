@@ -10,10 +10,8 @@ public class Client extends Person{
         setType("client");
     }
 
-    // Register to the DatabaseSystem
     public Boolean register() {
         PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
-        // Fixx this to match query
         String[] personData = {super.getId(), this.getType(), super.getPassword(), super.getDateOfBirth()+"", super.getUsername(), super.getEmail(), super.getName()};
         String entry = pdf.constructEntry(personData);
         if (pdf.checkDuplicate(getUsername())) {
@@ -35,7 +33,6 @@ public class Client extends Person{
         String type = params[1];
 
         String password = params[2];
-        // Add try catch date
         LocalDate dateOfBirth = LocalDate.parse(params[3]);
         String username = params[4];
         String email = params[5];

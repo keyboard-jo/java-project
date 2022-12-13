@@ -723,8 +723,6 @@ public class ManageClientInformation extends javax.swing.JPanel {
         if (this.menuCode == 2) {
             clientID.setText((String)clientTable.getValueAt(row, 0));
             usernameField1.setText((String)clientTable.getValueAt(row, 1));
-
-            System.out.println(clientTable.getValueAt(row, 5));
             
             DOBField1.setDate(Date.valueOf((String)clientTable.getValueAt(row, 5)));
             emailField1.setText((String)clientTable.getValueAt(row, 4));

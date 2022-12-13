@@ -16,33 +16,27 @@ public abstract class DataFile<T> {
         this.path = path;
     }
 
-    // Open file in read mode
     public Scanner openFileRead() {
         try {
             File dataFile = new File(this.path);
             Scanner dataFileReader = new Scanner(dataFile);
             return dataFileReader;
         } catch (FileNotFoundException e) {
-            System.out.println("File does not exist!");
             e.printStackTrace();
         }
         return null;
     }
 
-    // Open file in write mode
     public BufferedWriter openFileWrite() {
         try {
             BufferedWriter dataFile = new BufferedWriter(new FileWriter(this.path));
-            // System.out.println("File exist!");
             return dataFile;
         } catch (IOException e) {
-            System.out.println("File does not exists!");
             e.printStackTrace();
         }
         return null;
     }
 
-    // Open file in append mode
     public BufferedWriter openFileAppend() {
         try {
             BufferedWriter dataFile = new BufferedWriter(new FileWriter(this.path, true));
@@ -54,7 +48,6 @@ public abstract class DataFile<T> {
         return null;
     }
 
-    // Add entry to the database
     public void addEntry(String entry) throws IOException {
         BufferedWriter dataFile = this.openFileAppend();
         dataFile.write(entry + System.lineSeparator());
@@ -68,8 +61,6 @@ public abstract class DataFile<T> {
     public abstract DataFileQueryOperator<T> queryDatabase(HashMap<String, String> query);
     public abstract Boolean updateEntry(T objectT) throws IOException;
 
-    // TODO: Seperate this methods into different object
-    // Operators
     public static Boolean isBetween(Double start, Double val, Double end) {
         return !(val < start || val > end);
     }

@@ -262,9 +262,6 @@ public class CancelBookingMenu extends javax.swing.JPanel {
 
             ArrayList<Booking> bookingList = bdf.queryDatabase(query).all();
 
-            System.out.println(bookingList.size());
-
-
             for (Booking booking : bookingList) {
                 if (booking.getIsConfirmed().equals(true)) {
                     model.addRow(new Object[] {booking.getId(), booking.getStartDate(), booking.getEndDate(), booking.getIsConfirmed(), booking.getIsCanceled(), booking.getCar().getId(), booking.getCar().getModel(), booking.getCar().getRentalCost(), booking.getCar().getIsRented(), booking.getClient().getId(), booking.getClient().getUsername(), booking.getPaymentMethod()});

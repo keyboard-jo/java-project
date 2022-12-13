@@ -81,9 +81,7 @@ public class BookingDataFile extends DataFile<Booking> {
 
         while (dataFileRead.hasNextLine()) {
             Booking bookingData = deconstructEntry(dataFileRead.nextLine());
-            System.out.println(bookingData.getId());
             if (bookingData.getId().equals(booking.getId())) {
-                System.out.println("HIT");
                 bookingList.add(booking);
                 isChanged = true;
             } else {
@@ -136,7 +134,6 @@ public class BookingDataFile extends DataFile<Booking> {
 
         datafile.close();
 
-        // System.out.println(bookingList.size());
 
         for (Integer i = 1; i < featureVal.length; i++) {
             if (!super.isStar(featureVal[i])) {
