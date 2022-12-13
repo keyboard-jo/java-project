@@ -3,14 +3,12 @@ package Objects;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-// Abbstarct class
 public abstract class Person extends EntityId{
     private String type;
     private String password;
     private String username;
     private LocalDate dateOfBirth;
 
-    // Optional
     private String email;
     private String name;
 

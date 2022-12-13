@@ -13,7 +13,6 @@ public class CarDataFile extends DataFile<Car>{
         super(path);
     }
 
-    // Query database based on hashmap
     public DataFileQueryOperator<Car> queryDatabase(HashMap<String, String> query) {
         Scanner dataFile = super.openFileRead();
         

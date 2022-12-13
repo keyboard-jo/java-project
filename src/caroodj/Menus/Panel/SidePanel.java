@@ -50,13 +50,7 @@ public class SidePanel extends javax.swing.JPanel {
 
         String [] person = pdf.queryDatabase(pdf.createQuery(query)).first();
 
-        for (String i: person) {
-            System.out.println(i);
-        }
-
         this.isAdmin = person[1].equals("admin") ? true : false;
-
-        System.out.println(this.isAdmin);
 
         this.username = person[4];
     }

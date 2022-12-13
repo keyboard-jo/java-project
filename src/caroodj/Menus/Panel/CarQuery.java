@@ -244,7 +244,6 @@ public class CarQuery extends javax.swing.JPanel {
                                     Double rent2 = Double.parseDouble(rentField2.getText());
                                     rentQuery = rent1 + " " + rent2;    
                                 } catch (Exception e) {
-                                    System.out.println("Cannnot Parse");
                                     return null;
                                 }
                             } else {
@@ -258,7 +257,6 @@ public class CarQuery extends javax.swing.JPanel {
                             break;
                     }
                 } catch (Exception e) {
-                    System.out.println("Cannnot Parse");
                     return null;
                 }
             } else {

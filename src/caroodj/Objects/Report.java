@@ -190,8 +190,6 @@ public class Report {
 
         String startDateQuery = this.startDate + " " + this.endDate;
 
-        System.out.println(startDateQuery);
-
         String[] query = {"*", startDateQuery, "*", "true", "false", "*", "*", "*"};
 
         setBookingRange(bdf.queryDatabase(bdf.createQuery(query)).all());
