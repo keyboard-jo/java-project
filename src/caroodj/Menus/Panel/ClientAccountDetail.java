@@ -172,7 +172,7 @@ public class ClientAccountDetail extends javax.swing.JPanel {
             updateMap.put("DOB", dateOfBirth+"");
     
             if (this.client.update(updateMap)) {
-                JOptionPane.showMessageDialog(null, "Admin is Updated!");
+                JOptionPane.showMessageDialog(null, "Client is Updated!");
                 this.usernameDefault = username;
                 this.nameDefault = name;
                 this.passwordDefault = password;
