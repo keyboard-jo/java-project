@@ -123,11 +123,11 @@ public class ClientHome extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date", "Payment Method", "Confirmed"
+                "Booking ID", "Car ID", "Car Manufacture", "Car Model", "Production Year", "Rental Cost", "Start Date", "End Date", "Payment Method", "Confirmed", "Total Cost"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -152,6 +152,7 @@ public class ClientHome extends javax.swing.JPanel {
             TableOngoingBooking.getColumnModel().getColumn(7).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(8).setResizable(false);
             TableOngoingBooking.getColumnModel().getColumn(9).setResizable(false);
+            TableOngoingBooking.getColumnModel().getColumn(10).setResizable(false);
         }
 
         javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
@@ -279,7 +280,7 @@ public class ClientHome extends javax.swing.JPanel {
         for (Booking booking : bookingList) {
             if (DataFile.isHigher(booking.getStartDate(), now)){
                 model.addRow(new Object[] {booking.getId(),booking.getCar().getId(), booking.getCar().getManufacture(), booking.getCar().getModel(), 
-                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getPaymentMethod(), booking.getIsConfirmed()});
+                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getPaymentMethod(), booking.getIsConfirmed(), booking.calculateTotalCost()});
             }
         }
     }

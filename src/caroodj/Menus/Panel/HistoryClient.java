@@ -36,7 +36,7 @@ public class HistoryClient extends javax.swing.JPanel {
 
         for (Booking booking : bookingList) {
             model.addRow(new Object[] {booking.getId(), booking.getCar().getManufacture(), booking.getCar().getModel(), 
-                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getIsConfirmed()});
+                booking.getCar().getYear(), booking.getCar().getRentalCost(), booking.getStartDate(), booking.getEndDate(), booking.getIsConfirmed(), booking.calculateTotalCost()});
         }
     }
 
@@ -76,7 +76,7 @@ public class HistoryClient extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Booking ID", "Car Manufacture", "Car Model", "Production Year", "Cost", "Start Date", "End Date", "Confirmation Status"
+                "Booking ID", "Car Manufacture", "Car Model", "Production Year", "Cost", "Start Date", "End Date", "Confirmation Status", "Total Amount"
             }
         ));
         HistoryTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
