@@ -2,6 +2,7 @@ package Objects;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 public class Booking extends EntityId{
@@ -117,5 +118,9 @@ public class Booking extends EntityId{
         BookingDataFile bdf = new BookingDataFile("src\\caroodj\\Data\\Booking.txt");
         bdf.addEntry(bdf.constructEntry(this));
         return true;
+    }
+
+    public Double calculateTotalCost() {
+        return getCar().getRentalCost() * (ChronoUnit.DAYS.between(getStartDate(), getEndDate()));
     }
 }

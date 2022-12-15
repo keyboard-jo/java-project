@@ -1,6 +1,7 @@
 package Objects;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -110,16 +111,10 @@ public class Report {
         for (Booking booking : getBookingRange()) {
             String clientId = booking.getClient().getId();
 
-            String carId = booking.getCar().getId();
-
-            String [] query = {carId, "*", "*", "*", "*", "*", "*"};
-
-            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().getRentalCost();
-
             if (clientIdToRent.containsKey(clientId)) {
-                clientIdToRent.put(clientId, clientIdToRent.get(clientId) + carRent);
+                clientIdToRent.put(clientId, clientIdToRent.get(clientId) + booking.calculateTotalCost());
             } else {
-                clientIdToRent.put(clientId, carRent);
+                clientIdToRent.put(clientId, booking.calculateTotalCost());
             }
         }
 
@@ -208,11 +203,7 @@ public class Report {
 
             String clientId = booking.getClient().getId();
 
-            String [] query = {carId, "*", "*", "*", "*", "*", "*"};
-
-            Double carRent = cdf.queryDatabase(cdf.createQuery(query)).first().getRentalCost();
-
-            this.totalSales += carRent;
+            this.totalSales += booking.calculateTotalCost();
 
             this.nSales += 1;
 

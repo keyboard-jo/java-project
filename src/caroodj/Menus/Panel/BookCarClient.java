@@ -3,6 +3,7 @@ package Menus.Panel;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -314,7 +315,8 @@ public class BookCarClient extends javax.swing.JPanel {
                 PersonDataFile pdf = new PersonDataFile("src\\caroodj\\Data\\Person.txt");
                 Client client = Client.convertToClient(pdf.queryDatabase(pdf.createQuery(new String[] {clientID, "*", "*", "*", "*", "*", "*"})).first());
                 Car car = cdf.queryDatabase(cdf.createQuery(new String[]{carID, "*", "*", "*", "*", "*"})).first();
-                paymentMethod.setData(StartDate, EndDate, false, false, car, client, null);
+                Double totalRent = car.getRentalCost() * (ChronoUnit.DAYS.between(StartDate, EndDate));
+                paymentMethod.setData(StartDate, EndDate, false, false, car, client, null, totalRent);
         
                 JOptionPane.showMessageDialog(null, paymentMethod, "Information", JOptionPane.INFORMATION_MESSAGE);
             }    

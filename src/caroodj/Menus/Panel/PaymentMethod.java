@@ -50,6 +50,8 @@ public class PaymentMethod extends javax.swing.JPanel {
         cvvLabel = new javax.swing.JLabel();
         cvvField = new javax.swing.JTextField();
         dateChooser = new com.toedter.calendar.JDateChooser();
+        amountTotalLabel = new javax.swing.JLabel();
+        amountTotal = new javax.swing.JLabel();
 
         paymentCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cash", "card" }));
         paymentCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +68,12 @@ public class PaymentMethod extends javax.swing.JPanel {
             }
         });
         optionPanel.add(confirmButton);
+
+        amountTotalLabel.setText("Total Cost:");
+
+        optionPanel.add(amountTotalLabel);
+
+        optionPanel.add(amountTotal);
 
         displayPanel.setLayout(new java.awt.CardLayout());
 
@@ -167,7 +175,7 @@ public class PaymentMethod extends javax.swing.JPanel {
         }
     }
 
-    public void setData(LocalDate startdate, LocalDate endDate, Boolean isConfirmed, Boolean isCancelled, Car car, Client client, String paymentMethod) {
+    public void setData(LocalDate startdate, LocalDate endDate, Boolean isConfirmed, Boolean isCancelled, Car car, Client client, String paymentMethod, Double totalRent) {
         this.starDate = startdate;
         this.endDate = endDate;
         this.isConfirmed = isConfirmed;
@@ -175,6 +183,8 @@ public class PaymentMethod extends javax.swing.JPanel {
         this.car = car;
         this.client = client;
         this.paymentMethod = paymentMethod;
+
+        amountTotal.setText(String.valueOf(totalRent));
     }
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -215,5 +225,7 @@ public class PaymentMethod extends javax.swing.JPanel {
     private javax.swing.JPanel displayPanel;
     private javax.swing.JPanel optionPanel;
     private javax.swing.JComboBox<String> paymentCombo;
+    private javax.swing.JLabel amountTotalLabel;
+    private javax.swing.JLabel amountTotal;
     // End of variables declaration                   
 }
